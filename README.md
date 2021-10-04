@@ -32,5 +32,5 @@ An Android application to create and contains chronic wound groundtruth dataset
 | 26	| Mencatat log activity user	| Sistem	| Back-End	| 1	| 7 |
 
 keterangan:<br>
-1 = high priority <br>
-2 = low priority
+2 = high priority <br>
+1 = low priority
