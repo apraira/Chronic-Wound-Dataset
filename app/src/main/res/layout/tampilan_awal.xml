@@ -40,7 +40,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="34dp"
             android:lineHeight="26sp"
             android:text="Anda dapat membantu kami untuk mengumpukan dataset citra warna luka dan tepi luka kronik serta mengunduhnya lewat aplikasi ini"
             android:textSize="18sp" />
