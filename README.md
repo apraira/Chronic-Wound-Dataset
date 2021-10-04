@@ -1,5 +1,5 @@
-# Chronic-Wound-Dataset
-An Android application to create and contains chronic wound groundtruth dataset
+# Chronic Wound Dataset Application
+Chronic Wound Dataset merupakan aplikasi berbasis Android yang berfungsi untuk mengumpulkan citra groundtruth dari tepi dan warna luka luka kronik. Pengumpulan citra groundtruth ini dapat bermanfaat untuk keperluan riset dan penelitian terkait luka kronik.
 
 # Product Backlog
 | NO |	STORY	| USER ROLE	| STORY LEVEL	| FEATURES LEVEL | SPRINT NO. |
