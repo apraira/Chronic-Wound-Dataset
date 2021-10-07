@@ -24,6 +24,7 @@ public class FirstActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(i);
+                finish();
 
             }
         });
@@ -36,6 +37,7 @@ public class FirstActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 Intent i = new Intent(getApplicationContext(),RegisterActivity.class);
                 startActivity(i);
+                finish();
 
             }
         });

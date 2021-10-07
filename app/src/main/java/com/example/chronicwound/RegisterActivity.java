@@ -22,13 +22,11 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editTextUserName;
     EditText editTextEmail;
     EditText editTextPassword;
-    EditText editTextConfirmPassword;
 
     //Declaration TextInputLayout
     TextInputLayout textInputLayoutUserName;
     TextInputLayout textInputLayoutEmail;
     TextInputLayout textInputLayoutPassword;
-    TextInputLayout textInputLayoutConfirmPassword;
 
     //Declaration Button
     Button buttonRegister;
@@ -61,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                         i.putExtra("key",value);
                         startActivity(i);
+                        finish();
                     }else {
                         if (sqliteHelper.isUsernameExist(UserName)){
                             Snackbar.make(buttonRegister, "Username already taken", Snackbar.LENGTH_LONG).show();
@@ -82,11 +81,9 @@ public class RegisterActivity extends AppCompatActivity {
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         editTextUserName = (EditText) findViewById(R.id.editTextUserName);
-        editTextConfirmPassword = (EditText) findViewById(R.id.editTextConfirmPassword);
         textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
         textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPassword);
         textInputLayoutUserName = (TextInputLayout) findViewById(R.id.textInputLayoutUserName);
-        textInputLayoutConfirmPassword = (TextInputLayout) findViewById(R.id.textInputLayoutConfirmPassword);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
 
     }
@@ -99,7 +96,6 @@ public class RegisterActivity extends AppCompatActivity {
         String UserName = editTextUserName.getText().toString();
         String Email = editTextEmail.getText().toString();
         String Password = editTextPassword.getText().toString();
-        String ConfirmPassword = editTextConfirmPassword.getText().toString();
 
         //Handling validation for UserName field
         if (UserName.isEmpty()) {
