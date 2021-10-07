@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
 <LinearLayout
@@ -23,32 +25,41 @@
 <!--    Username-->
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/textInputLayoutUserName"
+        app:errorEnabled="true"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:hint="Username"
+        app:helperText="Hanya abjad A-Z dan angka"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
         android:layout_weight="0"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/daftar_username"
+            android:id="@+id/editTextUserName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="70dp"
+            android:maxLength="10"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!--    Email-->
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:errorEnabled="true"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:id="@+id/textInputLayoutEmail"
+        android:layout_height="wrap_content"
         android:hint="Email"
+        app:helperText="Masukkan E-mail Anda disini"
         android:layout_weight="0"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/daftar_email"
+            android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="70dp"
             android:inputType="textEmailAddress"
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -56,16 +67,20 @@
     <!--    Password-->
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:errorEnabled="true"
+        app:passwordToggleEnabled = "true"
+        android:id="@+id/textInputLayoutPassword"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:hint="Password"
+        app:helperText="Minimal 6 karakter"
         android:layout_weight="0"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/daftar_password"
+            android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="70dp"
             android:inputType="textPassword"
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -73,15 +88,17 @@
     <!--    Konfirmasi Password-->
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/textInputLayoutConfirmPassword"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:hint="Konfirmasi Password"
+        app:helperText="Ketik ulang password Anda"
         android:layout_weight="0">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/daftar_konfirmpass"
+            android:id="@+id/editTextConfirmPassword"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="70dp"
             android:inputType="textPassword"
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,7 +111,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/daftar_buat"
+            android:id="@+id/buttonRegister"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_gravity="center_horizontal|center"
