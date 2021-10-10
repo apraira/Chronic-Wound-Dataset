@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.os.Bundle;
 import android.content.Intent;
@@ -30,6 +31,9 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout textInputLayoutUserName;
     TextInputLayout textInputLayoutPassword;
 
+    //Declaration Layout
+    RelativeLayout loginForm;
+
     //Declaration Button
     Button buttonLogin;
 
@@ -42,6 +46,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.tampilan_login);
         sqliteHelper = new SqliteHelper(this);
         initViews();
+
+        // Check if UserResponse is Already Logged In
+        if(SaveSharedPreference.getLoggedStatus(getApplicationContext())) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        } else {
+            loginForm.setVisibility(View.VISIBLE);
+        }
+
 
         //set click event of login button
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -61,11 +74,13 @@ public class LoginActivity extends AppCompatActivity {
                     //Check Authentication is successful or not
                     if (currentUser != null) {
                         Snackbar.make(buttonLogin, "Successfully Logged in!", Snackbar.LENGTH_LONG).show();
+                        SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
 
                         //User Logged in Successfully Launch You home screen activity
                         String value= UserName;
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         i.putExtra("key",value);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(i);
                         finish();
 
@@ -89,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         textInputLayoutUserName = (TextInputLayout) findViewById(R.id.textInputLayoutUserName);
         textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPassword);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
+        loginForm = findViewById(R.id.loginForm);
 
     }
 

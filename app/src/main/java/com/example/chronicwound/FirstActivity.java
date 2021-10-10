@@ -23,6 +23,7 @@ public class FirstActivity extends AppCompatActivity {
                 // your handler code here
                 // TODO Auto-generated method stub
                 Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
                 finish();
 
@@ -36,6 +37,7 @@ public class FirstActivity extends AppCompatActivity {
                 // your handler code here
                 // TODO Auto-generated method stub
                 Intent i = new Intent(getApplicationContext(),RegisterActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
                 finish();
 

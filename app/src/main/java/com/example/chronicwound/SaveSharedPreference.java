@@ -4,23 +4,33 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-public class SaveSharedPreference
-{
-    static final String PREF_USER_NAME= "username";
+import static com.example.chronicwound.PreferencesUtility.LOGGED_IN_PREF;
 
-    static SharedPreferences getSharedPreferences(Context ctx) {
-        return PreferenceManager.getDefaultSharedPreferences(ctx);
+
+
+public class SaveSharedPreference {
+
+    static SharedPreferences getPreferences(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public static void setUserName(Context ctx, String userName)
-    {
-        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
-        editor.putString(PREF_USER_NAME, userName);
-        editor.commit();
+    /**
+     * Set the Login Status
+     * @param context
+     * @param loggedIn
+     */
+    public static void setLoggedIn(Context context, boolean loggedIn) {
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putBoolean(LOGGED_IN_PREF, loggedIn);
+        editor.apply();
     }
 
-    public static String getUserName(Context ctx)
-    {
-        return getSharedPreferences(ctx).getString(PREF_USER_NAME, "");
+    /**
+     * Get the Login Status
+     * @param context
+     * @return boolean: login status
+     */
+    public static boolean getLoggedStatus(Context context) {
+        return getPreferences(context).getBoolean(LOGGED_IN_PREF, false);
     }
 }
