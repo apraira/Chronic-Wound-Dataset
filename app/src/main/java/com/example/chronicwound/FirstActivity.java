@@ -4,15 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class FirstActivity extends AppCompatActivity {
 
+    RelativeLayout FirstTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tampilan_awal);
+
+        FirstTime = findViewById(R.id.FirstTime);
+
+        if(SaveSharedPreference.getLoggedStatus(getApplicationContext())) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        } else {
+            FirstTime.setVisibility(View.VISIBLE);
+        }
 
         final Button button_login = (Button) findViewById(R.id.log_in);
         final Button button_daftar = (Button) findViewById(R.id.buat_akun);

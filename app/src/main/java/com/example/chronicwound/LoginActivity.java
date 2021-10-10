@@ -1,6 +1,7 @@
 package com.example.chronicwound;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -74,12 +75,19 @@ public class LoginActivity extends AppCompatActivity {
                     //Check Authentication is successful or not
                     if (currentUser != null) {
                         Snackbar.make(buttonLogin, "Successfully Logged in!", Snackbar.LENGTH_LONG).show();
+
                         SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
 
-                        //User Logged in Successfully Launch You home screen activity
-                        String value= UserName;
+                        SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("username", UserName);
+                        editor.commit();
+
+                        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(mainIntent);
+
+
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                        i.putExtra("key",value);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(i);
                         finish();
