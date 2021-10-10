@@ -2,11 +2,13 @@ package com.example.chronicwound;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,10 +36,24 @@ public class RegisterActivity extends AppCompatActivity {
     //Declaration SqliteHelper
     SqliteHelper sqliteHelper;
 
+    //Declaration Layout
+    RelativeLayout registForm;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tampilan_register);
+
+        registForm = findViewById(R.id.registForm);
+        // Check if UserResponse is Already Logged In
+        if(SaveSharedPreference.getLoggedStatus(getApplicationContext())) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        } else {
+            registForm.setVisibility(View.VISIBLE);
+        }
+
+
         sqliteHelper = new SqliteHelper(this);
         initViews();
         buttonRegister.setOnClickListener(new View.OnClickListener() {
@@ -55,9 +71,15 @@ public class RegisterActivity extends AppCompatActivity {
                         sqliteHelper.addUser(new User(null, UserName, Email, Password));
 
                         Snackbar.make(buttonRegister, "User created successfully! Please Login ", Snackbar.LENGTH_LONG).show();
-                        String value= UserName;
+
+                        SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
+
+                        SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("username", UserName);
+                        editor.commit();
+
                         Intent i = new Intent(RegisterActivity.this, MainActivity.class);
-                        i.putExtra("key",value);
                         startActivity(i);
                         finish();
                     }else {
