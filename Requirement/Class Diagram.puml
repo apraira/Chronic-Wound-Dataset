@@ -1,0 +1,74 @@
+@startuml
+class com.example.chronicwound.MainActivity {
+~ String UserName
+# void onCreate(Bundle)
+}
+class com.example.chronicwound.SaveSharedPreference {
+~ {static} SharedPreferences getPreferences(Context)
++ {static} void setLoggedIn(Context,boolean)
++ {static} boolean getLoggedStatus(Context)
+}
+class com.example.chronicwound.User {
++ String id
++ String userName
++ String email
++ String password
+}
+class com.example.chronicwound.LoginActivity {
+~ EditText editTextUserName
+~ EditText editTextPassword
+~ TextInputLayout textInputLayoutUserName
+~ TextInputLayout textInputLayoutPassword
+~ RelativeLayout loginForm
+~ Button buttonLogin
+~ SqliteHelper sqliteHelper
+# void onCreate(Bundle)
+- void initViews()
++ {static} Spanned fromHtml(String)
++ boolean validate()
+}
+class com.example.chronicwound.RegisterActivity {
+~ EditText editTextUserName
+~ EditText editTextEmail
+~ EditText editTextPassword
+~ TextInputLayout textInputLayoutUserName
+~ TextInputLayout textInputLayoutEmail
+~ TextInputLayout textInputLayoutPassword
+~ Button buttonRegister
+~ SqliteHelper sqliteHelper
+~ RelativeLayout registForm
+# void onCreate(Bundle)
+- void initViews()
++ boolean validate()
+}
+class com.example.chronicwound.FirstActivity {
+~ RelativeLayout FirstTime
+# void onCreate(Bundle)
+}
+class com.example.chronicwound.PreferencesUtility {
++ {static} String LOGGED_IN_PREF
+}
+class com.example.chronicwound.SqliteHelper {
++ {static} String DATABASE_NAME
++ {static} int DATABASE_VERSION
++ {static} String TABLE_USERS
++ {static} String KEY_ID
++ {static} String KEY_USER_NAME
++ {static} String KEY_EMAIL
++ {static} String KEY_PASSWORD
++ {static} String SQL_TABLE_USERS
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ void addUser(User)
++ User Authenticate(User)
++ boolean isEmailExists(String)
++ boolean isUsernameExist(String)
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chronicwound.MainActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chronicwound.LoginActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chronicwound.RegisterActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chronicwound.FirstActivity
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.chronicwound.SqliteHelper
+@enduml
