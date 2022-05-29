@@ -1,22 +1,29 @@
 package com.example.chronicwound;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.chronicwound.remote.RegisterResponse;
+import com.example.chronicwound.remote.ResObj;
+import com.example.chronicwound.remote.RetrofitClient;
+import com.example.chronicwound.remote.UserService;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -24,17 +31,19 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editTextUserName;
     EditText editTextEmail;
     EditText editTextPassword;
+    EditText editTextNama;
 
     //Declaration TextInputLayout
     TextInputLayout textInputLayoutUserName;
     TextInputLayout textInputLayoutEmail;
     TextInputLayout textInputLayoutPassword;
+    TextInputLayout textInputLayoutNama;
 
     //Declaration Button
     Button buttonRegister;
 
-    //Declaration SqliteHelper
-    SqliteHelper sqliteHelper;
+    UserService userService;
+
 
     //Declaration Layout
     RelativeLayout registForm;
@@ -54,41 +63,19 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
 
-        sqliteHelper = new SqliteHelper(this);
+
         initViews();
         buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
             @Override
             public void onClick(View view) {
                 if (validate()) {
                     String UserName = editTextUserName.getText().toString();
                     String Email = editTextEmail.getText().toString();
                     String Password = editTextPassword.getText().toString();
+                    String Nama = editTextNama.getText().toString();
 
-                    //Check in the database is there any user associated with  this email
-                    if (!sqliteHelper.isEmailExists(Email) && !sqliteHelper.isUsernameExist(UserName)) {
-
-                        //Email does not exist now add new user to database
-                        sqliteHelper.addUser(new User(null, UserName, Email, Password));
-
-                        Snackbar.make(buttonRegister, "User created successfully! Please Login ", Snackbar.LENGTH_LONG).show();
-
-                        SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-
-                        SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("username", UserName);
-                        editor.commit();
-
-                        Intent i = new Intent(RegisterActivity.this, MainActivity.class);
-                        startActivity(i);
-                        finish();
-                    }else {
-                        if (sqliteHelper.isUsernameExist(UserName)){
-                            Snackbar.make(buttonRegister, "Username already taken", Snackbar.LENGTH_LONG).show();
-                        } else {
-                        //Email exists with email input provided so show error user already exist
-                        Snackbar.make(buttonRegister, "User already exists with same email ", Snackbar.LENGTH_LONG).show(); }
-                    }
+                    doRegister(Nama, UserName, Email, Password);
 
 
                 }
@@ -103,14 +90,18 @@ public class RegisterActivity extends AppCompatActivity {
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         editTextUserName = (EditText) findViewById(R.id.editTextUserName);
+        editTextNama = (EditText) findViewById(R.id.editNama);
         textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
         textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPassword);
         textInputLayoutUserName = (TextInputLayout) findViewById(R.id.textInputLayoutUserName);
+        textInputLayoutNama = (TextInputLayout) findViewById(R.id.textInputLayoutNama);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
+
 
     }
 
     //This method is used to validate input given by user
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     public boolean validate() {
         boolean valid = false;
 
@@ -120,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
         String Password = editTextPassword.getText().toString();
 
         //Handling validation for UserName field
+
         if (UserName.isEmpty()) {
             valid = false;
             textInputLayoutUserName.setError("Username tidak boleh kosong");
@@ -162,5 +154,40 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         return valid;
+    }
+
+    // do register
+    public void doRegister(final String name, final String username, final String email,final String password){
+        Call<RegisterResponse> registerResponseCall = RetrofitClient.getService().signup(name,username,email,password);
+        registerResponseCall.enqueue(new Callback<RegisterResponse>() {
+            @Override
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+
+                if(response.isSuccessful()){
+                    //login start main activity
+                    Snackbar.make(buttonRegister, "User created successfully!", Snackbar.LENGTH_LONG).show();
+
+                    SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
+
+                    SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("username", username);
+                    editor.commit();
+
+                    Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(i);
+                    finish();
+
+                }else {
+                    Snackbar.make(buttonRegister, "Unable to register user, maybe you are already registered", Snackbar.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                Toast.makeText(RegisterActivity.this, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

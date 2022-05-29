@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import static com.example.chronicwound.PreferencesUtility.LOGGED_IN_PREF;
-import static com.example.chronicwound.SqliteHelper.KEY_EMAIL;
 
 
 public class SaveSharedPreference {

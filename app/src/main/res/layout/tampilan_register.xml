@@ -26,7 +26,25 @@
         android:textSize="34sp"
         android:layout_weight="0"/>
 
-<!--    Username-->
+<!--    Nama-->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/textInputLayoutNama"
+        app:errorEnabled="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nama"
+        android:layout_weight="0"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNama"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--    Username-->
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/textInputLayoutUserName"

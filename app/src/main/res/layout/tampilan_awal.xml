@@ -12,6 +12,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-20dp"
         android:layout_marginLeft="40dp"
         android:src="@drawable/ic_cornerelips" />
 
@@ -35,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:lineHeight="46sp"
-            android:text="Chronic Wound Anotation and Dataset"
+            android:text="Chronic Wound Assesment Tool"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#000000"
             android:textSize="34sp" />
