@@ -1,35 +1,25 @@
-# Chronic Wound Dataset Application
-Chronic Wound Dataset merupakan aplikasi berbasis Android yang berfungsi untuk mengumpulkan citra groundtruth dari tepi dan warna luka luka kronik. Pengumpulan citra groundtruth ini dapat bermanfaat untuk keperluan riset dan penelitian terkait luka kronik.
+# Chronic Wound Assesment Application
+
 
 # Product Backlog
-| NO |	STORY	| USER ROLE	| STORY LEVEL	| FEATURES LEVEL | SPRINT NO. |
-| -- | ------ | --------- | ----------- | -------------- | ---------- |
-| 1	| Saya dapat membuat akun	| User	| Front-End	| 1	| 1 |
-| 2	| Saya dapat masuk ke akun yang sudah saya buat |	User | Front-End	| 1 |	1 |
-| 3	| Pemanggilan rest POST untuk menyimpan data user setelah melakukan pembuatan akun	| Sistem | 	Back-End	| 1 |	1 |
-| 4	| Pemanggilan rest GET  untuk keperluan masuk dan keluar akun |	Sistem	| Back-End	| 1	 | 1 |
-| 5	| Saya dapat keluar dari akun saya	| User	| Front-End	| 1	| 2 |
-| 6	| Saya dapat melihat detail profil dari akun yang telah saya buat	| User	| Front-End |	1	| 2 |
-| 7	| Saya dapat mengubah foto profil dari akun yang telah saya buat	| User |	Front-End	| 1	| 2 |
-| 8	| Saya dapat melakukan anotasi warna luka kronik |	User	| Front-End	| 2 |	3 |
-| 9	| Saya dapat mengunggah foto luka kronik melalui kamera maupun galeri |	User	| Front-End	| 2	| 3 |
-| 10	| Saya dapat menyimpan hasil anotasi warna luka kronik	| User	| Front-End	| 2	| 3 |
-| 11	| Pemanggilan rest POST untuk menyimpan secara otomatis foto luka yang telah diunggah ke database	| Sistem	| Back-End	| 1	| 3 |
-| 12 |	Saya dapat melakukan anotasi tepi luka kronik	| User	| Front-End	| 2 |	4 |
-| 13 | Saya dapat menyimpan hasil anotasi tepi luka kronik |	User	| Front-End	| 1 |	4 |
-| 14	| Pemanggilan rest POST untuk menyimpan secara otomatis hasil anotasi warna luka yang telah disimpan ke database | Sistem | Back-End |	2 |	4
-| 15	| Pemanggilan rest POST untuk menyimpan secara otomatis hasil anotasi tepi luka yang telah disimpan ke database	| Sistem	| Back-End | 1 | 	4 |
-| 16	| Saya dapat melihat kembali hasil anotasi warna luka kronik milik saya pribadi	| User |	Front-End |	2 |	5 |
-| 17	| Saya dapat melihat kembali hasil anotasi tepi luka kronik milik saya pribadi	| User |	Front-End |	1 |	5 |
-| 18	| Pemanggilan rest GET untuk menampilkan hasil anotasi warna luka pribadi milik user	| Sistem |	Back-End |	1 |	5 |
-| 19	| Pemanggilan rest GET untuk menampilkan hasil anotasi tepi luka pribadi milik user	| Sistem |	Back-End |	1 | 5 |
-| 20 |	Saya dapat melihat & mengunduh dataset publik citra groundtruth warna luka kronik |	User | Front-End |	2 |	6 |
-| 21 |	Saya dapat melihat & mengunduh dataset publik citra groundtruth tepi luka kronik | User |	Front-End |	2	| 6 |
-| 22	| Pemanggilan rest GET untuk akses unduh dan menampilkan dataset publik citra groundtruth warna luka kronik |	Sistem	| Back-End	| 2	| 6 |
-| 23	| Pemanggilan rest GET untuk akses unduh dan menampilkan dataset publik citra groundtruth tepi luka kronik	| Sistem |	Back-End |	1	| 6 |
-| 24	| Saya dapat melihat & mengunduh dataset publik foto luka kronik	 | User |	Front-End	| 1	| 7 |
-| 25	| Pemanggilan rest GET untuk akses unduh dan menampilkan dataset publik foto luka kronik	| Sistem	| Back-End	| 1	| 7 |
-| 26	| Mencatat log activity user	| Sistem	| Back-End	| 1	| 7 |
+|     NO    |     USER STORY                                                       |     FEATURES LEVEL    |     SPRINT NO.    |
+|-----------|----------------------------------------------------------------------|-----------------------|-------------------|
+|     1     |     Dapat membuat akun                                               |     2                 |     1             |
+|     2     |     Dapat masuk ke akun yang sudah saya buat                         |     2                 |     1             |
+|     3     |     Dapat keluar dari akun                                           |     2                 |     2             |
+|     4     |     Dapat melihat detail profil akun                                 |     2                 |     2             |
+|     5     |     Dapat menganotasikan tepi luka                                   |     1                 |     2             |
+|     6     |     Dapat melakukan penambahan pasien                                |     1                 |     3             |
+|     7     |     Dapat memfoto luka kronis yang   akan dikaji                     |     1                 |     3             |
+|     8     |     Dapat melakukan penambahan pengkajian luka                       |     1                 |     3             |
+|     9     |     Dapat input nilai skoring tepi luka                              |     1                 |     4             |
+|     10    |     Dapat input nilai skoring ukuran luka                            |     1                 |     4             |
+|     11    |     Dapat input nilai skoring epitalisasi luka                       |     1                 |     4             |
+|     12    |     Dapat melihat status luka pasien                                 |     1                 |     5             |
+|     13    |     Dapat melihat data riwayat pengkajian luka pada tiap   pasien    |     1                 |     5             |
+|     14    |     Dapat melihat galeri anotasi tepi luka kronis                    |     2                 |     6             |
+|     15    |     Dapat mengunduh dataset anotasi tepi luka   kronis               |     2                 |     7             |
+|     16    |     Dapat mencatat log activity user                                 |     1                 |     7             |
 
 keterangan:<br>
 2 = high priority <br>
