@@ -62,8 +62,6 @@ public class RegisterActivity extends AppCompatActivity {
             registForm.setVisibility(View.VISIBLE);
         }
 
-
-
         initViews();
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)

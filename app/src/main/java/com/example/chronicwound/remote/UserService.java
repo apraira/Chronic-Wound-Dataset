@@ -12,6 +12,7 @@ public interface UserService {
     Call<LoginResponse> login(@Path("username") String username, @Path("password") String password);
 
     @POST("user/{name}/{username}/{email}/{passw}")
-    Call<RegisterResponse> signup(@Path("name") String name, @Path("username") String username, @Path("email") String email, @Path("passw") String password);
+    Call<RegisterResponse> signup(@Path("name") String name, @Path("username") String username,
+                                  @Path("email") String email, @Path("passw") String password);
 
 }

@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:text="Log In"
+            android:text="Sign In"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#000000"
             android:textSize="34sp"
@@ -80,7 +80,7 @@
                 android:layout_gravity="center_horizontal|center"
                 android:background="@drawable/primary_button"
                 android:layout_marginBottom="20dp"
-                android:text="log in" />
+                android:text="Sign In" />
         </LinearLayout>
     </LinearLayout>
 

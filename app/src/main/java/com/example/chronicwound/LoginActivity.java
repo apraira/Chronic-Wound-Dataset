@@ -67,8 +67,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Check user input is correct or not
                 if (validate(username,password)) {
-
-                    //login
                     //do login
                     doLogin(username, password);
 
