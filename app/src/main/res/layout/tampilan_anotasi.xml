@@ -6,16 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".AnotasiActivity">
 
+    <com.example.chronicwound.anotasi.DrawView
+        android:id="@+id/draw_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="20dp" />
+
+
+
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+    >
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="20dp"
+            >
 
             <ImageButton
                 android:id="@+id/btn_undo"
@@ -63,13 +80,18 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_gravity="center_horizontal|center"
+            android:background="@drawable/primary_button"
+            android:layout_marginBottom="20dp"
+            android:text="Sign In" />
+
     </LinearLayout>
 
-    <com.example.chronicwound.anotasi.DrawView
-        android:id="@+id/draw_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/linear"
-        android:layout_centerInParent="true" />
+
 
 </RelativeLayout>
