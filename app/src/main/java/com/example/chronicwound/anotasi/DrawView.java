@@ -69,7 +69,7 @@ import java.util.ArrayList;
             currentColor = Color.BLACK;
 
             // set an initial brush size
-            strokeWidth = 20;
+            strokeWidth = 10;
         }
 
 
@@ -80,9 +80,12 @@ import java.util.ArrayList;
         }
 
         public void erase(){
-            mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+            currentColor = Color.WHITE;
         }
 
+        public void black(){
+            currentColor = Color.BLACK;
+        }
         public void undo() {
             // check whether the List is empty or not
             // if empty, the remove method will return an error

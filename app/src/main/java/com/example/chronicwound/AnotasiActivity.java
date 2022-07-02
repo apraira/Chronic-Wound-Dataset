@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -32,7 +33,7 @@ public class AnotasiActivity extends AppCompatActivity{
 
     // creating objects of type button
     private ImageButton eraser, stroke, undo;
-
+    private Button save;
     // creating a RangeSlider object, which will
     // help in selecting the width of the Stroke
     private RangeSlider rangeSlider;
@@ -44,6 +45,7 @@ public class AnotasiActivity extends AppCompatActivity{
 
         // getting the reference of the views from their ids
         paint = (DrawView) findViewById(R.id.draw_view);
+        save = (Button) findViewById(R.id.saveAnotasi);
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
         undo = (ImageButton) findViewById(R.id.btn_undo);
         eraser = (ImageButton) findViewById(R.id.btn_eraser);
@@ -60,14 +62,24 @@ public class AnotasiActivity extends AppCompatActivity{
                 paint.undo();
             }
         });
+        // save button
+        undo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                paint.undo();
+            }
+        });
+        // the erase will set the color to white, and when
+        // the user double clicked, it will show the rangeSlider
 
-        // the save button will save the current
-        // canvas which is actually a bitmap
-        // in form of PNG, in the storage
         eraser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 paint.erase();
+                if (rangeSlider.getVisibility() == View.VISIBLE)
+                    rangeSlider.setVisibility(View.GONE);
+                else
+                    rangeSlider.setVisibility(View.VISIBLE);
             }
 
         });
@@ -79,6 +91,7 @@ public class AnotasiActivity extends AppCompatActivity{
         stroke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                paint.black();
                 if (rangeSlider.getVisibility() == View.VISIBLE)
                     rangeSlider.setVisibility(View.GONE);
                 else
