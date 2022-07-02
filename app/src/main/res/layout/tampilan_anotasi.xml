@@ -1,56 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_height="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+    android:layout_height="match_parent"
+    tools:context=".AnotasiActivity">
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_marginHorizontal="30dp">
+        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selamat datang,"
-            android:gravity="center"
-            />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/view_username"
+            <ImageButton
+                android:id="@+id/btn_undo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_undo"
+                android:text="Undo" />
+
+            <ImageButton
+                android:id="@+id/btn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_floppy_disk"
+                android:text="Save" />
+
+            <ImageButton
+                android:id="@+id/btn_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_colorpicker"
+                android:text="Color" />
+
+            <ImageButton
+                android:id="@+id/btn_stroke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_paint_brush"
+                android:text="Stroke" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"
-            android:textSize="34sp"
-            android:textColor="#000"
-            android:layout_marginBottom="30dp"
-            android:gravity="center"
-            />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_gravity="center_horizontal|center"
-            android:background="@drawable/primary_button"
-            android:layout_marginBottom="20dp"
-            android:text="Log out" />
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/rangebar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
+    <com.example.chronicwound.anotasi.DrawView
+        android:id="@+id/draw_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linear"
+        android:layout_centerInParent="true" />
 
-
-
-
-</LinearLayout>
+</RelativeLayout>

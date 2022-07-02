@@ -26,6 +26,15 @@
         />
 
     <Button
+        android:id="@+id/anotasi"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal|center"
+        android:background="@drawable/primary_button"
+        android:layout_marginBottom="20dp"
+        android:text="Anotasi Tepi Luka" />
+
+    <Button
         android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="70dp"

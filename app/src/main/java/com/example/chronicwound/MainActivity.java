@@ -29,6 +29,19 @@ public class MainActivity extends AppCompatActivity {
         editUsername.setText(UserName);
 
         Button logout = (Button) findViewById(R.id.logout);
+        Button anotasi = (Button) findViewById(R.id.anotasi);
+
+
+        // button login
+        anotasi.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // your handler code here
+                // TODO Auto-generated method stub
+                Intent i = new Intent(getApplicationContext(),AnotasiActivity.class);
+                startActivity(i);
+
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

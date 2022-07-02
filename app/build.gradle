@@ -41,6 +41,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
 
+    //paint
+    implementation 'petrov.kristiyan:colorpicker-library:1.1.10'
+
     // logging
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
