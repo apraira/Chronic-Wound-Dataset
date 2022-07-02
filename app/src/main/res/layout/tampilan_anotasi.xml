@@ -42,21 +42,6 @@
                 android:src="@drawable/ic_undo"
                 android:text="Undo" />
 
-            <ImageButton
-                android:id="@+id/btn_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_floppy_disk"
-                android:text="Save" />
-
-            <ImageButton
-                android:id="@+id/btn_color"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_colorpicker"
-                android:text="Color" />
 
             <ImageButton
                 android:id="@+id/btn_stroke"
@@ -65,6 +50,15 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_paint_brush"
                 android:text="Stroke" />
+
+            <ImageButton
+                android:id="@+id/btn_eraser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_eraser"
+                android:text="Stroke" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -81,14 +75,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/buttonLogin"
+            android:id="@+id/saveAnotasi"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginHorizontal="20dp"
             android:layout_gravity="center_horizontal|center"
             android:background="@drawable/primary_button"
             android:layout_marginBottom="20dp"
-            android:text="Sign In" />
+            android:text="SAVE" />
 
     </LinearLayout>
 

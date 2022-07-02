@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ChronicWound" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ChronicWound" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/Accent</item>
         <item name="colorPrimaryVariant">@color/Accent</item>
@@ -12,5 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/Accent</item>
         <!-- Customize your theme here. -->
+
+        <!-- Disbale Dark Mode. -->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 </resources>

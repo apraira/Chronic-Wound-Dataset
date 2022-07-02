@@ -1,5 +1,6 @@
 package com.example.chronicwound.anotasi;
 
+import android.graphics.PorterDuff;
 import android.view.MotionEvent;
 
 
@@ -48,7 +49,7 @@ import java.util.ArrayList;
             // the drawings of the user
             mPaint.setAntiAlias(true);
             mPaint.setDither(true);
-            mPaint.setColor(Color.GREEN);
+            mPaint.setColor(Color.BLACK);
             mPaint.setStyle(Paint.Style.STROKE);
             mPaint.setStrokeJoin(Paint.Join.ROUND);
             mPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -65,20 +66,21 @@ import java.util.ArrayList;
             mCanvas = new Canvas(mBitmap);
 
             // set an initial color of the brush
-            currentColor = Color.GREEN;
+            currentColor = Color.BLACK;
 
             // set an initial brush size
             strokeWidth = 20;
         }
 
-        // sets the current color of stroke
-        public void setColor(int color) {
-            currentColor = color;
-        }
+
 
         // sets the stroke width
         public void setStrokeWidth(int width) {
             strokeWidth = width;
+        }
+
+        public void erase(){
+            mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
         }
 
         public void undo() {
