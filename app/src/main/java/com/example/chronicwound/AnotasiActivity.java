@@ -2,18 +2,25 @@ package com.example.chronicwound;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -22,24 +29,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.chronicwound.anotasi.DrawView;
 import com.google.android.material.slider.RangeSlider;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 import petrov.kristiyan.colorpicker.ColorPicker;
 
-public class AnotasiActivity extends AppCompatActivity{
+public class AnotasiActivity extends AppCompatActivity {
+    private static final int RESULT_LOAD_IMG = 1;
     // creating the object of type DrawView
     // in order to get the reference of the View
     private DrawView paint;
 
     // creating objects of type button
-    private ImageButton eraser, stroke, undo;
+    private ImageButton eraser, stroke,  undo, upload;
     private Button save;
+    private ImageView foto;
     // creating a RangeSlider object, which will
     // help in selecting the width of the Stroke
     private RangeSlider rangeSlider;
+    private static int RESULT_LOAD_IMAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tampilan_anotasi);
 
@@ -48,8 +61,32 @@ public class AnotasiActivity extends AppCompatActivity{
         save = (Button) findViewById(R.id.saveAnotasi);
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
         undo = (ImageButton) findViewById(R.id.btn_undo);
-        eraser = (ImageButton) findViewById(R.id.btn_eraser);
         stroke = (ImageButton) findViewById(R.id.btn_stroke);
+        upload = (ImageButton) findViewById(R.id.btn_upload);
+        foto = (ImageView) findViewById(R.id.img);
+        //fill = (ImageButton) findViewById(R.id.btn_fill);
+
+        // creating a OnClickListener for each button,
+        // to perform certain actions
+
+        // the undo button will remove the most
+        // recent stroke from the canvas
+        //undo.setOnClickListener(new View.OnClickListener() {
+         //   @Override
+          //  public void onClick(View view) {
+          //      paint.undo();
+          //  }
+        //});
+
+
+        // upload button
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getImageFromAlbum();
+
+            }
+        });
 
         // creating a OnClickListener for each button,
         // to perform certain actions
@@ -62,36 +99,52 @@ public class AnotasiActivity extends AppCompatActivity{
                 paint.undo();
             }
         });
-        // save button
-        undo.setOnClickListener(new View.OnClickListener() {
+
+        // the save button will save the current
+        // canvas which is actually a bitmap
+        // in form of PNG, in the storage
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                paint.undo();
+
+                // getting the bitmap from DrawView class
+                Bitmap bmp = paint.save();
+
+                // opening a OutputStream to write into the file
+                OutputStream imageOutStream = null;
+
+                ContentValues cv = new ContentValues();
+
+                // name of the file
+                cv.put(MediaStore.Images.Media.DISPLAY_NAME, "drawing.png");
+
+                // type of the file
+                cv.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
+
+                // location of the file to be saved
+                cv.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
+
+                // get the Uri of the file which is to be created in the storage
+                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv);
+                try {
+                    // open the output stream with the above uri
+                    imageOutStream = getContentResolver().openOutputStream(uri);
+
+                    // this method writes the files in storage
+                    bmp.compress(Bitmap.CompressFormat.PNG, 100, imageOutStream);
+
+                    // close the output stream after use
+                    imageOutStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
-        // the erase will set the color to white, and when
-        // the user double clicked, it will show the rangeSlider
-
-        eraser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                paint.erase();
-                if (rangeSlider.getVisibility() == View.VISIBLE)
-                    rangeSlider.setVisibility(View.GONE);
-                else
-                    rangeSlider.setVisibility(View.VISIBLE);
-            }
-
-        });
-        // the color button will allow the user
-        // to select the color of his brush
-
 
         // the button will toggle the visibility of the RangeBar/RangeSlider
         stroke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                paint.black();
                 if (rangeSlider.getVisibility() == View.VISIBLE)
                     rangeSlider.setVisibility(View.GONE);
                 else
@@ -117,7 +170,6 @@ public class AnotasiActivity extends AppCompatActivity{
         // to the init method of the DrawView object
         ViewTreeObserver vto = paint.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @SuppressLint("NewApi")
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onGlobalLayout() {
@@ -127,5 +179,45 @@ public class AnotasiActivity extends AppCompatActivity{
                 paint.init(height, width);
             }
         });
+
+        // the button will toggle the visibility of the RangeBar/RangeSlider
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(AnotasiActivity.this, "This is my Toast message!",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
+
+    private void getImageFromAlbum() {
+        try {
+            Intent i = new Intent(
+                    Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, RESULT_LOAD_IMAGE);
+        } catch (Exception exp) {
+            Log.i("Error", exp.toString());
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            foto.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        }
+
+
     }
 }

@@ -1,5 +1,6 @@
 package com.example.chronicwound;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.chronicwound.anotasi.DrawView;
 
 public class MainActivity extends AppCompatActivity {
     String UserName;
@@ -39,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 Intent i = new Intent(getApplicationContext(),AnotasiActivity.class);
                 startActivity(i);
-
             }
         });
 
@@ -58,10 +60,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        /**
-         * Logout
-         * TODO: Please modify according to your need it is just an example
-         */
+
+
+
+
+
 
     }
+
+
 }
