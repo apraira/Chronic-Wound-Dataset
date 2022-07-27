@@ -16,8 +16,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ import com.example.chronicwound.anotasi.DrawView;
 import com.google.android.material.slider.RangeSlider;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -64,19 +67,7 @@ public class AnotasiActivity extends AppCompatActivity {
         stroke = (ImageButton) findViewById(R.id.btn_stroke);
         upload = (ImageButton) findViewById(R.id.btn_upload);
         foto = (ImageView) findViewById(R.id.img);
-        //fill = (ImageButton) findViewById(R.id.btn_fill);
 
-        // creating a OnClickListener for each button,
-        // to perform certain actions
-
-        // the undo button will remove the most
-        // recent stroke from the canvas
-        //undo.setOnClickListener(new View.OnClickListener() {
-         //   @Override
-          //  public void onClick(View view) {
-          //      paint.undo();
-          //  }
-        //});
 
 
         // upload button
@@ -100,46 +91,7 @@ public class AnotasiActivity extends AppCompatActivity {
             }
         });
 
-        // the save button will save the current
-        // canvas which is actually a bitmap
-        // in form of PNG, in the storage
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                // getting the bitmap from DrawView class
-                Bitmap bmp = paint.save();
-
-                // opening a OutputStream to write into the file
-                OutputStream imageOutStream = null;
-
-                ContentValues cv = new ContentValues();
-
-                // name of the file
-                cv.put(MediaStore.Images.Media.DISPLAY_NAME, "drawing.png");
-
-                // type of the file
-                cv.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
-
-                // location of the file to be saved
-                cv.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
-
-                // get the Uri of the file which is to be created in the storage
-                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv);
-                try {
-                    // open the output stream with the above uri
-                    imageOutStream = getContentResolver().openOutputStream(uri);
-
-                    // this method writes the files in storage
-                    bmp.compress(Bitmap.CompressFormat.PNG, 100, imageOutStream);
-
-                    // close the output stream after use
-                    imageOutStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
         // the button will toggle the visibility of the RangeBar/RangeSlider
         stroke.setOnClickListener(new View.OnClickListener() {
@@ -184,8 +136,82 @@ public class AnotasiActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AnotasiActivity.this, "This is my Toast message!",
-                        Toast.LENGTH_LONG).show();
+
+                Toast.makeText(AnotasiActivity.this,"Saved.Check in your gallery.",Toast.LENGTH_LONG).show();
+                // getting the bitmap from Drawiew class
+
+                Bitmap bmp1 = paint.save();
+                FrameLayout v = (FrameLayout) findViewById(R.id.leot);
+                v.setDrawingCacheEnabled(true);
+                // this is the important code :)
+                // Without it the view will have a
+                // dimension of 0,0 and the bitmap will
+                // be null
+                //v.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+                //v.layout(0, 0, v.getWidth(), v.getHeight());
+                Bitmap bm = Bitmap.createBitmap(v.getDrawingCache());
+                v.setDrawingCacheEnabled(false);
+
+
+                // opening a OutputStream to write into the file
+                OutputStream imageOutStream = null;
+
+                ContentValues cv = new ContentValues();
+
+                // name of the file
+                cv.put(MediaStore.Images.Media.DISPLAY_NAME, "drawing.png");
+
+                // type of the file
+                cv.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
+
+                // location of the file to be saved
+                cv.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
+
+                // get the Uri of the file which is to be created in the storage
+                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv);
+                try {
+                    // open the output stream with the above uri
+                    imageOutStream = getContentResolver().openOutputStream(uri);
+
+                    // this method writes the files in storage
+                    bmp1.compress(Bitmap.CompressFormat.PNG, 0, imageOutStream);
+
+
+                    // close the output stream after use
+                    imageOutStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // opening a OutputStream to write into the file
+                OutputStream imageOutStream2 = null;
+
+                ContentValues cv2 = new ContentValues();
+
+                // name of the file
+                cv2.put(MediaStore.Images.Media.DISPLAY_NAME, "drawing.png");
+
+                // type of the file
+                cv2.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
+
+                // location of the file to be saved
+                cv2.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
+
+                // get the Uri of the file which is to be created in the storage
+                Uri uri2 = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv2);
+                try {
+                    // open the output stream with the above uri
+                    imageOutStream2 = getContentResolver().openOutputStream(uri2);
+
+                    // this method writes the files in storage
+                    bm.compress(Bitmap.CompressFormat.PNG, 0, imageOutStream2);
+
+
+                    // close the output stream after use
+                    imageOutStream2.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -215,6 +241,7 @@ public class AnotasiActivity extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
+            Bitmap image = BitmapFactory.decodeFile(picturePath);
             foto.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
 

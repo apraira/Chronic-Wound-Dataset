@@ -97,6 +97,17 @@ public class DrawView extends View {
         return mBitmap;
     }
 
+    public void changeHW(int h, int w){
+        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        mCanvas = new Canvas(mBitmap);
+
+        // set an initial color of the brush
+        currentColor = Color.BLACK;
+
+        // set an initial brush size
+        strokeWidth = 20;
+    }
+
     // this is the main method where
     // the actual drawing takes place
     @Override

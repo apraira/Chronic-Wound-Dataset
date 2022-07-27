@@ -8,8 +8,9 @@
     tools:context=".AnotasiActivity">
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/leot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@+id/linear"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="20dp" >
