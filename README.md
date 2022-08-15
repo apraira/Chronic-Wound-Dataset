@@ -1,15 +1,15 @@
 
 # Sprint Backlog
-|     NO                                                        |     SPRINT BACKLOG                                                           |
-|---------------------------------------------------------------|------------------------------------------------------------------------------|
-|     User   Story: Dapat menganotasikan tepi luka              |     Task                                                                     |
-|     1                                                         |     Membuat Mockup Tampilan Anotasi Tepi Luka                                |
-|     2                                                         |     Implementasi Layouting Mockup Tampilan Anotasi Tepi Luka                 |
-|     3                                                         |     Membuat logic FrontEnd untuk fitur anotasi tepi luka pada BackEnd        |
-|     4                                                         |     Membuat fitur save gambar yang telah dianotasikan                        |
-|     5                                                         |     Membuat fitur unggah foto dari kamera                                    |
+| No. | User Story                         | Task                                                              | Status      |
+|-----|------------------------------------|-------------------------------------------------------------------|-------------|
+| 1   | Menambah pasien dan memilih pasien | Membuat tampilan home dari aplikasi                               | Done        |
+|     |                                    | Membuat tampilan UI penambahan pasien                             | Done        |
+|     |                                    | Membuat tampilan daftar pasien                                    | Done        |
+|     |                                    | Membuat tampilan detail pasien                                    | Done        |
+|     |                                    | Membuat desain database pasien                                    | Done        |
+|     |                                    | Membuat routing table pasien                                      | Done        |
+|     |                                    | Membuat blueprint Flask di backend                                | In progress |
+|     |                                    | Membuat model di Flask untuk data pasien                          | In progress |
+|     |                                    | Membuat logic di front end yang berhubungan dengan backend pasien | In progress |
+|     |                                    | Implementasi tampilan layout pada Android                         | In progress |
 
-
-
-keterangan:<br>
-With number = task
