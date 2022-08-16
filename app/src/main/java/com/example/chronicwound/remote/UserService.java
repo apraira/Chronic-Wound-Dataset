@@ -1,6 +1,4 @@
 package com.example.chronicwound.remote;
-
-import com.example.chronicwound.remote.ResObj;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
