@@ -43,7 +43,7 @@
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:background="@drawable/circleshape"
-            android:src="@drawable/ic_eraser"
+            android:src="@drawable/ic_icon_pasien"
             android:textColor="#FFFFFF"/>
 
         <TextView
@@ -71,7 +71,7 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:background="@drawable/circleshape"
-                android:src="@drawable/ic_eraser"
+                android:src="@drawable/ic_icon_galeri"
                 android:textColor="#FFFFFF"/>
 
             <TextView
