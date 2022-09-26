@@ -6,16 +6,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chronicwound.anotasi.DrawView;
+import com.example.chronicwound.remote.LoginResponse;
+import com.example.chronicwound.remote.PasienResponse;
+import com.example.chronicwound.remote.RetrofitClient;
+import com.squareup.picasso.Picasso;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     String UserName;
+    private String KEY_USERNAME = "USERNAME";
+    private Integer IDperawat;
+    private ImageView imageView;
 
 
     @Override
@@ -31,21 +46,24 @@ public class MainActivity extends AppCompatActivity {
         final TextView editUsername = (TextView) findViewById(R.id.view_username);
         editUsername.setText(UserName);
 
-        Button logout = (Button) findViewById(R.id.logout);
-        Button anotasi = (Button) findViewById(R.id.anotasi);
+        ImageButton data_pasien = (ImageButton) findViewById(R.id.data_pasien);
+        ImageButton galeri = (ImageButton) findViewById(R.id.galeri);
+
+        //Picasso.get().load("https://jft.web.id/woundapi/instance/uploads/43eeaa47-0fb0-4a19-8cda-2a5ee7050eb41663778563.jpg").into(imageView);
 
 
         // button login
-        anotasi.setOnClickListener(new View.OnClickListener() {
+        data_pasien.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // your handler code here
-                // TODO Auto-generated method stub
-                Intent i = new Intent(getApplicationContext(),AnotasiActivity.class);
+                cariPerawat(UserName);
+                Intent i = new Intent(getApplicationContext(),listPasienActivity.class);
+                i.putExtra(KEY_USERNAME, IDperawat);
                 startActivity(i);
             }
         });
 
-        logout.setOnClickListener(new View.OnClickListener() {
+        galeri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Set LoggedIn status to false
@@ -66,6 +84,32 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
+    }
+
+    // cari pasien
+    public void cariPerawat(final String username) {
+        Call<LoginResponse> loginResponseCall = RetrofitClient.getService().cariIDPerawat(username);
+        loginResponseCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+                if (response.isSuccessful()) {
+                    //login start main activity
+                    IDperawat = response.body().get_id();
+
+                } else {
+                    Toast.makeText(MainActivity.this, "gagal", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 

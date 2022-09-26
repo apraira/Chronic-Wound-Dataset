@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".konfirmasiFotoActivity">
+
+    <FrameLayout
+        android:id="@+id/leot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="20dp" >
+
+        <ImageView
+            android:id="@+id/img_konfirmasi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:layout_alignParentBottom="true"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apakah anda yakin ingin menggunakan foto ini?"
+            android:textSize="34sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"/>
+
+        <Button
+            android:id="@+id/log_in"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/primary_button"
+            android:text="Yakin" />
+
+        <Button
+            android:id="@+id/CaptureAgain"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/Accent"
+            android:textColor="@color/Accent"
+            android:background="@drawable/secondary_button"
+            android:text="Gunakan Foto Lain" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
