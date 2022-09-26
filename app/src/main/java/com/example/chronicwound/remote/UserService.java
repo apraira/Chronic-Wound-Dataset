@@ -45,11 +45,9 @@ public interface UserService {
     //upload image
     @Multipart
     @POST("upload")
-    static Call<UploadRequest> uploadImage(@Part MultipartBody.Part image,
+    Call<UploadRequest> uploadImage(@Part MultipartBody.Part image,
                                            @Field("id_pasien") String id_pasien,
                                            @Field("id_perawat") Integer id_perawat,
-                                           @Field("category") String category) {
-        return null;
-    }
+                                           @Field("category") String category);
 
 }
