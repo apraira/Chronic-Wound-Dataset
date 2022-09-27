@@ -139,6 +139,20 @@ public class tambahKajianActivity extends AppCompatActivity {
                     startActivity(IntentCamera);
                 }
                 if (image == null && mCameraFileName != null) {
+                    File file = new File(mCameraFileName);
+
+                    String id_pasien = "012";
+                    Integer id_perawat = 820001;
+                    String category = "Raw";
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+                    MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+
+                    RequestBody pasien_id = RequestBody.create(MediaType.parse("multipart/form-data"),id_pasien);
+                    RequestBody perawat_id = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(id_perawat));
+                    RequestBody kategori = RequestBody.create(MediaType.parse("multipart/form-data"), category);;
+                    uploadImage(body, pasien_id, perawat_id, kategori);
+
                     image = Uri.fromFile(new File(mCameraFileName));
                     Intent IntentCamera = new Intent(tambahKajianActivity.this, konfirmasiFotoActivity.class);
                     IntentCamera.putExtra(KEY_PHOTO, image);
@@ -150,6 +164,34 @@ public class tambahKajianActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    // upload image
+    public void uploadImage(final MultipartBody.Part image, final RequestBody id_pasien, final RequestBody id_perawat, final RequestBody category){
+        Call<UploadRequest> uploadRequestCall = RetrofitClient.getService().uploadImage(image, id_pasien, id_perawat, category);
+        uploadRequestCall.enqueue(new Callback<UploadRequest>() {
+            @Override
+            public void onResponse(Call<UploadRequest> call, Response<UploadRequest> response) {
+
+                if(response.isSuccessful()){
+                    //login start main activity
+                    Intent i = new Intent(tambahKajianActivity.this, konfirmasiFotoActivity.class);
+                    startActivity(i);
+                    finish();
+
+                }else {
+                    Toast.makeText(tambahKajianActivity.this, "gagal", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UploadRequest> call, Throwable t) {
+                Toast.makeText(tambahKajianActivity.this, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
     }
 
 }

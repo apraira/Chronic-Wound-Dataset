@@ -1,41 +1,43 @@
 package com.example.chronicwound.remote;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Part;
 
 public class UploadRequest {
-    private Part image;
-    private String id_pasien, id_perawat, category;
+    private MultipartBody.Part image;
+    private RequestBody id_pasien, id_perawat, category;
 
-    public Part getImage() {
+    public MultipartBody.Part getImage() {
         return image;
     }
 
-    public void setImage(Part image) {
+    public void setImage(MultipartBody.Part image) {
         this.image = image;
     }
 
 
-    public String getId_pasien() {
+    public RequestBody getId_pasien() {
         return id_pasien;
     }
 
-    public void setId_pasien(String password) {
+    public void setId_pasien(RequestBody id_pasien) {
         this.id_pasien = id_pasien;
     }
 
-    public String getId_perawat() {
+    public RequestBody getId_perawat() {
         return id_perawat;
     }
 
-    public void setId_perawat(String id_perawat) {
+    public void setId_perawat(RequestBody id_perawat) {
         this.id_perawat = id_perawat;
     }
 
-    public String getCategory() {
+    public RequestBody getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(RequestBody category) {
         this.category = category;
     }
 }
