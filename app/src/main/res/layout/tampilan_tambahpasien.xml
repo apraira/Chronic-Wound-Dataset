@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    android:id="@+id/transfer_scroller"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tambahPasien"
+
     tools:context="com.example.chronicwound.LoginActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -25,25 +33,6 @@
             android:textSize="34sp"
             android:layout_weight="0"/>
 
-        <!--    Nama-->
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/textInputLayoutNama"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            android:hint="Nama"
-            android:layout_weight="0"
-            android:layout_marginBottom="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextNama"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
         <!--    Nomor Rekam Medis-->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -51,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            android:hint="Nomor Rekam Medis"
+            android:hint="Nomor Rekam Medis / Registrasi"
             android:layout_weight="0"
             android:layout_marginBottom="12dp">
 
@@ -59,7 +48,65 @@
                 android:id="@+id/editTextNRM"
                 app:passwordToggleEnabled = "true"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--    Nama-->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/textInputLayoutNama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:hint="Nama Lengkap"
+            android:layout_weight="0"
+            android:layout_marginBottom="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+        <!--    Agama-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutAgama"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Pilih Agama">
+
+            <AutoCompleteTextView
+                android:id="@+id/editTextAgama"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--    Tanggal Lahir-->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/textInputLayoutTanggalLahir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:layout_weight="0"
+            android:layout_marginBottom="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextTanggalLahir"
+                android:hint="Tanggal Lahir"
+                android:focusableInTouchMode="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,50 +125,89 @@
                 android:id="@+id/editTextUsia"
                 app:passwordToggleEnabled = "true"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--    Berat Badan-->
+        <!--    Kelamin-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutKelamin"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Jenis Kelamin">
+
+            <AutoCompleteTextView
+                android:id="@+id/editTextKelamin"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--    Alamat-->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/textInputLayoutBB"
+            android:id="@+id/textInputLayoutAlamat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            android:hint="Berat Badan"
+            android:hint="Alamat"
             android:layout_weight="0"
             android:layout_marginBottom="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextBB"
+                android:id="@+id/editTextAlamat"
                 app:passwordToggleEnabled = "true"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--    Tinggi Badan-->
+
+        <!--    Nomor Hp-->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/textInputLayoutTB"
+            android:id="@+id/textInputLayoutNoHp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            android:hint="Tinggi Badan"
+            android:hint="Nomor Hp"
             android:layout_weight="0"
             android:layout_marginBottom="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextTB"
+                android:id="@+id/editTextNoHp"
                 app:passwordToggleEnabled = "true"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--    Email-->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/textInputLayoutEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:hint="Email"
+            android:layout_weight="0"
+            android:layout_marginBottom="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextEmail"
+                app:passwordToggleEnabled = "true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <LinearLayout
+            android:fitsSystemWindows="true"
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
@@ -129,6 +215,7 @@
 
             <Button
                 android:id="@+id/buttonSubmit"
+
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_gravity="center_horizontal|center"
@@ -143,3 +230,4 @@
 
 
 </RelativeLayout>
+</ScrollView>

@@ -1,45 +1,38 @@
-package com.example.chronicwound;
+package com.example.chronicwound.tambahkajian;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.Observable;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.example.chronicwound.remote.PasienResponse;
+import com.example.chronicwound.LoginActivity;
+import com.example.chronicwound.MainActivity;
+import com.example.chronicwound.konfirmasiFotoActivity;
 import com.example.chronicwound.remote.RetrofitClient;
 import com.example.chronicwound.remote.UploadRequest;
 import com.example.chronicwound.remote.UserService;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 
-import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.chronicwound.R;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,26 +52,60 @@ public class tambahKajianActivity extends AppCompatActivity {
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private Bitmap photo;
     private String KEY_PHOTO = "PHOTO";
+    private String KEY_URI = "URI";
     UserService userService;
     private File FilePath;
     private String imagePath;
-    Uri image;
+    Uri image, uri;
     String mCameraFileName;
+    private String KEY_NAME = "NRM";
+    //Dropdown
+    AutoCompleteTextView opsiSize, opsiEdges, opsiNType, opsiNAmount, opsiSkinColor, opsiGranulation, opsiEpithelization;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tambah_kajian);
-
-
-
+        setContentView(R.layout.tambah_kajian_foto);
         MaterialCardView fab = findViewById(R.id.cameraButton);
+        LinearLayout layoutImage = findViewById(R.id.layoutImageRaw);
+        ImageView RawImageView = findViewById(R.id.rawImageView);
+
+
+        Bundle extras = getIntent().getExtras();
+        String NRM = extras.getString(KEY_NAME);
+        Button submit = findViewById(R.id.buttonNext);
+
+        Intent intent_camera = getIntent();
+        Uri uri = intent_camera.getParcelableExtra("URI");
+
+        if (uri != null) {
+            fab.setVisibility(View.GONE);
+            submit.setVisibility(View.VISIBLE);
+            layoutImage.setVisibility(View.VISIBLE);
+            RawImageView.setImageURI(uri);
+        }else {
+            fab.setVisibility(View.VISIBLE);
+            layoutImage.setVisibility(View.GONE);
+        }
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
                 cameraIntent();
+            }
+        });
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), tambahKajianSize.class);
+                i.putExtra(KEY_URI, uri);
+                startActivity(i);
             }
         });
 
@@ -141,7 +168,10 @@ public class tambahKajianActivity extends AppCompatActivity {
                 if (image == null && mCameraFileName != null) {
                     File file = new File(mCameraFileName);
 
-                    String id_pasien = "012";
+                    /** upload image below line **/
+                    Bundle extras = getIntent().getExtras();
+                    String NRM = extras.getString(KEY_NAME);
+                    String id_pasien = NRM;
                     Integer id_perawat = 820001;
                     String category = "Raw";
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -174,20 +204,18 @@ public class tambahKajianActivity extends AppCompatActivity {
             public void onResponse(Call<UploadRequest> call, Response<UploadRequest> response) {
 
                 if(response.isSuccessful()){
-                    //login start main activity
-                    Intent i = new Intent(tambahKajianActivity.this, konfirmasiFotoActivity.class);
-                    startActivity(i);
+                    Toast.makeText(getApplicationContext(), "Image uploaded to server", Toast.LENGTH_LONG).show();
                     finish();
 
                 }else {
-                    Toast.makeText(tambahKajianActivity.this, "gagal", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "gagal", Toast.LENGTH_LONG).show();
                 }
 
             }
 
             @Override
             public void onFailure(Call<UploadRequest> call, Throwable t) {
-                Toast.makeText(tambahKajianActivity.this, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
 

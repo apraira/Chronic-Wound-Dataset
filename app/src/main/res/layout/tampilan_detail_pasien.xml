@@ -60,12 +60,12 @@
                     android:layout_height="wrap_content"
                     android:text="No. Reg : 1313617010"/>
                 <TextView
-                    android:id="@+id/skorTerakhir"
+                    android:id="@+id/nomorHp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email: test@mail.com"/>
                 <TextView
-                    android:id="@+id/noHp"
+                    android:id="@+id/emailPasien"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No. Hp: 088888888"/>
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:text="Agama"/>
                 <TextView
-                    android:id="@+id/usiaPasien"
+                    android:id="@+id/agamaPasien"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="56 Tahun"
@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:text="Tanggal Lahir"/>
                 <TextView
-                    android:id="@+id/beratBadan"
+                    android:id="@+id/tanggalLahir"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="57kg"
@@ -145,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:text="Usia"/>
                 <TextView
-                    android:id="@+id/tinggiBadan"
+                    android:id="@+id/usiaPasien"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="120cm"
@@ -164,7 +164,7 @@
                     android:layout_height="wrap_content"
                     android:text="Jenis Kelamin"/>
                 <TextView
-                    android:id="@+id/lastAssesment"
+                    android:id="@+id/jenisKelamin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
@@ -182,12 +182,65 @@
             android:layout_height="wrap_content"
             android:text="Alamat"/>
         <TextView
+            android:id="@+id/alamatPasien"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Jl. Kramat Raya No.138, Kenari, Kec. Senen, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10430"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#000000"
             android:textSize="18sp"/>
+
+        <!-- cek galeri -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/galeriButton"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginBottom="30dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingHorizontal="20dp"
+            android:checkable="true">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/img"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_camera"
+                        />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Galeri"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#000000"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+        </com.google.android.material.card.MaterialCardView>
 
         <View
             android:layout_width="match_parent"

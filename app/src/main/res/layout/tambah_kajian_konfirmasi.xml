@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Tambah Data Kajian Luka"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="#000000"
+                android:textSize="34sp"
+                android:layout_weight="0"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nama Pasien"/>
+                    <TextView
+                        android:id="@+id/txt_nama_Pasien"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jane Doe"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#000000"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No. Reg"/>
+                    <TextView
+                        android:id="@+id/beratBadan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1313617010"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#000000"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_height="1dp"
+                android:background="#80FFFFFF"/>
+
+
+
+                <ImageView
+
+                    android:id="@+id/rawImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+            <TableLayout
+
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1"> <!-- stretch the second column of the layout-->
+
+                <!-- size-->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <!-- judul-->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dip"
+                        android:layout_gravity="center_vertical"
+                        android:text="Size"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#8F8F8F"
+                        android:textSize="18sp"/>
+                    <!-- isian-->
+                    <TextView
+
+                        android:id="@+id/textSize"
+                        android:padding="8dip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lorem Ipsum"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#000000"
+                        android:textSize="18sp"/>
+
+                </TableRow>
+
+                <!-- edges-->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <!-- judul-->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dip"
+                        android:layout_gravity="center_vertical"
+                        android:text="Edges"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#8F8F8F"
+                        android:textSize="18sp"/>
+                    <!-- isian-->
+                    <TextView
+
+                        android:id="@+id/textEdges"
+                        android:padding="8dip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lorem Ipsum"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#000000"
+                        android:textSize="18sp"/>
+
+                </TableRow>
+
+                <!-- Necrotic Type-->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <!-- judul-->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dip"
+                        android:layout_gravity="center_vertical"
+                        android:text="Necrotic Type"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#8F8F8F"
+                        android:textSize="18sp"/>
+                    <!-- isian-->
+                    <TextView
+
+                        android:id="@+id/textNType"
+                        android:padding="8dip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lorem Ipsum"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#000000"
+                        android:textSize="18sp"/>
+
+                </TableRow>
+
+                <!-- Necrotic Amount-->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <!-- judul-->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dip"
+                        android:layout_gravity="center_vertical"
+                        android:text="Necrotic Amount"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#8F8F8F"
+                        android:textSize="18sp"/>
+                    <!-- isian-->
+                    <TextView
+
+                        android:id="@+id/textNAmount"
+                        android:padding="8dip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lorem Ipsum"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#000000"
+                        android:textSize="18sp"/>
+
+                </TableRow>
+
+                <!-- Skin Color Surrounding Wound-->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <!-- judul-->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dip"
+                        android:layout_gravity="center_vertical"
+                        android:text="Skin Color \nSurrounding\nWound"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#8F8F8F"
+                        android:textSize="18sp"/>
+                    <!-- isian-->
+                    <TextView
+
+                        android:id="@+id/textSkinColor"
+                        android:padding="8dip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lorem Ipsum"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#000000"
+                        android:textSize="18sp"/>
+
+                </TableRow>
+
+
+                <!-- Granulation Tissue-->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <!-- judul-->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dip"
+                        android:layout_gravity="center_vertical"
+                        android:text="Granulation \nTissue"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#8F8F8F"
+                        android:textSize="18sp"/>
+                    <!-- isian-->
+                    <TextView
+
+                        android:id="@+id/textGranulation"
+                        android:padding="8dip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lorem Ipsum"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#000000"
+                        android:textSize="18sp"/>
+
+                </TableRow>
+
+                <!-- Epithelization Tissue-->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <!-- judul-->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dip"
+                        android:layout_gravity="center_vertical"
+                        android:text="Epithelization \nTissue"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#8F8F8F"
+                        android:textSize="18sp"/>
+                    <!-- isian-->
+                    <TextView
+
+                        android:id="@+id/textEpithelization"
+                        android:padding="8dip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lorem Ipsum"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="#000000"
+                        android:textSize="18sp"/>
+
+                </TableRow>
+
+
+
+            </TableLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/buttonSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal|center"
+                    android:background="@drawable/primary_button"
+                    android:layout_marginBottom="20dp"
+                    android:text="SUBMIT DATA" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</FrameLayout>
+
+</ScrollView>

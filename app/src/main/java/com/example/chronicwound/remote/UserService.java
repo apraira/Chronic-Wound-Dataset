@@ -1,13 +1,19 @@
 package com.example.chronicwound.remote;
 import android.database.Observable;
 
+import com.example.chronicwound.gallery.GalleryRequest;
+import com.example.chronicwound.gallery.GalleryResponse;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -34,9 +40,18 @@ public interface UserService {
     Call<PasienResponse> addPasien(@Path("nrm") String nrm, @Path("id_perawat") Integer id_perawat,
                                   @Path("nama") String nama, @Path("usia") String usia, @Path("berat") String berat,
                                      @Path("tinggi") String tinggi);
+
+    //regist pasien versi baru
+    @FormUrlEncoded
+    @POST("pasien")
+    Call<PasienResponse> createPasien(@Field("_id") String _id, @Field("id_perawat") String id_perawat,
+                                     @Field("nama") String nama, @Field("agama") String agama, @Field("born_date") String born_date,
+                                     @Field("usia") String usia, @Field("kelamin") String kelamin, @Field("alamat") String alamat,
+                                     @Field("no_hp") String no_hp, @Field("email") String email);
+
     //pasien berdasarkan id_perawat
     @GET("pasien")
-    Call<ArrayList<PasienRequest>> getAllCourses();
+    Call<ArrayList<PasienResponse>> getAllCourses();
 
     //data detail pasien
     @GET("pasien/{nrm}")
@@ -45,9 +60,17 @@ public interface UserService {
     //upload image
     @Multipart
     @POST("upload")
-    Call<UploadRequest> uploadImage(@Part("image") MultipartBody.Part image,
+    Call<UploadRequest> uploadImage(@Part MultipartBody.Part image,
                                            @Part("id_pasien") RequestBody id_pasien,
                                            @Part("id_perawat") RequestBody id_perawat,
                                            @Part("category") RequestBody category);
+
+    //get image by patient id
+    @GET("image/find/{id_pasien}")
+    Call<ArrayList<GalleryRequest>>  getImageByID(@Path("id_pasien") String id_pasien);
+
+    // GET image by image id
+    @GET("get_image/{id}")
+    Call<GalleryResponse> getImageDetail(@Path("id") String id);
 
 }

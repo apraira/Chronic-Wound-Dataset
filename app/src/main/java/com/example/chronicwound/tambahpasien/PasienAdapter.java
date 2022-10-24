@@ -1,4 +1,4 @@
-package com.example.chronicwound;
+package com.example.chronicwound.tambahpasien;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -9,7 +9,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.example.chronicwound.R;
+import com.example.chronicwound.pasien.detailPasienActivity;
+import com.example.chronicwound.pasien.listPasienActivity;
 import com.example.chronicwound.remote.PasienRequest;
+import com.example.chronicwound.remote.PasienResponse;
 
 import java.util.ArrayList;
 
@@ -22,9 +26,9 @@ public class PasienAdapter extends RecyclerView.Adapter<PasienAdapter.MahasiswaV
     private AdapterView.OnItemClickListener listener;
     private String KEY_NAME = "NRM";
 
-    private ArrayList<PasienRequest> dataList;
+    private ArrayList<PasienResponse> dataList;
 
-    public PasienAdapter(ArrayList<PasienRequest> dataList, listPasienActivity listPasienActivity) {
+    public PasienAdapter(ArrayList<PasienResponse> dataList, listPasienActivity listPasienActivity) {
 
         this.dataList = dataList;
     }
@@ -39,7 +43,7 @@ public class PasienAdapter extends RecyclerView.Adapter<PasienAdapter.MahasiswaV
     @Override
     public void onBindViewHolder(MahasiswaViewHolder holder, int position) {
         holder.txtNama.setText(dataList.get(position).getNama());
-        holder.txtNRM.setText("NRM: " + dataList.get(position).getNrm());
+        holder.txtNRM.setText("NRM: " + dataList.get(position).get_id());
         holder.txtUsia.setText(dataList.get(position).getUsia() + " Tahun");
     }
 
@@ -61,7 +65,7 @@ public class PasienAdapter extends RecyclerView.Adapter<PasienAdapter.MahasiswaV
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    String NRM =  dataList.get(position).getNrm();
+                    String NRM =  dataList.get(position).get_id();
                     Context context = v.getContext();
                     //Snackbar.make(itemView, dataList.get(position).getNrm(), Snackbar.LENGTH_LONG).show();
                     Intent i = new Intent(context, detailPasienActivity.class);

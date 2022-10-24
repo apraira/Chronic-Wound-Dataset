@@ -66,7 +66,7 @@
             android:paddingHorizontal="8dp">
 
             <ImageButton
-                android:id="@+id/galeri"
+                android:id="@+id/anotasiTepi"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:background="@drawable/circleshape"
@@ -76,7 +76,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Galeri Luka Kronis"
+                android:text="Anotasi Luka Kronis"
                 android:textSize="15sp"
                 android:textColor="#000"
                 android:textAlignment="center"
@@ -84,11 +84,32 @@
                 android:layout_marginBottom="30dp"
                 android:gravity="center_horizontal" />
 
-            <ImageView
-                android:id="@+id/imageView2"
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="8dp">
+
+            <ImageButton
+                android:id="@+id/logOut"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/circleshape"
+                android:src="@drawable/ic_icon_galeri"
+                android:textColor="#FFFFFF"/>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:text="Log Out"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:textAlignment="center"
+                android:paddingTop="4dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="center_horizontal" />
 
         </LinearLayout>
 

@@ -1,4 +1,4 @@
-package com.example.chronicwound;
+package com.example.chronicwound.pasien;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,8 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
+import com.example.chronicwound.R;
 import com.example.chronicwound.remote.PasienRequest;
+import com.example.chronicwound.remote.PasienResponse;
 import com.example.chronicwound.remote.RetrofitClient;
+import com.example.chronicwound.tambahpasien.PasienAdapter;
+import com.example.chronicwound.tambahpasien.tambahPasienActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
@@ -21,18 +25,25 @@ import retrofit2.Response;
 public class listPasienActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PasienAdapter adapter;
-    private ArrayList<PasienRequest> pasienArrayList;
-    private Integer IDperawat;
+    private ArrayList<PasienResponse> pasienArrayList;
     private String KEY_USERNAME = "USERNAME";
+    int id_perawat;
+    private Integer dd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tampilan_listpasien);
 
+        Bundle extras = listPasienActivity.this.getIntent().getExtras();
+        id_perawat = extras.getInt(KEY_USERNAME);
+        dd = Integer.parseInt(String.valueOf(id_perawat));
+        System.out.println("Id perawat list pasien: " + id_perawat);
+
+
         FloatingActionButton tambah = (FloatingActionButton) findViewById(R.id.tambah_pasien);
-        Bundle extras = getIntent().getExtras();
-        IDperawat = extras.getInt(KEY_USERNAME);
+
         //mahasiswaArrayList.clear();
 
         getAllCourses();
@@ -52,7 +63,9 @@ public class listPasienActivity extends AppCompatActivity {
                 // your handler code here
                 // TODO Auto-generated method stub
                 Intent i = new Intent(getApplicationContext(), tambahPasienActivity.class);
-                i.putExtra(KEY_USERNAME, IDperawat);
+
+                i.putExtra(KEY_USERNAME, dd);
+                System.out.println("Id perawat tombol tambah: " + dd);
                 startActivity(i);
             }
         });
@@ -60,13 +73,13 @@ public class listPasienActivity extends AppCompatActivity {
 
 
     private void getAllCourses() {
-        Call<ArrayList<PasienRequest>> pasienResponseCall = RetrofitClient.getService().getAllCourses();
+        Call<ArrayList<PasienResponse>> pasienResponseCall = RetrofitClient.getService().getAllCourses();
 
         // on below line we are calling method to enqueue and calling
         // all the data from array list.
-        pasienResponseCall.enqueue(new Callback<ArrayList<PasienRequest>>() {
+        pasienResponseCall.enqueue(new Callback<ArrayList<PasienResponse>>() {
             @Override
-            public void onResponse(Call<ArrayList<PasienRequest>> call, Response<ArrayList<PasienRequest>> response) {
+            public void onResponse(Call<ArrayList<PasienResponse>> call, Response<ArrayList<PasienResponse>> response) {
                 // inside on response method we are checking
                 // if the response is success or not.
                 if (response.isSuccessful()) {
@@ -91,7 +104,7 @@ public class listPasienActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<PasienRequest>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<PasienResponse>> call, Throwable t) {
                 // in the method of on failure we are displaying a
                 // toast message for fail to get data.
                 Toast.makeText(listPasienActivity.this, "Fail to get data", Toast.LENGTH_SHORT).show();

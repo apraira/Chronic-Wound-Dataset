@@ -21,10 +21,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChronicWound"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".konfirmasiFotoActivity"></activity>
-        <activity android:name=".GaleriActivity" />
-        <activity android:name=".detailPasienActivity" />
+        android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="adjustResize">
+        <activity android:name=".tambahkajian.tambahKajianKonfirmasi"></activity>
+        <activity android:name=".tambahkajian.tambahKajianEpithelization" />
+        <activity android:name=".tambahkajian.tambahKajianGranulation" />
+        <activity android:name=".tambahkajian.tambahKajianSkinColor" />
+        <activity android:name=".tambahkajian.tambahKajianNecroticType" />
+        <activity android:name=".tambahkajian.tambahKajianNecroticAmount" />
+        <activity android:name=".tambahkajian.tambahKajianEdges" />
+        <activity android:name=".tambahkajian.tambahKajianSize" />
+        <activity android:name=".gallery.singleImageView" />
+        <activity android:name=".konfirmasiFotoActivity" />
+        <activity android:name=".gallery.GaleriActivity" />
+        <activity android:name=".pasien.detailPasienActivity" />
         <activity android:name=".FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,10 +46,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".AnotasiActivity" />
-        <activity android:name=".listPasienActivity" />
-        <activity android:name=".tambahPasienActivity" />
-        <activity android:name=".tambahKajianActivity" />
-
+        <activity android:name=".pasien.listPasienActivity" />
+        <activity android:name=".tambahpasien.tambahPasienActivity" />
+        <activity android:name=".tambahkajian.tambahKajianActivity" />
     </application>
 
 </manifest>
