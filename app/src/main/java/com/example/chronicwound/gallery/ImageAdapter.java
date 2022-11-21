@@ -65,8 +65,10 @@ public class ImageAdapter extends RecyclerView.Adapter<com.example.chronicwound.
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     String IDImage =  dataList.get(position).getID();
+                    String IDPasien = dataList.get(position).getId_pasien();
                     Context context = v.getContext();
                     Intent i = new Intent(context, singleImageView.class);
+                    i.putExtra("IDPasien", IDPasien);
                     i.putExtra(KEY_NAME, IDImage);
                     context.startActivity(i);
                 }

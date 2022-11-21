@@ -66,7 +66,7 @@
             android:paddingHorizontal="8dp">
 
             <ImageButton
-                android:id="@+id/anotasiTepi"
+                android:id="@+id/anotasiLuka"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:background="@drawable/circleshape"
@@ -77,6 +77,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Anotasi Luka Kronis"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:textAlignment="center"
+                android:paddingTop="4dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="center_horizontal" />
+
+            <ImageButton
+                android:id="@+id/anotasiTepi"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/circleshape"
+                android:src="@drawable/ic_icon_galeri"
+                android:textColor="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Anotasi Tepi"
                 android:textSize="15sp"
                 android:textColor="#000"
                 android:textAlignment="center"

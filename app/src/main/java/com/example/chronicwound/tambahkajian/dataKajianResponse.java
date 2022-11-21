@@ -5,16 +5,9 @@ import java.util.List;
 
 public class dataKajianResponse {
 
-    private String _id, id_pasien, id_perawat;
+    private String id_pasien, id_perawat;
     private String size, edges, necrotic_type, necrotic_amount, skincolor_surround, granulation, epithelization, raw_photo_id;
 
-    public String getID() {
-        return _id;
-    }
-
-    public void setID(String id) {
-        this._id = _id;
-    }
 
     public String getId_pasien() {
         return id_pasien;
@@ -32,13 +25,69 @@ public class dataKajianResponse {
         this.id_perawat = id_perawat;
     }
 
-
-
-
-    public dataKajianResponse(String _id, String id_pasien, String id_perawat, String size, String edges, String category, String created_at, String updated_at) {
-        this._id = _id;
-        this.id_pasien = id_pasien;
-        this.id_perawat = id_perawat;
+    public String getSize() {
+        return size;
     }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getEdges() {
+        return edges;
+    }
+
+    public void setEdges(String edges) {
+        this.edges = edges;
+    }
+
+    public String getNecrotic_type() {
+        return necrotic_type;
+    }
+
+    public void setNecrotic_type(String necrotic_type) {
+        this.necrotic_type = necrotic_type;
+    }
+
+    public String getNecrotic_amount() {
+        return necrotic_amount;
+    }
+
+    public void setNecrotic_amount(String necrotic_amount) {
+        this.necrotic_amount = necrotic_amount;
+    }
+
+    public String getSkincolor_surround() {
+        return skincolor_surround;
+    }
+
+    public void setSkincolor_surround(String skincolor_surround) {
+        this.skincolor_surround = skincolor_surround;
+    }
+
+    public String getGranulation() {
+        return granulation;
+    }
+
+    public void setGranulation(String granulation) {
+        this.granulation = granulation;
+    }
+
+    public String getEpithelization() {
+        return epithelization;
+    }
+
+    public void setEpithelization(String epithelization) {
+        this.epithelization = epithelization;
+    }
+
+    public String getRaw_photo_id() {
+        return raw_photo_id;
+    }
+
+    public void setRaw_photo_id(String raw_photo_id) {
+        this.raw_photo_id = raw_photo_id;
+    }
+
 }
 

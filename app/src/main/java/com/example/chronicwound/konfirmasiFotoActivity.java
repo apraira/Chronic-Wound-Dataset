@@ -49,7 +49,7 @@ import retrofit2.Response;
 public class konfirmasiFotoActivity extends AppCompatActivity {
 
     private Uri photo;
-    String path;
+    String path, id_perawat, id_gambar, id_pasien;
     private String KEY_PHOTO = "PHOTO";
     private String KEY_URI = "URI";
     private Button buttonSubmit;
@@ -79,7 +79,15 @@ public class konfirmasiFotoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(konfirmasiFotoActivity.this, "Button Clicked", Toast.LENGTH_LONG).show();
                 Intent IntentCamera = new Intent(konfirmasiFotoActivity.this, tambahKajianActivity.class);
+                Bundle extras = getIntent().getExtras();
+                id_perawat = extras.getString("id_perawat");
+                id_gambar = extras.getString("id_gambar");
+                id_pasien = extras.getString("id_pasien");
+                IntentCamera.putExtra("id_perawat", id_perawat);
+                IntentCamera.putExtra("id_gambar", id_gambar);
+                IntentCamera.putExtra("NRM", id_pasien);
                 IntentCamera.putExtra(KEY_URI, uri);
+                System.out.println("sent from konfirmasi foto activity:" + id_gambar+ "," + id_perawat + "," + id_pasien);
                 startActivity(IntentCamera);
             }
         });

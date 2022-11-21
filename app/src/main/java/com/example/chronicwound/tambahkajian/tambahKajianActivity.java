@@ -8,12 +8,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.example.chronicwound.LoginActivity;
-import com.example.chronicwound.MainActivity;
+import com.example.chronicwound.anotasi.PathView;
+import com.example.chronicwound.anotasi.anotasiTepi;
 import com.example.chronicwound.konfirmasiFotoActivity;
+import com.example.chronicwound.pasien.detailPasienActivity;
+import com.example.chronicwound.pasien.listPasienActivity;
+import com.example.chronicwound.remote.PasienResponse;
 import com.example.chronicwound.remote.RetrofitClient;
 import com.example.chronicwound.remote.UploadRequest;
 import com.example.chronicwound.remote.UserService;
+import com.example.chronicwound.tambahpasien.tambahPasienActivity;
 import com.google.android.material.card.MaterialCardView;
 
 import androidx.annotation.NonNull;
@@ -31,11 +35,13 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.chronicwound.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -52,10 +58,9 @@ public class tambahKajianActivity extends AppCompatActivity {
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private Bitmap photo;
     private String KEY_PHOTO = "PHOTO";
-    private String KEY_URI = "URI";
     UserService userService;
     private File FilePath;
-    private String imagePath;
+    private String id_perawat, NRM;
     Uri image, uri;
     String mCameraFileName;
     private String KEY_NAME = "NRM";
@@ -66,22 +71,24 @@ public class tambahKajianActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tambah_kajian_foto);
+        setContentView(R.layout.activity_tambah_kajian);
         MaterialCardView fab = findViewById(R.id.cameraButton);
         LinearLayout layoutImage = findViewById(R.id.layoutImageRaw);
+        LinearLayout formKajian = findViewById(R.id.formKajian);
         ImageView RawImageView = findViewById(R.id.rawImageView);
 
 
         Bundle extras = getIntent().getExtras();
-        String NRM = extras.getString(KEY_NAME);
-        Button submit = findViewById(R.id.buttonNext);
+        NRM = extras.getString(KEY_NAME);
+        id_perawat = extras.getString("id_perawat");
+        Button submit = findViewById(R.id.buttonSubmit);
 
         Intent intent_camera = getIntent();
-        Uri uri = intent_camera.getParcelableExtra("URI");
+        Uri uri = intent_camera.getParcelableExtra("rawPhoto");
 
         if (uri != null) {
             fab.setVisibility(View.GONE);
-            submit.setVisibility(View.VISIBLE);
+            formKajian.setVisibility(View.VISIBLE);
             layoutImage.setVisibility(View.VISIBLE);
             RawImageView.setImageURI(uri);
         }else {
@@ -99,18 +106,102 @@ public class tambahKajianActivity extends AppCompatActivity {
         });
 
 
+        //list opsi-opsi form size
+        opsiSize = (AutoCompleteTextView) findViewById(R.id.editTextSize);
+        String[] listSize = new String[]{"1= pxl < 4sq cm", "2= pxl  4=<16sq cm", "3= pxl 16.1=<36 sq cm ", "4= pxl 36.1--<80 sq cm", "5 = pxl >80 sq cm"};
+        ArrayAdapter<String> adapterSize = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listSize);
+        opsiSize.setAdapter(adapterSize);
+
+        //list opsi-opsi form edges
+        opsiEdges = (AutoCompleteTextView) findViewById(R.id.editTextEdges);
+        String[] listEdges = new String[]{"1 = Indistinct, diffuse, none clearly visible", "2 = Distinct, outline clearly visible, attached, even with wound base", "3 = Well-defined, not attached to wound base", "4 = Well-defined, not attached to base, rolled under, thickened", "5 = Well-defined, fibrotic, scarred or hyperkeratotic"};
+        ArrayAdapter<String> adapterEdges = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listEdges);
+        opsiEdges.setAdapter(adapterEdges);
+
+        //list opsi-opsi form necrotic type
+        opsiNType = (AutoCompleteTextView) findViewById(R.id.editTextNType);
+        String[] listNType = new String[]{"1 =  None visible", "2 = White/grey non-viable tissue &/or non-adherent yellow slough", "3 =  Loosely adherent yellow slough", "4 = Adherent, soft, black eschar", "5 =  Firmly adherent, hard, black eschar"};
+        ArrayAdapter<String> adapterNType = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listNType);
+        opsiNType.setAdapter(adapterNType);
+
+        //list opsi-opsi form necrotic amount
+        opsiNAmount = (AutoCompleteTextView) findViewById(R.id.editTextNAmount);
+        String[] listNAmount = new String[]{"1 = None visible", "2 = <25% of wound bed covered", "3 = 25% to 50% of wound covered", "4 =  > 50% and < 75% of wound covered", "5 =   75% to 100% of wound covered"};
+        ArrayAdapter<String> adapterNAmount = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listNAmount);
+        opsiNAmount.setAdapter(adapterNAmount);
+
+        //list opsi-opsi form skin color surrounding wound
+        opsiSkinColor = (AutoCompleteTextView) findViewById(R.id.editTextSkinColor);
+        String[] listSkinColor = new String[]{"1 = Pink or normal for ethnic group", "2 =  Bright red &/or blanches to touch", "3 = White or grey pallor or hypopigmented", "4 =  Dark red or purple &/or non-blanchable", "5 = Black or hyperpigmented"};
+        ArrayAdapter<String> adapterSkinColor = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listSkinColor);
+        opsiSkinColor.setAdapter(adapterSkinColor);
+
+        //list opsi-opsi form granulation tissue
+        opsiGranulation = (AutoCompleteTextView) findViewById(R.id.editTextGranulation);
+        String[] listGranulation = new String[]{"1 =  Skin intact or partial thickness wound", "2 =  Bright, beefy red; 75% to 100% of wound filled &/or tissue overgrowth", "3 =  Bright, beefy red; < 75% & > 25% of wound filled", "4 =   Pink, &/or dull, dusky red &/or fills < 25% of wound", "5 = No granulation tissue present"};
+        ArrayAdapter<String> adapterGranulation = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listGranulation);
+        opsiGranulation.setAdapter(adapterGranulation);
+
+        //list opsi-opsi form ephitelization tissue
+        opsiEpithelization = (AutoCompleteTextView) findViewById(R.id.editTextEpithelization);
+        String[] listEpithelization = new String[]{"1 = 100% wound covered, surface intac", "2 = 75% to <100% wound covered &/or epithelial tissue extends >0.5cm  into wound bed", "3 =  50% to <75% wound covered &/or epithelial tissue extends to <0.5cm  into wound bed", "4 = 25% to < 50% wound covered ", "5 = < 25%  wound covered"};
+        ArrayAdapter<String> adapterEpithelization = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listEpithelization);
+        opsiEpithelization.setAdapter(adapterEpithelization);
+
+
         submit.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), tambahKajianSize.class);
-                i.putExtra(KEY_URI, uri);
-                startActivity(i);
+                insertKajian();
+
             }
         });
 
 
 
+    }
+
+    public void insertKajian(){
+        Bundle extras = getIntent().getExtras();
+        String id_nurse = id_perawat;
+        String rawID = extras.getString("id_gambar");
+        String id_pasien = NRM;
+        System.out.println("Get from Anotasi Tepi:" + rawID+ "," + id_perawat + "," + id_pasien);
+        String size = opsiSize.getText().toString();
+        String edges = opsiEdges.getText().toString();
+        String NType = opsiNType.getText().toString();
+        String NAmount = opsiNAmount.getText().toString();
+        String skincolor = opsiSkinColor.getText().toString();
+        String granulation = opsiGranulation.getText().toString();
+        String ephitelization = opsiEpithelization.getText().toString();
+
+
+
+
+        Call<dataKajianResponse> call = RetrofitClient.getService().tambahKajian(id_pasien,id_perawat,size,edges,NType,NAmount,skincolor,granulation,ephitelization,rawID);
+        call.enqueue(new Callback<dataKajianResponse>() {
+            @Override
+            public void onResponse(Call<dataKajianResponse> call, Response<dataKajianResponse> response) {
+                if(response.isSuccessful()){
+                    //login start main activity
+                    Intent i = new Intent(getApplicationContext(), detailPasienActivity.class);
+                    i.putExtra("NRM", NRM);
+                    startActivity(i);
+
+                }else {
+                    Toast.makeText(getApplicationContext(),"gagal menambah kajian baru",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<dataKajianResponse> call, Throwable t) {
+                call.cancel();
+                Toast.makeText(getApplicationContext(), "input data kajian error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -163,29 +254,40 @@ public class tambahKajianActivity extends AppCompatActivity {
 
                     Intent IntentCamera = new Intent(tambahKajianActivity.this, konfirmasiFotoActivity.class);
                     IntentCamera.putExtra(KEY_PHOTO, image);
+                    IntentCamera.putExtra("id_perawat", id_perawat);
                     startActivity(IntentCamera);
                 }
                 if (image == null && mCameraFileName != null) {
                     File file = new File(mCameraFileName);
-
+                    String rawPath = file.getAbsolutePath(); // Get the full path
+                    System.out.println(rawPath);
                     /** upload image below line **/
                     Bundle extras = getIntent().getExtras();
                     String NRM = extras.getString(KEY_NAME);
+                    String id_perawat1 = extras.getString("id_perawat");
+                    String id_perawat = id_perawat1;
                     String id_pasien = NRM;
-                    Integer id_perawat = 820001;
                     String category = "Raw";
+                    String id_gambar = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+                    String filename = file.getName();
+
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
                     MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-
+                    RequestBody id = RequestBody.create(MediaType.parse("multipart/form-data"), id_gambar);
                     RequestBody pasien_id = RequestBody.create(MediaType.parse("multipart/form-data"),id_pasien);
                     RequestBody perawat_id = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(id_perawat));
                     RequestBody kategori = RequestBody.create(MediaType.parse("multipart/form-data"), category);;
-                    uploadImage(body, pasien_id, perawat_id, kategori);
+                    // uploadImage(body, id, pasien_id, perawat_id, kategori);
 
                     image = Uri.fromFile(new File(mCameraFileName));
-                    Intent IntentCamera = new Intent(tambahKajianActivity.this, konfirmasiFotoActivity.class);
+                    Intent IntentCamera = new Intent(tambahKajianActivity.this, anotasiTepi.class);
                     IntentCamera.putExtra(KEY_PHOTO, image);
+                    IntentCamera.putExtra("raw_path", rawPath);
+                    IntentCamera.putExtra("id_gambar", id_gambar);
+                    IntentCamera.putExtra("id_perawat", id_perawat);
+                    IntentCamera.putExtra("id_pasien", id_pasien);
+                    System.out.println("sent from tambah kajian activity 1:" + id_gambar+ "," + id_perawat + "," + id_pasien);
                     startActivity(IntentCamera);
                 }
                 File file = new File(mCameraFileName);
@@ -197,8 +299,8 @@ public class tambahKajianActivity extends AppCompatActivity {
     }
 
     // upload image
-    public void uploadImage(final MultipartBody.Part image, final RequestBody id_pasien, final RequestBody id_perawat, final RequestBody category){
-        Call<UploadRequest> uploadRequestCall = RetrofitClient.getService().uploadImage(image, id_pasien, id_perawat, category);
+    public void uploadImage( final MultipartBody.Part image, final RequestBody id, final RequestBody id_pasien, final RequestBody id_perawat, final RequestBody category){
+        Call<UploadRequest> uploadRequestCall = RetrofitClient.getService().uploadImage(image, id, id_pasien, id_perawat, category);
         uploadRequestCall.enqueue(new Callback<UploadRequest>() {
             @Override
             public void onResponse(Call<UploadRequest> call, Response<UploadRequest> response) {

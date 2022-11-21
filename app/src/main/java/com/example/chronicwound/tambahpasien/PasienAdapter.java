@@ -66,10 +66,13 @@ public class PasienAdapter extends RecyclerView.Adapter<PasienAdapter.MahasiswaV
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     String NRM =  dataList.get(position).get_id();
+                    String id_perawat = dataList.get(position).getId_perawat();
                     Context context = v.getContext();
                     //Snackbar.make(itemView, dataList.get(position).getNrm(), Snackbar.LENGTH_LONG).show();
                     Intent i = new Intent(context, detailPasienActivity.class);
+                    i.putExtra("id_perawat", id_perawat);
                     i.putExtra(KEY_NAME, NRM);
+                    System.out.println("list pasien:" +   id_perawat + "," + NRM);
                     context.startActivity(i);
                 }
             });

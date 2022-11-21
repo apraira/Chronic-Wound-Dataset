@@ -3,6 +3,7 @@ import android.database.Observable;
 
 import com.example.chronicwound.gallery.GalleryRequest;
 import com.example.chronicwound.gallery.GalleryResponse;
+import com.example.chronicwound.tambahkajian.dataKajianResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -60,8 +62,8 @@ public interface UserService {
     //upload image
     @Multipart
     @POST("upload")
-    Call<UploadRequest> uploadImage(@Part MultipartBody.Part image,
-                                           @Part("id_pasien") RequestBody id_pasien,
+    Call<UploadRequest> uploadImage(@Part MultipartBody.Part image, @Part("id") RequestBody id,
+                                    @Part("id_pasien") RequestBody id_pasien,
                                            @Part("id_perawat") RequestBody id_perawat,
                                            @Part("category") RequestBody category);
 
@@ -73,4 +75,16 @@ public interface UserService {
     @GET("get_image/{id}")
     Call<GalleryResponse> getImageDetail(@Path("id") String id);
 
+    //input kajian
+    @FormUrlEncoded
+    @POST("insert_kajian")
+    Call<dataKajianResponse> tambahKajian(@Field("id_pasien") String id_pasien, @Field("id_perawat") String id_perawat,
+                                          @Field("size") String size, @Field("edges") String edges, @Field("necrotic_type") String necrotic_type,
+                                          @Field("necrotic_amount") String necrotic_amount, @Field("skincolor_surround") String skincolor_surround, @Field("granulation") String granulation,
+                                          @Field("epithelization") String epithelization, @Field("raw_photo_id") String raw_photo_id);
+
+
+    //delete image
+    @DELETE("delete_image/{id}")
+    Call<GalleryResponse> delete_image(@Path("id") String id);
 }

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chronicwound.anotasi.anotasiTepi;
 import com.example.chronicwound.remote.LoginResponse;
 import com.example.chronicwound.remote.RetrofitClient;
 import com.example.chronicwound.pasien.listPasienActivity;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageButton data_pasien = (ImageButton) findViewById(R.id.data_pasien);
         ImageButton anotasiTepi = (ImageButton) findViewById(R.id.anotasiTepi);
+        ImageButton anotasiLuka = (ImageButton) findViewById(R.id.anotasiLuka);
         ImageButton logOut = (ImageButton) findViewById(R.id.logOut);
 
         //Picasso.get().load("https://jft.web.id/woundapi/instance/uploads/43eeaa47-0fb0-4a19-8cda-2a5ee7050eb41663778563.jpg").into(imageView);
@@ -73,6 +75,14 @@ public class MainActivity extends AppCompatActivity {
         anotasiTepi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), com.example.chronicwound.anotasi.anotasiTepi.class);
+                startActivity(intent);
+            }
+        });
+
+        anotasiLuka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AnotasiActivity.class);
                 startActivity(intent);
             }
@@ -102,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("Id perawat main activity: " + IDperawat.toString());
                     Intent i = new Intent(getApplicationContext(), listPasienActivity.class);
                     i.putExtra(KEY_USERNAME, IDperawat);
+                    SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("id_perawat", String.valueOf(IDperawat));
+                    editor.commit();
+
 
                     startActivity(i);
 

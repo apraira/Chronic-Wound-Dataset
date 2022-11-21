@@ -23,7 +23,7 @@ import retrofit2.Response;
 public class detailPasienActivity extends AppCompatActivity {
 
     TextView nama_pasien, nomorRekamMedis, nomorHp, email, usiaPasien, tanggalLahir, jenisKelamin, Alamat;
-    private String NRM;
+    private String NRM, id_perawat;
     private String KEY_NAME = "NRM";
 
     @Override
@@ -42,6 +42,7 @@ public class detailPasienActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         NRM = extras.getString(KEY_NAME);
+        id_perawat = extras.getString("id_perawat");
 
         cariPasien(NRM);
 
@@ -52,7 +53,9 @@ public class detailPasienActivity extends AppCompatActivity {
                 // your handler code here
                 // TODO Auto-generated method stub
                 Intent i = new Intent(getApplicationContext(), tambahKajianActivity.class);
+                i.putExtra("id_perawat", id_perawat);
                 i.putExtra(KEY_NAME, NRM);
+                System.out.println("sent from DETAIL PASIEN ACTIVITY" + id_perawat+ "," + NRM );
                 startActivity(i);
             }
         });

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.chronicwound">
+    package="com.example.chronicwound" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -22,20 +22,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChronicWound"
         android:usesCleartextTraffic="true"
-        android:windowSoftInputMode="adjustResize">
-        <activity android:name=".tambahkajian.tambahKajianKonfirmasi"></activity>
-        <activity android:name=".tambahkajian.tambahKajianEpithelization" />
-        <activity android:name=".tambahkajian.tambahKajianGranulation" />
-        <activity android:name=".tambahkajian.tambahKajianSkinColor" />
-        <activity android:name=".tambahkajian.tambahKajianNecroticType" />
-        <activity android:name=".tambahkajian.tambahKajianNecroticAmount" />
-        <activity android:name=".tambahkajian.tambahKajianEdges" />
-        <activity android:name=".tambahkajian.tambahKajianSize" />
+        android:windowSoftInputMode="adjustResize" >
+        <activity android:name=".anotasi.anotasiTepi" >
+        </activity>
         <activity android:name=".gallery.singleImageView" />
         <activity android:name=".konfirmasiFotoActivity" />
         <activity android:name=".gallery.GaleriActivity" />
         <activity android:name=".pasien.detailPasienActivity" />
-        <activity android:name=".FirstActivity">
+        <activity android:name=".FirstActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

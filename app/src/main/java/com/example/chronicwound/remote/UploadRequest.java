@@ -6,7 +6,9 @@ import retrofit2.http.Part;
 
 public class UploadRequest {
     private MultipartBody.Part image;
-    private RequestBody id_pasien, id_perawat, category;
+    private RequestBody id, id_pasien, id_perawat, category;
+
+
 
     public MultipartBody.Part getImage() {
         return image;
@@ -14,6 +16,14 @@ public class UploadRequest {
 
     public void setImage(MultipartBody.Part image) {
         this.image = image;
+    }
+
+    public RequestBody getId() {
+        return id;
+    }
+
+    public void setId(RequestBody id) {
+        this.id = id;
     }
 
 
@@ -24,6 +34,8 @@ public class UploadRequest {
     public void setId_pasien(RequestBody id_pasien) {
         this.id_pasien = id_pasien;
     }
+
+
 
     public RequestBody getId_perawat() {
         return id_perawat;
