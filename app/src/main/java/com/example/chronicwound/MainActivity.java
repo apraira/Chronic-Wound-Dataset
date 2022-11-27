@@ -1,6 +1,7 @@
 package com.example.chronicwound;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -41,10 +42,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView editUsername = (TextView) findViewById(R.id.view_username);
         editUsername.setText(UserName);
 
-        ImageButton data_pasien = (ImageButton) findViewById(R.id.data_pasien);
-        ImageButton anotasiTepi = (ImageButton) findViewById(R.id.anotasiTepi);
-        ImageButton anotasiLuka = (ImageButton) findViewById(R.id.anotasiLuka);
-        ImageButton logOut = (ImageButton) findViewById(R.id.logOut);
+        CardView data_pasien = (CardView) findViewById(R.id.data_pasien);
 
         //Picasso.get().load("https://jft.web.id/woundapi/instance/uploads/43eeaa47-0fb0-4a19-8cda-2a5ee7050eb41663778563.jpg").into(imageView);
 
@@ -57,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        /*
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), AnotasiActivity.class);
                 startActivity(intent);
             }
-        });
-
+        });*/
 
 
 
@@ -114,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     i.putExtra(KEY_USERNAME, IDperawat);
                     SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("id_perawat", String.valueOf(IDperawat));
+                    editor.putInt("id_perawat", IDperawat);
                     editor.commit();
 
 

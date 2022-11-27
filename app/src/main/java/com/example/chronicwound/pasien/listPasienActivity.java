@@ -15,6 +15,7 @@ import com.example.chronicwound.remote.PasienResponse;
 import com.example.chronicwound.remote.RetrofitClient;
 import com.example.chronicwound.tambahpasien.PasienAdapter;
 import com.example.chronicwound.tambahpasien.tambahPasienActivity;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
@@ -42,7 +43,7 @@ public class listPasienActivity extends AppCompatActivity {
         System.out.println("Id perawat list pasien: " + id_perawat);
 
 
-        FloatingActionButton tambah = (FloatingActionButton) findViewById(R.id.tambah_pasien);
+        ExtendedFloatingActionButton tambah = (ExtendedFloatingActionButton) findViewById(R.id.tambah_pasien);
 
         //mahasiswaArrayList.clear();
 

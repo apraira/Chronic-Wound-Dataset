@@ -1,7 +1,9 @@
 package com.example.chronicwound.tambahkajian;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -77,10 +79,14 @@ public class tambahKajianActivity extends AppCompatActivity {
         LinearLayout formKajian = findViewById(R.id.formKajian);
         ImageView RawImageView = findViewById(R.id.rawImageView);
 
+        SharedPreferences settings = getSharedPreferences("preferences",
+                Context.MODE_PRIVATE);
+        Integer idperawat = settings.getInt("id_perawat", 0);
+
 
         Bundle extras = getIntent().getExtras();
         NRM = extras.getString(KEY_NAME);
-        id_perawat = extras.getString("id_perawat");
+        id_perawat = String.valueOf(idperawat);
         Button submit = findViewById(R.id.buttonSubmit);
 
         Intent intent_camera = getIntent();

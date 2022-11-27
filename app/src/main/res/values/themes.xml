@@ -22,7 +22,16 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.ChronicWound.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.ChronicWound.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <item name="elevation">0dp</item>
+    </style>
 
-    <style name="Theme.ChronicWound.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.ChronicWound.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+    <item name="elevation">0dp</item>
+    </style>
+
+    <style name="chipText" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
 </resources>

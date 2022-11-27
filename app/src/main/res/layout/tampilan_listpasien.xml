@@ -1,46 +1,157 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="1dp"
+        android:outlineSpotShadowColor="#7C7C7C00"
+        android:outlineAmbientShadowColor="#7C7C7C00">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:paddingVertical="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:outlineProvider="none">
+
+            <ImageButton
+                android:layout_marginLeft="16sp"
+                android:id="@+id/backButton"
+                android:layout_width="16sp"
+                android:layout_height="16sp"
+                android:background="@drawable/ic_back_arrow"/>
+
+            <TextView
+                android:id="@+id/teksToolBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Daftar Pasien"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <ImageButton
+                android:layout_marginRight="16sp"
+                android:id="@+id/searchPasien"
+                android:layout_width="16sp"
+                android:layout_height="16sp"
+                android:layout_gravity="right"
+                android:background="@drawable/ic_search"
+                 />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.chip.ChipGroup
+        android:background="@color/white"
+        android:outlineProvider="none"
+        android:elevation="2dp"
+        android:id="@+id/filterPasien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBar"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/semuaPasien"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Semua" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/pasienLaki"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_regular"
+            android:textSize="14sp"
+            android:text="Laki-laki" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/pasienPerempuan"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_regular"
+            android:textSize="14sp"
+            android:text="Perempuan" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/pasienUsia"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_regular"
+            android:textSize="14sp"
+            android:text="Usia" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/tambah_pasien"
+        app:cornerRadius="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/ic_baseline_add_24"
-        android:contentDescription="add"
+        android:layout_gravity="bottom"
         android:layout_margin="16dp"
-        android:layout_alignParentRight="true" />
+        android:contentDescription="add"
+        android:text="Tambah Pasien Baru"
+        app:backgroundTint="#CFEAEA"
+        app:iconTint="#169DBD"
+        android:textColor ="#169DBD"
+        app:icon="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints"
+        android:elevation="4dp"
+        android:textAllCaps="false"
+        android:fontFamily="@font/nunito_bold"
+        android:textSize="14sp"
+        android:outlineSpotShadowColor="#9E9E9E"
+        android:outlineAmbientShadowColor="#9E9E9E"/>
 
-    <LinearLayout
-        android:layout_height="match_parent"
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="14dp"
-        android:layout_marginTop="30dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Daftar Pasien"
-            android:textSize="34sp"
-            android:layout_marginBottom="30dp"
-            android:textColor="#000"
-            />
-
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="10sp"
+        android:paddingBottom="120sp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterPasien">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+            android:layout_height="wrap_content"
+             />
 
 
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
