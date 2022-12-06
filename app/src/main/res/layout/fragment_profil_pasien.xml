@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profilPasienFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".gallery.singleImageView"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginVertical="8sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Informasi Umum Pasien"
+            android:layout_marginHorizontal="16sp"
+            android:textColor="#9E9E9E"
+            android:textSize="22sp"
+            />
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1"> <!-- stretch the second column of the layout-->
+
+            <!-- tanggal pendaftaran-->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <!-- first element of the row-->
+                <TextView
+                    android:layout_marginHorizontal="8sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+
+                    android:text="Tanggal Pendaftaran"
+                    android:fontFamily="@font/nunito_regular"
+                    android:textColor="#8F8F8F"
+                    android:textSize="14sp"/>
+
+                <TextView
+
+                    android:layout_marginRight="8sp"
+                    android:id="@+id/textCreatedAt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="13/01/2022"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+            </TableRow>
+
+            <!-- nomor registrasi-->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <!-- first element of the row-->
+                <TextView
+                    android:layout_marginHorizontal="8sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+
+                    android:text="Nomor Registrasi"
+                    android:fontFamily="@font/nunito_regular"
+                    android:textColor="#8F8F8F"
+                    android:textSize="14sp"/>
+
+                <TextView
+
+                    android:layout_marginRight="8sp"
+                    android:id="@+id/textNoReg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="1313617888"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+            </TableRow>
+
+            <!-- nama lengkap-->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <!-- first element of the row-->
+                <TextView
+                    android:layout_marginHorizontal="8sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+
+                    android:text="Nama Lengkap"
+                    android:fontFamily="@font/nunito_regular"
+                    android:textColor="#8F8F8F"
+                    android:textSize="14sp"/>
+
+                <TextView
+
+                    android:layout_marginRight="8sp"
+                    android:id="@+id/textNamaPasien"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Nama Pasien"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+            </TableRow>
+
+            <!-- tanggal lahir-->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <!-- first element of the row-->
+                <TextView
+                    android:layout_marginHorizontal="8sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+
+                    android:text="Tanggal Lahir"
+                    android:fontFamily="@font/nunito_regular"
+                    android:textColor="#8F8F8F"
+                    android:textSize="14sp"/>
+
+                <TextView
+
+                    android:layout_marginRight="8sp"
+                    android:id="@+id/textTanggalLahir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="29-12-1999"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+            </TableRow>
+
+            <!-- usia-->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <!-- first element of the row-->
+                <TextView
+                    android:layout_marginHorizontal="8sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+
+                    android:text="Usia"
+                    android:fontFamily="@font/nunito_regular"
+                    android:textColor="#8F8F8F"
+                    android:textSize="14sp"/>
+
+                <TextView
+
+                    android:layout_marginRight="8sp"
+                    android:id="@+id/textUsia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="23 Tahun"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+            </TableRow>
+
+            <!-- Jenis Kelamin-->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <!-- first element of the row-->
+                <TextView
+                    android:layout_marginHorizontal="8sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+
+                    android:text="Jenis Kelamin"
+                    android:fontFamily="@font/nunito_regular"
+                    android:textColor="#8F8F8F"
+                    android:textSize="14sp"/>
+
+                <TextView
+
+                    android:layout_marginRight="8sp"
+                    android:id="@+id/textJenisKelamin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Perempuan"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+            </TableRow>
+
+            <!-- Agama-->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <!-- first element of the row-->
+                <TextView
+                    android:layout_marginHorizontal="8sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+
+                    android:text="Agama"
+                    android:fontFamily="@font/nunito_regular"
+                    android:textColor="#8F8F8F"
+                    android:textSize="14sp"/>
+
+                <TextView
+
+                    android:layout_marginRight="8sp"
+                    android:id="@+id/textAgama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Islam"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+            </TableRow>
+
+            <!-- Email-->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <!-- first element of the row-->
+                <TextView
+                    android:layout_marginHorizontal="8sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+
+                    android:text="Email"
+                    android:fontFamily="@font/nunito_regular"
+                    android:textColor="#8F8F8F"
+                    android:textSize="14sp"/>
+
+                <TextView
+
+                    android:layout_marginRight="8sp"
+                    android:id="@+id/textEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="example@mail.com"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+            </TableRow>
+
+            <!-- Nomor Hp-->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <!-- first element of the row-->
+                <TextView
+                    android:layout_marginHorizontal="8sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+
+                    android:text="Nomor Hp"
+                    android:fontFamily="@font/nunito_regular"
+                    android:textColor="#8F8F8F"
+                    android:textSize="14sp"/>
+
+                <TextView
+
+                    android:layout_marginRight="8sp"
+                    android:id="@+id/textNoHp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="087786667878"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+            </TableRow>
+
+
+            <!-- Alamat-->
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <!-- first element of the row-->
+                <TextView
+                    android:layout_marginHorizontal="8sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+
+                    android:text="Alamat"
+                    android:fontFamily="@font/nunito_regular"
+                    android:textColor="#8F8F8F"
+                    android:textSize="14sp"/>
+
+                <TextView
+
+                    android:layout_marginRight="8sp"
+                    android:id="@+id/textAlamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Jl. Pintu Satu Senayan No.RT.1, RT.1/RW.3, Gelora, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10270"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"/>
+
+            </TableRow>
+
+
+
+
+
+
+        </TableLayout>
+
+    </LinearLayout>
+
+</ScrollView>

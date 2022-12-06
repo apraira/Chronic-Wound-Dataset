@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Get value
+        // Get value of shared preferences
         SharedPreferences settings = getSharedPreferences("preferences",
                 Context.MODE_PRIVATE);
         UserName = settings.getString("username", "");
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     i.putExtra(KEY_USERNAME, IDperawat);
                     SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt("id_perawat", IDperawat);
+                    editor.putString("id_perawat", IDperawat.toString());
                     editor.commit();
 
 

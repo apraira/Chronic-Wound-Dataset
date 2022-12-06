@@ -10,8 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.chronicwound.LoginActivity;
 import com.example.chronicwound.R;
+import com.example.chronicwound.galeriLukaPasien;
+import com.example.chronicwound.pasien.detailPasienActivity;
 import com.example.chronicwound.remote.PasienResponse;
 import com.squareup.picasso.Picasso;
 
@@ -26,10 +30,11 @@ public class ImageAdapter extends RecyclerView.Adapter<com.example.chronicwound.
     private AdapterView.OnItemClickListener listener;
     private String KEY_NAME = "NRM"; //nomor registrasi pasien
     private String id_image, filename;
+    galeriLukaPasien myFragment;
 
     private ArrayList<GalleryRequest> dataList;
 
-    public ImageAdapter(ArrayList<GalleryRequest> dataList, GaleriActivity galeriActivity) {
+    public ImageAdapter(ArrayList<GalleryRequest> dataList, galeriLukaPasien galeriLukaPasien) {
 
         this.dataList = dataList;
     }
@@ -44,8 +49,12 @@ public class ImageAdapter extends RecyclerView.Adapter<com.example.chronicwound.
     @Override
     public void onBindViewHolder(com.example.chronicwound.gallery.ImageAdapter.ImageViewHolder holder, int position) {
         final GalleryRequest imageModel = (com.example.chronicwound.gallery.GalleryRequest) dataList.get(position);
-
-        Picasso.get().load("https://jft.web.id/woundapi/instance/uploads/" + imageModel.getFilename()).resize(200,200).centerCrop().into(holder.imgView);
+        Glide.with(holder.itemView.getContext()).load("https://jft.web.id/woundapi/instance/uploads/" + imageModel.getFilename())
+                .centerCrop()
+                .thumbnail(0.05f)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(holder.imgView);
+        //Picasso.get().load("https://jft.web.id/woundapi/instance/uploads/" + imageModel.getFilename()).resize(200,200).centerCrop().into(holder.imgView);
     }
 
     @Override
@@ -59,6 +68,7 @@ public class ImageAdapter extends RecyclerView.Adapter<com.example.chronicwound.
         public ImageViewHolder(View itemView) {
             super(itemView);
             imgView  = (ImageView) itemView.findViewById(R.id.iv_photo);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

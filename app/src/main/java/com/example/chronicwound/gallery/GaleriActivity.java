@@ -32,7 +32,7 @@ public class GaleriActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String NRM = extras.getString(KEY_NAME);
 
-        getImageURL(NRM);
+        //getImageURL(NRM);
 
 
 
@@ -44,7 +44,7 @@ public class GaleriActivity extends AppCompatActivity {
         imageArrayList.add(new imageModel ("https://jft.web.id/woundapi/instance/uploads/048fefe2481e8aea2cd3441ae1028ad61664783158.jpg"));
         imageArrayList.add(new imageModel ("https://jft.web.id/woundapi/instance/uploads/43eeaa47-0fb0-4a19-8cda-2a5ee7050eb41663778563.jpg"));
     }**/
-
+    /*
     private void getImageURL(String id_pasien) {
         Call<ArrayList<GalleryRequest>> pasienResponseCall = RetrofitClient.getService().getImageByID(id_pasien);
 
@@ -87,4 +87,6 @@ public class GaleriActivity extends AppCompatActivity {
 
 
     }
+
+    */
     }

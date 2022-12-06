@@ -3,7 +3,7 @@ package com.example.chronicwound.remote;
 public class PasienResponse {
     private String _id;
     private String id_perawat;
-    private String nama, agama, born_date, usia, kelamin, alamat, no_hp, email;
+    private String nama, agama, born_date, usia, kelamin, alamat, no_hp, email, created_at, updated_at;
 
 
     public String get_id() {
@@ -53,6 +53,14 @@ public class PasienResponse {
     public String getEmail(){return email;}
 
     public void setEmail(String email){this.email = email;}
+
+    public String getCreated_at(){return created_at;}
+
+    public void setCreated_at(String created_at){this.created_at = created_at;}
+
+    public String getUpdated_at(){return updated_at;}
+
+    public void setUpdated_at(String updated_at){this.updated_at = updated_at;}
 
 
 }

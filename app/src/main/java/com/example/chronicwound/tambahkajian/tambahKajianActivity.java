@@ -25,6 +25,7 @@ import com.google.android.material.card.MaterialCardView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.os.StrictMode;
 import android.provider.MediaStore;
@@ -34,6 +35,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chronicwound.R;
@@ -65,6 +68,7 @@ public class tambahKajianActivity extends AppCompatActivity {
     private String id_perawat, NRM;
     Uri image, uri;
     String mCameraFileName;
+    TextView nama_pasien, nomorRekamMedis, nomorHp, email, usiaPasien, tanggalLahir, jenisKelamin, Alamat;
     private String KEY_NAME = "NRM";
     //Dropdown
     AutoCompleteTextView opsiSize, opsiEdges, opsiNType, opsiNAmount, opsiSkinColor, opsiGranulation, opsiEpithelization;
@@ -74,19 +78,26 @@ public class tambahKajianActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_kajian);
-        MaterialCardView fab = findViewById(R.id.cameraButton);
-        LinearLayout layoutImage = findViewById(R.id.layoutImageRaw);
-        LinearLayout formKajian = findViewById(R.id.formKajian);
+        CardView fab = findViewById(R.id.cameraButton);
+        ScrollView formKajian = findViewById(R.id.formKajian);
         ImageView RawImageView = findViewById(R.id.rawImageView);
 
+        // Get value of shared preferences
         SharedPreferences settings = getSharedPreferences("preferences",
                 Context.MODE_PRIVATE);
-        Integer idperawat = settings.getInt("id_perawat", 0);
+        id_perawat = settings.getString("id_perawat", "").toString();
+        NRM  = settings.getString("NRM", "").toString();
+        System.out.println("Id perawat  dan NRM shared preferemces: " + id_perawat + ", " + NRM);
+
+        nomorRekamMedis = (TextView) findViewById(R.id.nomorRekamMedis);
+        nama_pasien = (TextView) findViewById(R.id.nama_pasien);
+        usiaPasien = (TextView) findViewById(R.id.usiaPasien);
+        jenisKelamin = (TextView) findViewById(R.id.jenisKelamin);
+
+        cariPasien(NRM);
 
 
-        Bundle extras = getIntent().getExtras();
-        NRM = extras.getString(KEY_NAME);
-        id_perawat = String.valueOf(idperawat);
+
         Button submit = findViewById(R.id.buttonSubmit);
 
         Intent intent_camera = getIntent();
@@ -95,11 +106,9 @@ public class tambahKajianActivity extends AppCompatActivity {
         if (uri != null) {
             fab.setVisibility(View.GONE);
             formKajian.setVisibility(View.VISIBLE);
-            layoutImage.setVisibility(View.VISIBLE);
             RawImageView.setImageURI(uri);
         }else {
             fab.setVisibility(View.VISIBLE);
-            layoutImage.setVisibility(View.GONE);
         }
 
 
@@ -265,13 +274,18 @@ public class tambahKajianActivity extends AppCompatActivity {
                 }
                 if (image == null && mCameraFileName != null) {
                     File file = new File(mCameraFileName);
+
+                    SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("rawImage", file.getAbsolutePath().toString());
+                    System.out.println(file.getAbsolutePath().toString());
+                    editor.commit();
+
+
                     String rawPath = file.getAbsolutePath(); // Get the full path
                     System.out.println(rawPath);
                     /** upload image below line **/
                     Bundle extras = getIntent().getExtras();
-                    String NRM = extras.getString(KEY_NAME);
-                    String id_perawat1 = extras.getString("id_perawat");
-                    String id_perawat = id_perawat1;
                     String id_pasien = NRM;
                     String category = "Raw";
                     String id_gambar = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
@@ -328,6 +342,34 @@ public class tambahKajianActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    // cari pasien
+    public void cariPasien(final String nrm) {
+        Call<PasienResponse> pasienResponseCall = RetrofitClient.getService().cariPasienNRM(nrm);
+        pasienResponseCall.enqueue(new Callback<PasienResponse>() {
+            @Override
+            public void onResponse(Call<PasienResponse> call, Response<PasienResponse> response) {
+
+                if (response.isSuccessful()) {
+                    //login start main activity
+                    nama_pasien.setText(response.body().getNama());
+                    nomorRekamMedis.setText("NRM: " + response.body().get_id());
+                    usiaPasien.setText(response.body().getUsia() + " Tahun");
+                    jenisKelamin.setText(response.body().getKelamin());
+
+
+                } else {
+                    Toast.makeText(tambahKajianActivity.this, "gagal", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<PasienResponse> call, Throwable t) {
+                Toast.makeText(tambahKajianActivity.this, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }

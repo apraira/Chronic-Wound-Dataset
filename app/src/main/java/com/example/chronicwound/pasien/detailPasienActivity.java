@@ -1,20 +1,38 @@
 package com.example.chronicwound.pasien;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chronicwound.R;
+import com.example.chronicwound.galeriLukaPasien;
 import com.example.chronicwound.gallery.GaleriActivity;
+import com.example.chronicwound.historiKajianFragment;
+import com.example.chronicwound.profilPasienFragment;
 import com.example.chronicwound.remote.PasienResponse;
 import com.example.chronicwound.remote.RetrofitClient;
 import com.example.chronicwound.tambahkajian.tambahKajianActivity;
+import com.example.chronicwound.tambahpasien.tambahPasienActivity;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,27 +43,110 @@ public class detailPasienActivity extends AppCompatActivity {
     TextView nama_pasien, nomorRekamMedis, nomorHp, email, usiaPasien, tanggalLahir, jenisKelamin, Alamat;
     private String NRM, id_perawat;
     private String KEY_NAME = "NRM";
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+    ExtendedFloatingActionButton fab;
+    private profilPasienFragment profilPasienFragment;
+    private historiKajianFragment historiKajianFragment;
+    private galeriLukaPasien galeriLukaPasien;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tampilan_detail_pasien);
 
+        fab = findViewById(R.id.tambahKajian);
+
         nomorRekamMedis = (TextView) findViewById(R.id.nomorRekamMedis);
-        nomorHp = (TextView) findViewById(R.id.nomorHp);
-        email = (TextView) findViewById(R.id.emailPasien);
         nama_pasien = (TextView) findViewById(R.id.nama_pasien);
         usiaPasien = (TextView) findViewById(R.id.usiaPasien);
-        tanggalLahir = (TextView) findViewById(R.id.tanggalLahir);
         jenisKelamin = (TextView) findViewById(R.id.jenisKelamin);
-        Alamat = (TextView) findViewById(R.id.alamatPasien);
+        viewPager = findViewById(R.id.view_pager_pasien);
+        tabLayout = findViewById(R.id.tabLayoutPasien);
+
+        profilPasienFragment = new profilPasienFragment();
+        historiKajianFragment = new historiKajianFragment();
+        galeriLukaPasien = new galeriLukaPasien();
 
         Bundle extras = getIntent().getExtras();
         NRM = extras.getString(KEY_NAME);
-        id_perawat = extras.getString("id_perawat");
+
+
+        // Get value of shared preferences
+        SharedPreferences settings = getSharedPreferences("preferences",
+                Context.MODE_PRIVATE);
+        id_perawat = settings.getString("id_perawat", "");
+        System.out.println("Id perawat shared preferemces: " + id_perawat.toString());
+
+
+        SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("NRM", NRM);
+        editor.commit();
+
+        // send NRM ke fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("NRM", NRM);
+        profilPasienFragment.setArguments(bundle);
+        historiKajianFragment.setArguments(bundle);
+        galeriLukaPasien.setArguments(bundle);
 
         cariPasien(NRM);
 
+        tabLayout.setupWithViewPager(viewPager);
+        //create viewpager adapter
+        //here we will create inner class for adapter
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
+
+        //add fragments and set the adapter
+        viewPagerAdapter.addFragment(profilPasienFragment, "");
+        viewPagerAdapter.addFragment(historiKajianFragment, "");
+        viewPagerAdapter.addFragment(galeriLukaPasien, "");
+        viewPager.setAdapter(viewPagerAdapter);
+        //set the icons
+        tabLayout.getTabAt(0).setText("Profil Pasien");
+        tabLayout.getTabAt(1).setText("Histori Kajian");
+        tabLayout.getTabAt(2).setText("Galeri Luka");
+
+        fab = findViewById(R.id.tambahKajian);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 1) {
+                    fab.show();
+                } else {
+                    fab.hide();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // your handler code here
+                // TODO Auto-generated method stub
+                Intent i = new Intent(getApplicationContext(), tambahKajianActivity.class);
+                System.out.println("Id perawat tombol tambah: " + id_perawat);
+                startActivity(i);
+            }
+        });
+
+
+
+
+        /*
         FloatingActionButton fab = findViewById(R.id.tambah_pasien);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,20 +159,53 @@ public class detailPasienActivity extends AppCompatActivity {
                 System.out.println("sent from DETAIL PASIEN ACTIVITY" + id_perawat+ "," + NRM );
                 startActivity(i);
             }
-        });
+        });*/
 
 
-        MaterialCardView btn = findViewById(R.id.galeriButton);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Snackbar.make(itemView, dataList.get(position).getNrm(), Snackbar.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), GaleriActivity.class);
-                i.putExtra(KEY_NAME, NRM);
-                startActivity(i);
-            }
-        });
+    /*  MaterialCardView btn = findViewById(R.id.galeriButton);
+      btn.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              //Snackbar.make(itemView, dataList.get(position).getNrm(), Snackbar.LENGTH_LONG).show();
+              Intent i = new Intent(getApplicationContext(), GaleriActivity.class);
+              i.putExtra(KEY_NAME, NRM);
+              startActivity(i);
+          }
+      });*/
+
     }
+
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+        private List<Fragment> fragments = new ArrayList<>();
+        private List<String> fragmentTitles = new ArrayList<>();
+        public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
+        }
+        //add fragment to the viewpager
+        public void addFragment(Fragment fragment, String title){
+            fragments.add(fragment);
+            fragmentTitles.add(title);
+        }
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+
+        }
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+        //to setup title of the tab layout
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragmentTitles.get(position);
+        }
+    }
+
+
+
 
     // cari pasien
     public void cariPasien(final String nrm) {
@@ -84,12 +218,8 @@ public class detailPasienActivity extends AppCompatActivity {
                     //login start main activity
                     nama_pasien.setText(response.body().getNama());
                     nomorRekamMedis.setText("NRM: " + response.body().get_id());
-                    nomorHp.setText(response.body().getNo_hp());
                     usiaPasien.setText(response.body().getUsia() + " Tahun");
-                    tanggalLahir.setText(response.body().getBorn_date());
                     jenisKelamin.setText(response.body().getKelamin());
-                    email.setText(response.body().getEmail());
-                    Alamat.setText(response.body().getAlamat());
 
 
                 } else {
@@ -104,4 +234,7 @@ public class detailPasienActivity extends AppCompatActivity {
             }
         });
     }
-}
+
+
+
+    }
