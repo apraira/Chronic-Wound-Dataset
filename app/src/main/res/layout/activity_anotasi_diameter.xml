@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AnotasiActivity">
+    tools:context=".anotasi.anotasiDiameter">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -45,18 +45,11 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Anotasi Warna Luka"
+                    android:text="Anotasi Diameter Luka X"
                     android:textColor="@color/black"
                     android:textSize="22sp" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_marginRight="16sp"
-                    android:id="@+id/btn_upload"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="right"
-                    android:src="@drawable/ic_galeri_foto_luka"
-                    android:tint="@color/black"/>
+
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -69,7 +62,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBar"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="30sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -97,7 +90,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="524dp" />
 
-                    <com.example.chronicwound.anotasi.DrawView
+                    <com.example.chronicwound.anotasi.PathView
                         android:id="@+id/draw_view"
                         android:layout_width="match_parent"
                         android:layout_height="524dp" />
@@ -110,11 +103,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+
                     android:layout_marginBottom="20dp"
                     android:layout_marginHorizontal="20dp"
                     >
-
-
 
 
 
@@ -122,16 +114,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"
                         >
 
                         <ImageButton
-                            android:id="@+id/btn_red"
+                            android:id="@+id/btn_stroke"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_paint_brush"
-                            android:tint="#FF0000"
                             android:background="@null"
                             android:text="Stroke" />
 
@@ -139,60 +131,12 @@
                             android:layout_marginTop="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Red"/>
+                            android:text="Stroke"/>
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        >
-
-                        <ImageButton
-                            android:id="@+id/btn_yellow"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_paint_brush"
-                            android:tint="#FFFF00"
-                            android:background="@null"
-                            android:text="Yellow" />
-
-                        <TextView
-                            android:layout_marginTop="10dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Yellow"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        >
-
-                        <ImageButton
-                            android:id="@+id/btn_black"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_paint_brush"
-                            android:background="@null"
-                            android:text="Black" />
-
-                        <TextView
-                            android:layout_marginTop="10dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Black"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -214,6 +158,41 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Undo"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        >
+                        <!--    Input Panjang-->
+                        <TextView
+                            android:id="@+id/textViewInputPanjang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Panjang X (cm)"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:id="@+id/textInputLayoutDiameter"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextDiameter"
+                                android:layout_width="match_parent"
+                                android:inputType="number"
+                                android:digits="0123456789.,"
+                                android:layout_height="50dp"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
 

@@ -48,7 +48,8 @@
 
                 android:layout_marginRight="20dp"
                 android:id="@+id/textNamaPasien"
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dip"
                 android:gravity="right"
@@ -82,7 +83,8 @@
 
                 android:layout_marginRight="20dp"
                 android:id="@+id/textNamaPerawat"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:padding="8dip"
                 android:gravity="right"
@@ -112,10 +114,11 @@
             <TextView
                 android:layout_marginRight="20dp"
                 android:id="@+id/textFileName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dip"
                 android:gravity="right"
+                android:layout_weight="1"
                 android:text="blablabla.jpg"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="#000000"
@@ -143,7 +146,8 @@
             <TextView
                 android:layout_marginRight="20dp"
                 android:id="@+id/textCreatedAt"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:padding="8dip"
                 android:gravity="right"
@@ -173,7 +177,8 @@
             <TextView
                 android:layout_marginRight="20dp"
                 android:id="@+id/textCategory"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:padding="8dip"
                 android:gravity="right"

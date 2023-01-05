@@ -6,18 +6,24 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import com.example.chronicwound.anotasi.PathView;
+import com.example.chronicwound.anotasi.anotasiDiameter;
+import com.example.chronicwound.anotasi.anotasiDiameterY;
 import com.example.chronicwound.anotasi.anotasiTepi;
+import com.example.chronicwound.gallery.GalleryRequest;
 import com.example.chronicwound.konfirmasiFotoActivity;
 import com.example.chronicwound.pasien.detailPasienActivity;
 import com.example.chronicwound.pasien.listPasienActivity;
+import com.example.chronicwound.remote.AnotasiDiameterRequest;
 import com.example.chronicwound.remote.PasienResponse;
 import com.example.chronicwound.remote.RetrofitClient;
 import com.example.chronicwound.remote.UploadRequest;
+import com.example.chronicwound.remote.UploadVectorRequest;
 import com.example.chronicwound.remote.UserService;
 import com.example.chronicwound.tambahpasien.tambahPasienActivity;
 import com.google.android.material.card.MaterialCardView;
@@ -33,6 +39,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -43,6 +50,8 @@ import com.example.chronicwound.R;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,6 +64,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.chronicwound.MainActivity.id_nurse;
+import static com.example.chronicwound.logging.LogHelper.InsertLog;
+
 public class tambahKajianActivity extends AppCompatActivity {
 
     //variabel kamera
@@ -65,9 +77,10 @@ public class tambahKajianActivity extends AppCompatActivity {
     private String KEY_PHOTO = "PHOTO";
     UserService userService;
     private File FilePath;
-    private String id_perawat, NRM;
+    private String id_perawat, NRM, imagepath;
     Uri image, uri;
-    String mCameraFileName;
+    String mCameraFileName, jpgRawImage, jpgTepi, jpgTepiFilename,  pngTepi, pngTepiFilename, tepiPathList;
+    String jpgDiameter, jpgDiameterFilename, pngDiameter, pngDiameterFilename, XPathList, YPathList;
     TextView nama_pasien, nomorRekamMedis, nomorHp, email, usiaPasien, tanggalLahir, jenisKelamin, Alamat;
     private String KEY_NAME = "NRM";
     //Dropdown
@@ -78,15 +91,60 @@ public class tambahKajianActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_kajian);
+        InsertLog(id_nurse, "Memasuki halaman tambah hasil kajian");
+
         CardView fab = findViewById(R.id.cameraButton);
         ScrollView formKajian = findViewById(R.id.formKajian);
         ImageView RawImageView = findViewById(R.id.rawImageView);
+        ImageView TepiImageView = findViewById(R.id.anotasiTepiView);
+        ImageView DiameterImageView = findViewById(R.id.anotasiDiameterView);
 
         // Get value of shared preferences
         SharedPreferences settings = getSharedPreferences("preferences",
                 Context.MODE_PRIVATE);
         id_perawat = settings.getString("id_perawat", "").toString();
         NRM  = settings.getString("NRM", "").toString();
+        jpgRawImage = settings.getString("rawImage", "");
+
+        //back button
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InsertLog(id_nurse, "Menekan tombol kembali pada halaman tambah kajian");
+                finish();
+            }
+        });
+        //
+
+
+        /*anotasi diameter*/
+
+        //jpg
+        jpgDiameter = settings.getString("jpgDiameterY", "");
+        jpgDiameterFilename = settings.getString("jpgDiameterYFilename", "");
+
+        //png
+        pngDiameter = settings.getString("pngDiameterY", "");
+        pngDiameterFilename = settings.getString("pngDiameterYFilename", "");
+
+        //path
+        //path
+        XPathList = settings.getString("XPathList", "");
+        YPathList = settings.getString("YPathList", "");
+
+        /*anotasi tepi */
+
+        //jpg
+        jpgTepi = settings.getString("jpgAnotasi", "");
+        jpgTepiFilename = settings.getString("jpgAnotasiFilename", "");
+
+        //png
+        pngTepi = settings.getString("pngAnotasi", "");
+        pngTepiFilename = settings.getString("pngAnotasiFilename", "");
+
+        //path
+        tepiPathList = settings.getString("tepiPathList", "");
         System.out.println("Id perawat  dan NRM shared preferemces: " + id_perawat + ", " + NRM);
 
         nomorRekamMedis = (TextView) findViewById(R.id.nomorRekamMedis);
@@ -97,16 +155,20 @@ public class tambahKajianActivity extends AppCompatActivity {
         cariPasien(NRM);
 
 
-
         Button submit = findViewById(R.id.buttonSubmit);
 
         Intent intent_camera = getIntent();
-        Uri uri = intent_camera.getParcelableExtra("rawPhoto");
+        String id = intent_camera.getStringExtra("KEY");
+        Uri uriRaw = Uri.fromFile(new File(jpgRawImage));
+        Uri uriDiameter = Uri.fromFile(new File(jpgDiameter, jpgDiameterFilename));
+        Uri uriTepi = Uri.fromFile(new File(jpgTepi, jpgTepiFilename));
 
-        if (uri != null) {
+        if (id != null) {
             fab.setVisibility(View.GONE);
             formKajian.setVisibility(View.VISIBLE);
-            RawImageView.setImageURI(uri);
+            RawImageView.setImageURI(uriRaw);
+            DiameterImageView.setImageURI(uriDiameter);
+            TepiImageView.setImageURI(uriTepi);
         }else {
             fab.setVisibility(View.VISIBLE);
         }
@@ -116,6 +178,7 @@ public class tambahKajianActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
+                InsertLog(id_nurse, "Memasuki halaman untuk mengambil foto luka");
                 cameraIntent();
             }
         });
@@ -168,6 +231,7 @@ public class tambahKajianActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
+                InsertLog(id_nurse, "Menekan tombol submit pada halaman tambah kajian");
                 insertKajian();
 
             }
@@ -180,9 +244,11 @@ public class tambahKajianActivity extends AppCompatActivity {
     public void insertKajian(){
         Bundle extras = getIntent().getExtras();
         String id_nurse = id_perawat;
-        String rawID = extras.getString("id_gambar");
+
+
+
         String id_pasien = NRM;
-        System.out.println("Get from Anotasi Tepi:" + rawID+ "," + id_perawat + "," + id_pasien);
+
         String size = opsiSize.getText().toString();
         String edges = opsiEdges.getText().toString();
         String NType = opsiNType.getText().toString();
@@ -192,9 +258,93 @@ public class tambahKajianActivity extends AppCompatActivity {
         String ephitelization = opsiEpithelization.getText().toString();
 
 
+        // upload raw image
+
+        String rawID = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+        String category = "Raw";
+        String type = "Jpg";
+        File file = new File(jpgRawImage);
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+        RequestBody id = RequestBody.create(MediaType.parse("multipart/form-data"), rawID);
+        RequestBody pasien_id = RequestBody.create(MediaType.parse("multipart/form-data"),id_pasien);
+        RequestBody perawat_id = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(id_perawat));
+        RequestBody kategori = RequestBody.create(MediaType.parse("multipart/form-data"), category);
+        RequestBody tipe = RequestBody.create(MediaType.parse("multipart/form-data"), type);
+        uploadImage(body, id, pasien_id, perawat_id, tipe, kategori);
+        System.out.println("Raw Image Uploaded");
 
 
-        Call<dataKajianResponse> call = RetrofitClient.getService().tambahKajian(id_pasien,id_perawat,size,edges,NType,NAmount,skincolor,granulation,ephitelization,rawID);
+        //upload anotasi tepi jpg
+        String tepiID = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+        String categoryTepi = "Anotasi Tepi";
+        String tipe_tepi = "Jpg";
+        File file_jpg_tepi = new File(jpgTepi, jpgTepiFilename);
+
+        RequestBody requestFileTepiJpg = RequestBody.create(MediaType.parse("multipart/form-data"), file_jpg_tepi);
+        RequestBody noreg = RequestBody.create(MediaType.parse("multipart/form-data"),id_pasien);
+        RequestBody nurseid = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(id_perawat));
+        MultipartBody.Part bodyTepiJpg = MultipartBody.Part.createFormData("image", file_jpg_tepi.getName(), requestFileTepiJpg);
+        RequestBody id_tepi_jpg = RequestBody.create(MediaType.parse("multipart/form-data"), tepiID);
+        RequestBody kategoriTepiJpg = RequestBody.create(MediaType.parse("multipart/form-data"), categoryTepi);
+        RequestBody tipe_tepi_jpg = RequestBody.create(MediaType.parse("multipart/form-data"), tipe_tepi);
+        uploadImage(bodyTepiJpg, id_tepi_jpg, noreg, nurseid, tipe_tepi_jpg, kategoriTepiJpg);
+        System.out.println("Anotasi Tepi JPG Image Uploaded");
+
+        //upload anotasi tepi png
+        String tepiPNGID = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+        File file_png_tepi = new File(pngTepi, pngTepiFilename);
+        RequestBody no_reg = RequestBody.create(MediaType.parse("multipart/form-data"),id_pasien);
+        RequestBody nurse_id = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(id_perawat));
+        RequestBody requestFileTepiPng = RequestBody.create(MediaType.parse("multipart/form-data"), file_png_tepi);
+        RequestBody kategoriTepiPng = RequestBody.create(MediaType.parse("multipart/form-data"), categoryTepi);
+        MultipartBody.Part bodyTepiPng = MultipartBody.Part.createFormData("image", file_png_tepi.getName(), requestFileTepiPng);
+        RequestBody id_tepi_png = RequestBody.create(MediaType.parse("multipart/form-data"), tepiPNGID);
+        RequestBody tipe_tepi_png = RequestBody.create(MediaType.parse("multipart/form-data"), "Png");
+        uploadImage(bodyTepiPng, id_tepi_png, no_reg, nurse_id, tipe_tepi_png, kategoriTepiPng);
+        System.out.println("Anotasi Tepi PNG Image Uploaded");
+
+        //upload path
+        uploadSVG(tepiPathList, id_pasien, id_perawat, "Anotasi Tepi");
+        System.out.println("Anotasi Tepi SVG Image Uploaded");
+
+        //upload anotasi diameter jpg
+        String diameterID = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+        String kategoriDiameter = "Anotasi Diameter";
+        String tipeDiametr = "Jpg";
+        File file_jpg_diameter = new File(jpgDiameter, jpgDiameterFilename);
+        RequestBody reg_pasien = RequestBody.create(MediaType.parse("multipart/form-data"),id_pasien);
+        RequestBody idnurse = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(id_perawat));
+        RequestBody requestFileDiameterJpg = RequestBody.create(MediaType.parse("multipart/form-data"), file_jpg_diameter);
+        MultipartBody.Part bodyDiameterJpg = MultipartBody.Part.createFormData("image", file_jpg_diameter.getName(), requestFileDiameterJpg);
+        RequestBody id_diameter_jpg = RequestBody.create(MediaType.parse("multipart/form-data"), diameterID);
+        RequestBody kategoriD = RequestBody.create(MediaType.parse("multipart/form-data"), kategoriDiameter);
+        RequestBody tipe_diameter_jpg = RequestBody.create(MediaType.parse("multipart/form-data"), tipeDiametr);
+        uploadImage(bodyDiameterJpg, id_diameter_jpg, reg_pasien, idnurse, tipe_diameter_jpg, kategoriD);
+        System.out.println("Anotasi Diameter JPG Image Uploaded");
+
+        //upload anotasi diameter png
+        String diameterPNGID = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+        File file_png_diameter = new File(pngDiameter, pngDiameterFilename);
+        RequestBody regpas = RequestBody.create(MediaType.parse("multipart/form-data"),id_pasien);
+        RequestBody nurseids = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(id_perawat));
+        RequestBody requestFileDiameterPng = RequestBody.create(MediaType.parse("multipart/form-data"), file_png_diameter);
+        MultipartBody.Part bodyDiameterPng = MultipartBody.Part.createFormData("image", file_png_diameter.getName(), requestFileDiameterPng);
+        RequestBody id_diameter_png = RequestBody.create(MediaType.parse("multipart/form-data"), diameterPNGID);
+        RequestBody tipe_diameter_png = RequestBody.create(MediaType.parse("multipart/form-data"), "Png");
+        RequestBody kategoriDP = RequestBody.create(MediaType.parse("multipart/form-data"), kategoriDiameter);
+        uploadImage(bodyDiameterPng, id_diameter_png, regpas, nurseids, tipe_diameter_png, kategoriDP);
+        System.out.println("Anotasi Diameter PNG Image Uploaded");
+
+        //upload path Diametr
+        uploadSVGDiameter(tepiPathList, XPathList, YPathList, id_pasien, id_perawat, "Anotasi Diameter");
+        System.out.println("Anotasi Diameter SVG Image Uploaded");
+
+
+
+        Call<dataKajianResponse> call = RetrofitClient.getService().tambahKajian(id_pasien,id_perawat,size,edges,NType,NAmount,skincolor,granulation,ephitelization,rawID,tepiID, diameterID);
         call.enqueue(new Callback<dataKajianResponse>() {
             @Override
             public void onResponse(Call<dataKajianResponse> call, Response<dataKajianResponse> response) {
@@ -202,7 +352,11 @@ public class tambahKajianActivity extends AppCompatActivity {
                     //login start main activity
                     Intent i = new Intent(getApplicationContext(), detailPasienActivity.class);
                     i.putExtra("NRM", NRM);
+                    anotasiTepi.tepiAct.finish();
+                    anotasiDiameter.dxAct.finish();
+                    anotasiDiameterY.dyAct.finish();
                     startActivity(i);
+                    finish();
 
                 }else {
                     Toast.makeText(getApplicationContext(),"gagal menambah kajian baru",
@@ -241,6 +395,7 @@ public class tambahKajianActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     private void cameraIntent() {
+        InsertLog(id_nurse, "Membuka kamera");
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         Intent intent = new Intent();
@@ -275,14 +430,16 @@ public class tambahKajianActivity extends AppCompatActivity {
                 if (image == null && mCameraFileName != null) {
                     File file = new File(mCameraFileName);
 
+                    // save raw image ke shared preferences
                     SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("rawImage", file.getAbsolutePath().toString());
                     System.out.println(file.getAbsolutePath().toString());
                     editor.commit();
+                    // end of save raw image ke shared preferences
 
 
-                    String rawPath = file.getAbsolutePath(); // Get the full path
+                    String rawPath = file.getAbsolutePath().toString(); // Get the full path
                     System.out.println(rawPath);
                     /** upload image below line **/
                     Bundle extras = getIntent().getExtras();
@@ -290,6 +447,8 @@ public class tambahKajianActivity extends AppCompatActivity {
                     String category = "Raw";
                     String id_gambar = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
                     String filename = file.getName();
+
+
 
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
@@ -300,7 +459,7 @@ public class tambahKajianActivity extends AppCompatActivity {
                     RequestBody kategori = RequestBody.create(MediaType.parse("multipart/form-data"), category);;
                     // uploadImage(body, id, pasien_id, perawat_id, kategori);
 
-                    image = Uri.fromFile(new File(mCameraFileName));
+                    image = Uri.fromFile(new File(rawPath));
                     Intent IntentCamera = new Intent(tambahKajianActivity.this, anotasiTepi.class);
                     IntentCamera.putExtra(KEY_PHOTO, image);
                     IntentCamera.putExtra("raw_path", rawPath);
@@ -310,17 +469,14 @@ public class tambahKajianActivity extends AppCompatActivity {
                     System.out.println("sent from tambah kajian activity 1:" + id_gambar+ "," + id_perawat + "," + id_pasien);
                     startActivity(IntentCamera);
                 }
-                File file = new File(mCameraFileName);
-                if (!file.exists()) {
-                    file.mkdir();
-                }
+                
             }
         }
     }
 
     // upload image
-    public void uploadImage( final MultipartBody.Part image, final RequestBody id, final RequestBody id_pasien, final RequestBody id_perawat, final RequestBody category){
-        Call<UploadRequest> uploadRequestCall = RetrofitClient.getService().uploadImage(image, id, id_pasien, id_perawat, category);
+    public void uploadImage( final MultipartBody.Part image, final RequestBody id, final RequestBody id_pasien, final RequestBody id_perawat, final RequestBody type, final RequestBody category){
+        Call<UploadRequest> uploadRequestCall = RetrofitClient.getService().uploadImage(image, id, id_pasien, id_perawat, type, category);
         uploadRequestCall.enqueue(new Callback<UploadRequest>() {
             @Override
             public void onResponse(Call<UploadRequest> call, Response<UploadRequest> response) {
@@ -330,7 +486,7 @@ public class tambahKajianActivity extends AppCompatActivity {
                     finish();
 
                 }else {
-                    Toast.makeText(getApplicationContext(), "gagal", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "gagal upload image" + category + type, Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -360,7 +516,7 @@ public class tambahKajianActivity extends AppCompatActivity {
 
 
                 } else {
-                    Toast.makeText(tambahKajianActivity.this, "gagal", Toast.LENGTH_LONG).show();
+                    Toast.makeText(tambahKajianActivity.this, "gagal cari pasien", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -370,6 +526,59 @@ public class tambahKajianActivity extends AppCompatActivity {
                 Toast.makeText(tambahKajianActivity.this, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+
+    // upload vector
+    public void uploadSVG( final String paths, final String id_pasien,final String id_perawat, final String category){
+        Call<UploadVectorRequest> uploadRequestCall = RetrofitClient.getService().uploadSVG(paths, id_pasien, id_perawat, category);
+        uploadRequestCall.enqueue(new Callback<UploadVectorRequest>() {
+            @Override
+            public void onResponse(Call<UploadVectorRequest> call, Response<UploadVectorRequest> response) {
+
+                if(response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "SVG uploaded to server", Toast.LENGTH_LONG).show();
+                    finish();
+
+                }else {
+                    Toast.makeText(getApplicationContext(), "gagal upload svg tepi", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UploadVectorRequest> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
+
+    // upload diameter
+    public void uploadSVGDiameter( final String paths, final String paths2,final String paths3,final String id_pasien,final String id_perawat, final String category){
+        Call<AnotasiDiameterRequest> uploadRequestCall = RetrofitClient.getService().uploadSVGDiameter(paths, paths2, paths3, id_pasien, id_perawat, category);
+        uploadRequestCall.enqueue(new Callback<AnotasiDiameterRequest>() {
+            @Override
+            public void onResponse(Call<AnotasiDiameterRequest> call, Response<AnotasiDiameterRequest> response) {
+
+                if(response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "SVG uploaded to server", Toast.LENGTH_LONG).show();
+                    finish();
+
+                }else {
+                    Toast.makeText(getApplicationContext(), "gagal upload svg diamter", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AnotasiDiameterRequest> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
     }
 
 }

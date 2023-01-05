@@ -23,6 +23,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.chronicwound.logging.LogHelper.InsertLog;
+
 public class LoginActivity extends AppCompatActivity {
 
     UserService userService;
@@ -47,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tampilan_login);
+        InsertLog("Guest", "Memasuki Halaman Login");
 
         loginForm = findViewById(R.id.loginForm);
         // Check if UserResponse is Already Logged In
@@ -62,6 +65,8 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                InsertLog("Guest", "Menekan tombol login pada halaman login");
                 String username = editTextUserName.getText().toString();
                 String password = editTextPassword.getText().toString();
 
@@ -91,6 +96,8 @@ public class LoginActivity extends AppCompatActivity {
 
     //This method is used to validate input given by user
     public boolean validate(String username, String password) {
+
+        InsertLog("Sistem", "Validasi isian form login");
         if(username == null || username.trim().length() == 0){
             textInputLayoutUserName.setError("Username tidak boleh kosong");
             return false;
@@ -104,6 +111,8 @@ public class LoginActivity extends AppCompatActivity {
 
     //do login class
     private void doLogin(final String username,final String password){
+
+        InsertLog("Guest", "Data akan dicek ke database");
         Call<LoginResponse> loginResponseCall = RetrofitClient.getService().login(username,password);
         loginResponseCall.enqueue(new Callback<LoginResponse>() {
             @Override
@@ -120,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("username", username);
                     editor.commit();
 
+                    InsertLog("Guest", "Data guest tedapat pada database, akan diarahkan ke halaman utama");
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
                     finish();

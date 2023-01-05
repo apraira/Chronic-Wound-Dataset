@@ -6,7 +6,7 @@ import retrofit2.http.Part;
 
 public class UploadRequest {
     private MultipartBody.Part image;
-    private RequestBody id, id_pasien, id_perawat, category;
+    private RequestBody id, id_pasien, id_perawat, type, category;
 
 
 
@@ -43,6 +43,14 @@ public class UploadRequest {
 
     public void setId_perawat(RequestBody id_perawat) {
         this.id_perawat = id_perawat;
+    }
+
+    public RequestBody getType() {
+        return type;
+    }
+
+    public void setType(RequestBody type) {
+        this.type = type;
     }
 
     public RequestBody getCategory() {

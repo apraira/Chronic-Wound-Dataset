@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * Email : araymaulana66@gmail.com
  */
 
-public class ImageAdapter extends RecyclerView.Adapter<com.example.chronicwound.gallery.ImageAdapter.ImageViewHolder> {
+public class AllGalleryAdapter extends RecyclerView.Adapter<com.example.chronicwound.gallery.AllGalleryAdapter.ImageViewHolder> {
     private AdapterView.OnItemClickListener listener;
     private String KEY_NAME = "NRM"; //nomor registrasi pasien
     private String id_image, filename;
@@ -36,20 +36,20 @@ public class ImageAdapter extends RecyclerView.Adapter<com.example.chronicwound.
 
     private ArrayList<GalleryRequest> dataList;
 
-    public ImageAdapter(ArrayList<GalleryRequest> dataList, galeriLukaPasien galeriLukaPasien) {
+    public AllGalleryAdapter(ArrayList<GalleryRequest> dataList, GaleriActivity GaleriActivity) {
 
         this.dataList = dataList;
     }
 
     @Override
-    public com.example.chronicwound.gallery.ImageAdapter.ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public com.example.chronicwound.gallery.AllGalleryAdapter.ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.galeri_card, parent, false);
-        return new com.example.chronicwound.gallery.ImageAdapter.ImageViewHolder(view);
+        return new com.example.chronicwound.gallery.AllGalleryAdapter.ImageViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(com.example.chronicwound.gallery.ImageAdapter.ImageViewHolder holder, int position) {
+    public void onBindViewHolder(com.example.chronicwound.gallery.AllGalleryAdapter.ImageViewHolder holder, int position) {
         final GalleryRequest imageModel = (com.example.chronicwound.gallery.GalleryRequest) dataList.get(position);
         String type = imageModel.getType();
 
@@ -103,7 +103,7 @@ public class ImageAdapter extends RecyclerView.Adapter<com.example.chronicwound.
 
 
 
-    }
+}
 
 
 

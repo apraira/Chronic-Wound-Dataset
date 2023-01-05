@@ -8,6 +8,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:layout_weight="1"
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,11 +21,14 @@
         android:outlineAmbientShadowColor="#7C7C7C00">
 
         <androidx.appcompat.widget.Toolbar
+            android:visibility="visible"
             android:id="@+id/toolbar"
             android:paddingVertical="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            app:actionViewClass="androidx.appcompat.widget.SearchView"
+            app:showAsAction="ifRoom|collapseActionView"
             android:outlineProvider="none">
 
             <ImageButton
@@ -35,6 +39,7 @@
                 android:background="@drawable/ic_back_arrow"/>
 
             <TextView
+                android:visibility="visible"
                 android:id="@+id/teksToolBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,18 +50,23 @@
                 android:textColor="@color/black"
                 android:textSize="22sp" />
 
-            <ImageButton
-                android:layout_marginRight="16sp"
-                android:id="@+id/searchPasien"
-                android:layout_width="16sp"
-                android:layout_height="16sp"
+
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:paddingRight="8sp"
                 android:layout_gravity="right"
-                android:background="@drawable/ic_search"
-                 />
+                android:layout_width="wrap_content"
+                android:elevation="2dp"
+                android:background="#fff"
+                android:layout_height="wrap_content"/>
+
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.chip.ChipGroup
+        android:visibility="gone"
+        android:layout_weight="1"
         android:background="@color/white"
         android:outlineProvider="none"
         android:elevation="2dp"
@@ -105,6 +115,9 @@
             android:text="Usia" />
     </com.google.android.material.chip.ChipGroup>
 
+
+
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/tambah_pasien"
         app:cornerRadius="15dp"
@@ -131,25 +144,29 @@
         android:outlineSpotShadowColor="#9E9E9E"
         android:outlineAmbientShadowColor="#9E9E9E"/>
 
+
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="10sp"
-        android:paddingBottom="120sp"
+        android:layout_weight="1"
         android:clipChildren="false"
         android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingHorizontal="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filterPasien">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingBottom="200sp"
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-             />
+            android:layout_height="wrap_content" />
 
 
     </ScrollView>

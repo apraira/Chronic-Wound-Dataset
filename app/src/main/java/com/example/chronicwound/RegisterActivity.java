@@ -25,6 +25,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.chronicwound.logging.LogHelper.InsertLog;
+
 public class RegisterActivity extends AppCompatActivity {
 
     //Declaration EditTexts
@@ -52,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tampilan_register);
+        InsertLog("Guest", "Memasuki Halaman Buat Akun");
 
         registForm = findViewById(R.id.registForm);
         // Check if UserResponse is Already Logged In
@@ -67,6 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
             @Override
             public void onClick(View view) {
+                InsertLog("Guest", "Menekan tombol pembuatan akun pada halaman Buat Akun");
                 if (validate()) {
                     String UserName = editTextUserName.getText().toString();
                     String Email = editTextEmail.getText().toString();
@@ -102,6 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     public boolean validate() {
         boolean valid = false;
+        InsertLog("Sistem", "Memvalidasi isian form");
 
         //Get values from EditText fields
         String UserName = editTextUserName.getText().toString();
@@ -156,6 +161,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     // do register
     public void doRegister(final String name, final String username, final String email,final String password){
+        InsertLog("Guest", "Data pendaftaran akan diunggah ke database");
         Call<RegisterResponse> registerResponseCall = RetrofitClient.getService().signup(name,username,email,password);
         registerResponseCall.enqueue(new Callback<RegisterResponse>() {
             @Override
@@ -171,7 +177,7 @@ public class RegisterActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("username", username);
                     editor.commit();
-
+                    InsertLog("Guest", "Guest berhasil mendaftarkan akun baru");
                     Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                     startActivity(i);
                     finish();

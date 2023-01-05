@@ -1,13 +1,20 @@
-package com.example.chronicwound.tambahkajian;
+package com.example.chronicwound.remote;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class dataKajianResponse {
+public class KajianResponse {
 
-    private String id_pasien, id_perawat;
-    private String size, edges, necrotic_type, necrotic_amount, skincolor_surround, granulation, epithelization, raw_photo_id, tepi_image_id, diameter_image_id;
+    private String _id, id_pasien, id_perawat;
+    private String size, edges, necrotic_type, necrotic_amount, skincolor_surround, granulation, epithelization, raw_photo_id, tepi_image_id,  diameter_image_id, created_at;
 
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String id) {
+        this._id = _id;
+    }
 
     public String getId_pasien() {
         return id_pasien;
@@ -105,6 +112,13 @@ public class dataKajianResponse {
         this.diameter_image_id = diameter_image_id;
     }
 
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
 
 }
 

@@ -3,10 +3,12 @@ package com.example.chronicwound.gallery;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.RequestBody;
+
 public class GalleryRequest {
 
     private String _id, id_pasien, id_perawat;
-    private String filename, filepath, category, created_at, updated_at;
+    private String filename, filepath, type, category, created_at, updated_at;
 
     public String getID() {
         return _id;
@@ -46,6 +48,14 @@ public class GalleryRequest {
 
     public void setFilepath(String filepath) {
         this.filepath = _id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getCategory() {

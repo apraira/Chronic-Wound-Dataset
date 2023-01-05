@@ -1,5 +1,7 @@
 package com.example.chronicwound.gallery;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,25 +16,37 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.chronicwound.MainActivity.id_nurse;
+import static com.example.chronicwound.logging.LogHelper.InsertLog;
+
 
 public class GaleriActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private com.example.chronicwound.gallery.ImageAdapter adapter;
+    private com.example.chronicwound.gallery.AllGalleryAdapter adapter;
     private ArrayList<GalleryRequest> imageArrayList;
     private Integer IDperawat;
     private String KEY_NAME = "NRM";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        InsertLog(id_nurse, "Memasuki halaman galeri luka");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeri);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv_images);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        Bundle extras = getIntent().getExtras();
-        String NRM = extras.getString(KEY_NAME);
 
-        //getImageURL(NRM);
+        getAllImages();
+
+        //back button
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        //
 
 
 
@@ -44,9 +58,9 @@ public class GaleriActivity extends AppCompatActivity {
         imageArrayList.add(new imageModel ("https://jft.web.id/woundapi/instance/uploads/048fefe2481e8aea2cd3441ae1028ad61664783158.jpg"));
         imageArrayList.add(new imageModel ("https://jft.web.id/woundapi/instance/uploads/43eeaa47-0fb0-4a19-8cda-2a5ee7050eb41663778563.jpg"));
     }**/
-    /*
-    private void getImageURL(String id_pasien) {
-        Call<ArrayList<GalleryRequest>> pasienResponseCall = RetrofitClient.getService().getImageByID(id_pasien);
+
+    private void getAllImages() {
+        Call<ArrayList<GalleryRequest>> pasienResponseCall = RetrofitClient.getService().getAllImages();
 
         // on below line we are calling method to enqueue and calling
         // all the data from array list.
@@ -62,11 +76,11 @@ public class GaleriActivity extends AppCompatActivity {
 
                     // below line we are running a loop to add data to our adapter class.
                     for (int i = 0; i < imageArrayList.size(); i++) {
-                        adapter = new ImageAdapter(imageArrayList, GaleriActivity.this);
+                        adapter = new AllGalleryAdapter(imageArrayList, GaleriActivity.this);
 
                         int numberOfColumns = 2;
 
-                        adapter = new com.example.chronicwound.gallery.ImageAdapter(imageArrayList, com.example.chronicwound.gallery.GaleriActivity.this);
+                        adapter = new com.example.chronicwound.gallery.AllGalleryAdapter(imageArrayList, com.example.chronicwound.gallery.GaleriActivity.this);
 
                         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(com.example.chronicwound.gallery.GaleriActivity.this, numberOfColumns);
 
@@ -88,5 +102,5 @@ public class GaleriActivity extends AppCompatActivity {
 
     }
 
-    */
+
     }

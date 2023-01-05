@@ -18,10 +18,9 @@ import com.example.chronicwound.remote.PasienResponse;
 
 import java.util.ArrayList;
 
-/**
- * Created by Dimas Maulana on 5/26/17.
- * Email : araymaulana66@gmail.com
- */
+import static com.example.chronicwound.MainActivity.id_nurse;
+import static com.example.chronicwound.logging.LogHelper.InsertLog;
+
 
 public class PasienAdapter extends RecyclerView.Adapter<PasienAdapter.MahasiswaViewHolder> {
     private AdapterView.OnItemClickListener listener;
@@ -32,6 +31,16 @@ public class PasienAdapter extends RecyclerView.Adapter<PasienAdapter.MahasiswaV
     public PasienAdapter(ArrayList<PasienResponse> dataList, listPasienActivity listPasienActivity) {
 
         this.dataList = dataList;
+    }
+
+    // method for filtering our recyclerview items.
+    public void filterList(ArrayList<PasienResponse> filterlist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        dataList = filterlist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
     }
 
     @Override
@@ -65,6 +74,7 @@ public class PasienAdapter extends RecyclerView.Adapter<PasienAdapter.MahasiswaV
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    InsertLog(id_nurse, "Memasuki halaman detail pasien");
                     int position = getAdapterPosition();
                     String NRM =  dataList.get(position).get_id();
                     String id_perawat = dataList.get(position).getId_perawat();

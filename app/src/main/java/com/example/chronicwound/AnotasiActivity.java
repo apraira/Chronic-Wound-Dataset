@@ -61,7 +61,7 @@ public class AnotasiActivity extends AppCompatActivity {
 
         // getting the reference of the views from their ids
         paint = (DrawView) findViewById(R.id.draw_view);
-        save = (Button) findViewById(R.id.saveAnotasi);
+        save = (Button) findViewById(R.id.submitAnotasi);
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
         undo = (ImageButton) findViewById(R.id.btn_undo);
         stroke = (ImageButton) findViewById(R.id.btn_stroke);

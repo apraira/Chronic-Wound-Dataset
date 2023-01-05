@@ -183,6 +183,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayoutPasien"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"

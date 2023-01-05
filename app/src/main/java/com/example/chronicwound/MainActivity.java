@@ -14,23 +14,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chronicwound.anotasi.anotasiTepi;
+import com.example.chronicwound.gallery.GaleriActivity;
 import com.example.chronicwound.remote.LoginResponse;
 import com.example.chronicwound.remote.RetrofitClient;
 import com.example.chronicwound.pasien.listPasienActivity;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.chronicwound.logging.LogHelper.InsertLog;
 
 public class MainActivity extends AppCompatActivity {
     String UserName;
     private String KEY_USERNAME = "USERNAME";
     private Integer IDperawat;
     private ImageView imageView;
+    TextView namaPerawat;
+    CircleImageView profil;
+    public static String id_nurse;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -41,8 +50,14 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView editUsername = (TextView) findViewById(R.id.view_username);
         editUsername.setText(UserName);
+        setNamaPerawat(UserName);
+
+        InsertLog(id_nurse, "Memasuki halaman utama");
 
         CardView data_pasien = (CardView) findViewById(R.id.data_pasien);
+        CardView arsirWarna = (CardView) findViewById(R.id.arsirWarnaLuka);
+        CardView galeriLuka = (CardView) findViewById(R.id.galeri_luka);
+        profil = (CircleImageView) findViewById(R.id.circle_imageView);
 
         //Picasso.get().load("https://jft.web.id/woundapi/instance/uploads/43eeaa47-0fb0-4a19-8cda-2a5ee7050eb41663778563.jpg").into(imageView);
 
@@ -52,6 +67,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // your handler code here
                 cariPerawat(UserName);
+                InsertLog(id_nurse, "Menekan tombol untuk menuju list pasien");
+
+            }
+        });
+
+        profil.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // your handler code here
+                Intent intent = new Intent(getApplicationContext(), ProfilPerawat.class);
+                startActivity(intent);
+                InsertLog(id_nurse, "Menekan tombol menuju detail profil perawat");
 
             }
         });
@@ -87,6 +113,24 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
 
+        arsirWarna.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), com.example.chronicwound.anotasi.anotasiWarna.class);
+                startActivity(intent);
+                InsertLog(id_nurse, "Menekan tombol menuju halaman arsir warna");
+            }
+        });
+
+        galeriLuka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InsertLog(id_nurse, "Menekan tombol untuk memasuki halaman galeri luka");
+                Intent intent = new Intent(getApplicationContext(), GaleriActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 
@@ -100,9 +144,10 @@ public class MainActivity extends AppCompatActivity {
     public void cariPerawat(final String username) {
         Call<LoginResponse> loginResponseCall = RetrofitClient.getService().cariIDPerawat(username);
         loginResponseCall.enqueue(new Callback<LoginResponse>() {
+
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-
+                InsertLog(id_nurse, "Melakukan pencarian id perawat untuk disimpan sebagai sharedPreferences");
                 if (response.isSuccessful()) {
                     //login start main activity
                     IDperawat = response.body().get_id();
@@ -115,7 +160,44 @@ public class MainActivity extends AppCompatActivity {
                     editor.commit();
 
 
+
                     startActivity(i);
+
+
+
+                } else {
+                    Toast.makeText(MainActivity.this, "gagal", Toast.LENGTH_LONG).show();
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    // cari pasien
+    public void setNamaPerawat(final String username) {
+
+        Call<LoginResponse> loginResponseCall = RetrofitClient.getService().cariIDPerawat(username);
+        loginResponseCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+                if (response.isSuccessful()) {
+                    //login start main activity
+                    namaPerawat = (TextView) findViewById(R.id.namaPerawat);
+                    namaPerawat.setText(response.body().getName());
+                    id_nurse = response.body().get_id().toString();
+                    InsertLog(id_nurse, "Mencari id berdasarkan NIP");
+                    SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("id_perawat", response.body().get_id().toString());
+                    editor.commit();
 
 
 

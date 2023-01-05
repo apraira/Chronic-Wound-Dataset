@@ -75,7 +75,7 @@ public class PathView extends View {
         currentColor = Color.BLACK;
 
         // set an initial brush size
-        strokeWidth = 20;
+        strokeWidth = 10;
     }
 
     // sets the current color of stroke
@@ -85,6 +85,10 @@ public class PathView extends View {
 
     public void erase(){
 
+    }
+
+    public ArrayList  getPathList(){
+        return dataPath;
     }
 
     // sets the stroke width

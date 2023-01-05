@@ -1,7 +1,6 @@
 package com.example.chronicwound.anotasi;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -36,6 +35,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.chronicwound.R;
 import com.example.chronicwound.anotasi.DrawView;
 import com.example.chronicwound.anotasi.PathView;
+import com.example.chronicwound.remote.RetrofitClient;
+import com.example.chronicwound.remote.UploadRequest;
 import com.example.chronicwound.tambahkajian.tambahKajianActivity;
 import com.google.android.material.slider.RangeSlider;
 
@@ -47,23 +48,29 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
+import java.util.UUID;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import petrov.kristiyan.colorpicker.ColorPicker;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.chronicwound.MainActivity.id_nurse;
 import static com.example.chronicwound.logging.LogHelper.InsertLog;
 
-public class anotasiTepi extends AppCompatActivity {
+public class anotasiWarna extends AppCompatActivity {
     private static final int RESULT_LOAD_IMG = 1;
     // creating the object of type DrawView
     // in order to get the reference of the View
-    private PathView paint;
+    private DrawView paint;
     TextView toolbarTitle;
 
 
     // creating objects of type button
-    private ImageButton eraser, stroke,  undo, upload;
+    private ImageButton eraser, stroke,  undo;
     private Button save;
     private ImageView foto;
     Uri rawImage;
@@ -72,62 +79,55 @@ public class anotasiTepi extends AppCompatActivity {
     private RangeSlider rangeSlider;
     String id_perawat, id_gambar, id_pasien;
     private static int RESULT_LOAD_IMAGE = 1;
-    public static Activity tepiAct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anotasi_tepi);
+        setContentView(R.layout.tampilan_anotasi);
         toolbarTitle = (TextView) findViewById(R.id.teksToolBar);
 
-        InsertLog(id_nurse, "Memasuki halaman anotasi tepi");
-
-        tepiAct = this;
-
-        toolbarTitle.setText("Anotasi Tepi Luka");
+        toolbarTitle.setText("Arsir Warna Luka");
 
         // getting the reference of the views from their ids
-        paint = (PathView) findViewById(R.id.draw_view);
+        paint = (DrawView) findViewById(R.id.draw_view);
         save = (Button) findViewById(R.id.submitAnotasi);
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
         undo = (ImageButton) findViewById(R.id.btn_undo);
+        ImageButton black = (ImageButton) findViewById(R.id.btn_black);
+        ImageButton red = (ImageButton) findViewById(R.id.btn_red);
+        ImageButton yellow = (ImageButton) findViewById(R.id.btn_yellow);
         stroke = (ImageButton) findViewById(R.id.btn_stroke);
-        //upload = (ImageButton) findViewById(R.id.btn_upload);
+        de.hdodenhof.circleimageview.CircleImageView upload = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.btn_upload);
         foto = (ImageView) findViewById(R.id.img);
 
-        /* Getting ImageBitmap from Camera from Main Activity */
-        Intent intent_camera = getIntent();
-        rawImage = intent_camera.getParcelableExtra("PHOTO");
-        Bundle extras = getIntent().getExtras();
-        id_perawat = extras.getString("id_perawat");
-        id_gambar = extras.getString("id_gambar");
-        id_pasien = extras.getString("id_pasien");
+        InsertLog(id_nurse, "Memasuki halaman arsir warna luka");
 
 
-        foto.setImageURI(rawImage);
+
 
         //back button
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                anotasiTepi.super.onBackPressed();
+                InsertLog(id_nurse, "Menekan back button dari arsir warna");
+                finish();
             }
+
         });
         //
 
-
-
         // upload button
-        /*
+
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InsertLog(id_nurse, "Melakukan saving gambar arsir warna luka ke server");
                 getImageFromAlbum();
 
             }
-        });*/
+        });
 
         // creating a OnClickListener for each button,
         // to perform certain actions
@@ -135,26 +135,44 @@ public class anotasiTepi extends AppCompatActivity {
         // the undo button will remove the most
         // recent stroke from the canvas
         undo.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                InsertLog(id_nurse, "Menekan tombol undo anotasi tepi");
+                InsertLog(id_nurse, "Mengundo paint");
                 paint.undo();
             }
         });
 
 
-
-        // the button will toggle the visibility of the RangeBar/RangeSlider
-        stroke.setOnClickListener(new View.OnClickListener() {
+        //set color
+        black.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InsertLog(id_nurse, "Mengubah ukuran stroke anotasi tepi");
-                if (rangeSlider.getVisibility() == View.VISIBLE)
-                    rangeSlider.setVisibility(View.GONE);
-                else
-                    rangeSlider.setVisibility(View.VISIBLE);
+
+                InsertLog(id_nurse, "Mengganti warna stroke menjadi hitam");
+                paint.setColor(Color.BLACK);
             }
         });
+
+        red.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InsertLog(id_nurse, "Mengganti warna stroke menjadi merah");
+                paint.setColor(Color.RED);
+            }
+        });
+
+        yellow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InsertLog(id_nurse, "Mengganti warna stroke menjadi kuning");
+                paint.setColor(Color.YELLOW);
+            }
+        });
+
+
+
+
 
         // set the range of the RangeSlider
         rangeSlider.setValueFrom(0.0f);
@@ -166,6 +184,7 @@ public class anotasiTepi extends AppCompatActivity {
         rangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+                InsertLog(id_nurse, "Mengganti ukuran stroke");
                 paint.setStrokeWidth((int) value);
             }
         });
@@ -188,16 +207,12 @@ public class anotasiTepi extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InsertLog(id_nurse, "Menekan tombol save ke server");
 
-                Toast.makeText(anotasiTepi.this,"Saved.Check in your gallery.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Saved.Check in your gallery.",Toast.LENGTH_LONG).show();
                 // getting the bitmap from Drawiew class
 
-                InsertLog(id_nurse, "Menyimpan anotasi tepi");
-
                 Bitmap bmp1 = paint.save();
-                ArrayList path1 = paint.getPathList();
-                String pathList = path1.toString();
-                System.out.println("ini path save : " +pathList);
                 FrameLayout v = (FrameLayout) findViewById(R.id.leot);
                 v.setDrawingCacheEnabled(true);
                 // this is the important code :)
@@ -211,7 +226,7 @@ public class anotasiTepi extends AppCompatActivity {
 
 
                 /*Save png anotasi tepi luka ke galeri*/
-                String namapng = "IMG_PNG_ANOTASI" + System.currentTimeMillis() +".png";
+                String namapng = "IMG_PNG_WARNA_" + System.currentTimeMillis() +".png";
                 ContextWrapper cw = new ContextWrapper(getApplicationContext());
                 // path to /data/data/yourapp/app_data/ChronicWound
                 File directory = cw.getDir("ChronicWound", Context.MODE_PRIVATE);
@@ -236,7 +251,7 @@ public class anotasiTepi extends AppCompatActivity {
                 String filepath_png = directory.getAbsolutePath();
 
                 /*Save jpg raw image + anotasi tepi luka ke galeri*/
-                String namajpg = "IMG_JPG_ANOTASI" + System.currentTimeMillis() +".jpg";
+                String namajpg = "IMG_JPG_WARNA_" + System.currentTimeMillis() +".jpg";
                 ContextWrapper cv = new ContextWrapper(getApplicationContext());
                 // path to /data/data/yourapp/app_data/imageDir
                 File dire = cv.getDir("ChronicWound", Context.MODE_PRIVATE);
@@ -262,36 +277,51 @@ public class anotasiTepi extends AppCompatActivity {
 
                 SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("pngAnotasi", filepath_png);
-                editor.putString("pngAnotasiFilename", namapng);
-                editor.putString("jpgAnotasi", filepath_jpg);
-                editor.putString("jpgAnotasiFilename", namajpg);
-                editor.putString("tepiPathList", pathList);
+                editor.putString("pngAnotasiWarna", filepath_png);
+                editor.putString("pngAnotasiWarnaFilename", namapng);
+                editor.putString("jpgAnotasiWarna", filepath_jpg);
+                editor.putString("jpgAnotasiWarnaFilename", namajpg);
                 editor.commit();
 
 
+                //upload anotasi warna png
+                String WarnaID = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+                File file_warna_png = new File(filepath_png, namapng);
+
+                RequestBody regpas = RequestBody.create(MediaType.parse("multipart/form-data"),"all");
+                RequestBody nurseids = RequestBody.create(MediaType.parse("multipart/form-data"), "artist");
+                RequestBody requestFileWarnaPng = RequestBody.create(MediaType.parse("multipart/form-data"), file_warna_png);
+                MultipartBody.Part bodyWarnaPng = MultipartBody.Part.createFormData("image", file_warna_png.getName(), requestFileWarnaPng);
+                RequestBody id_warna_png = RequestBody.create(MediaType.parse("multipart/form-data"), WarnaID);
+                RequestBody tipe_warna_png = RequestBody.create(MediaType.parse("multipart/form-data"), "Png");
+                RequestBody kategoriWarnaPng = RequestBody.create(MediaType.parse("multipart/form-data"), "Arsir Warna");
+                uploadImage(bodyWarnaPng, id_warna_png, regpas, nurseids, tipe_warna_png, kategoriWarnaPng);
+                System.out.println("Arsir Warna PNG Image Uploaded");
+
+                //upload anotasi warna jpg
+                String WarnaJPGID = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+                File file_warna_jpg = new File(filepath_jpg, namajpg);
+
+                RequestBody pas = RequestBody.create(MediaType.parse("multipart/form-data"),"all");
+                RequestBody nurs = RequestBody.create(MediaType.parse("multipart/form-data"), "artist");
+                RequestBody requestFileWarnaJpg = RequestBody.create(MediaType.parse("multipart/form-data"), file_warna_jpg);
+                MultipartBody.Part bodyWarnaJpg = MultipartBody.Part.createFormData("image", file_warna_jpg.getName(), requestFileWarnaJpg);
+                RequestBody id_warna_jpg = RequestBody.create(MediaType.parse("multipart/form-data"), WarnaJPGID);
+                RequestBody tipe_warna_jpg = RequestBody.create(MediaType.parse("multipart/form-data"), "Jpg");
+                RequestBody kategoriWarnaJpg = RequestBody.create(MediaType.parse("multipart/form-data"), "Arsir Warna");
+                uploadImage(bodyWarnaJpg, id_warna_jpg, pas, nurs, tipe_warna_jpg, kategoriWarnaJpg);
+                System.out.println("Arsir Warna JPG Image Uploaded");
 
 
-                /* Getting ImageBitmap from Camera from Main Activity */
-
-                Intent intent_camera = getIntent();
-                rawImage = intent_camera.getParcelableExtra("PHOTO");
-                Bundle extras = getIntent().getExtras();
-                String raw_path = extras.getString("raw_path");
-                id_perawat = extras.getString("id_perawat");
-                id_gambar = extras.getString("id_gambar");
-                id_pasien = extras.getString("id_pasien");
 
 
 
-                Intent IntentCamera = new Intent(anotasiTepi.this, anotasiDiameter.class);
-                IntentCamera.putExtra("rawPhoto", rawImage);
-                IntentCamera.putExtra("raw_path", raw_path);
-                IntentCamera.putExtra("id_gambar", id_gambar);
-                IntentCamera.putExtra("id_perawat", id_perawat);
-                IntentCamera.putExtra("id_pasien", id_pasien);
-                System.out.println("sent from tambah kajian activity 1:" + id_gambar+ "," + id_perawat + "," + id_pasien);
-                startActivity(IntentCamera);
+
+
+
+                //Intent IntentCamera = new Intent(getApplicationContext(), anotasiDiameter.class);
+                //System.out.println("sent from tambah kajian activity 1:" + id_gambar+ "," + id_perawat + "," + id_pasien);
+                //startActivity(IntentCamera);
             }
 
 
@@ -327,6 +357,35 @@ public class anotasiTepi extends AppCompatActivity {
             Bitmap image = BitmapFactory.decodeFile(picturePath);
             foto.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
+
+
+    }
+
+    // upload image
+    public void uploadImage(final MultipartBody.Part image, final RequestBody id, final RequestBody id_pasien, final RequestBody id_perawat, final RequestBody type, final RequestBody category){
+        Call<UploadRequest> uploadRequestCall = RetrofitClient.getService().uploadImage(image, id, id_pasien, id_perawat, type, category);
+        uploadRequestCall.enqueue(new Callback<UploadRequest>() {
+
+            @Override
+            public void onResponse(Call<UploadRequest> call, Response<UploadRequest> response) {
+
+
+                if(response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Image uploaded to server", Toast.LENGTH_LONG).show();
+                    InsertLog(id_nurse, "Berhasil upload gambar ke server");
+                    finish();
+
+                }else {
+                    Toast.makeText(getApplicationContext(), "gagal upload image" + category + type, Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UploadRequest> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
 
     }

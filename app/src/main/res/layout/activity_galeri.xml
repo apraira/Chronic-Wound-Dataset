@@ -1,54 +1,131 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:layout_height="match_parent"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_weight="1"
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="14dp"
-        android:layout_marginTop="30dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="1dp"
+        android:outlineSpotShadowColor="#7C7C7C00"
+        android:outlineAmbientShadowColor="#7C7C7C00">
 
-        <TextView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:paddingVertical="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Galeri Luka Pasien"
-            android:textSize="34sp"
+            android:background="@color/white"
+            android:outlineProvider="none">
 
-            android:textColor="#000"
-            />
+            <ImageButton
+                android:layout_marginLeft="16sp"
+                android:id="@+id/backButton"
+                android:layout_width="16sp"
+                android:layout_height="16sp"
+                android:background="@drawable/ic_back_arrow"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/teksToolBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Galeri Luka Kronis"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.chip.ChipGroup
+        android:visibility="gone"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:outlineProvider="none"
+        android:elevation="2dp"
+        android:id="@+id/filterPasien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBar"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/rawGambar"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="30dp"
-            >
+            android:fontFamily="@font/nunito_regular"
+            android:textSize="14sp"
+            android:text="Raw" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama Pasien   | "/>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tepiGambar"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_regular"
+            android:textSize="14sp"
+            android:text="Anotasi Tepi" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="    No. Reg Pasien"/>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/diameterGambar"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_regular"
+            android:textSize="14sp"
+            android:text="Anotasi Diameter" />
 
-        </LinearLayout>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/arsirWarna"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_regular"
+            android:textSize="14sp"
+            android:text="Arsir Warna Luka" />
 
+    </com.google.android.material.chip.ChipGroup>
+
+
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingHorizontal="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterPasien">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_images"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingBottom="200sp"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
-    </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-

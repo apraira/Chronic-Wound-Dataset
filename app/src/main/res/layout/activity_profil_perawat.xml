@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AnotasiActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            android:gravity="center"
+            android:outlineAmbientShadowColor="#7C7C7C00"
+            android:outlineSpotShadowColor="#7C7C7C00"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:outlineProvider="none"
+                android:paddingVertical="10sp">
+
+                <ImageButton
+                    android:id="@+id/backButton"
+                    android:layout_width="16sp"
+                    android:layout_height="16sp"
+                    android:layout_marginLeft="16sp"
+                    android:background="@drawable/ic_back_arrow" />
+
+                <TextView
+                    android:id="@+id/teksToolBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Profil Perawat"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="68dp"
+            android:paddingHorizontal="16sp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBar">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+
+                android:id="@+id/fotoPerawat"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_profile_picture" />
+
+            <TextView
+                android:id="@+id/textNamaPerawat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:gravity="center_horizontal"
+                android:text="Jane Doe"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textNIPPerawat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:gravity="center_horizontal"
+                android:text="NIP: 12345679880"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textEmailPerawat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_regular"
+                android:gravity="center_horizontal"
+                android:text="test@mail.com"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <Button
+
+                android:id="@+id/buttonLogout"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="30sp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/secondary_button"
+                android:backgroundTint="@color/Accent"
+                android:text="Log Out"
+                android:textColor="@color/Accent" />
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

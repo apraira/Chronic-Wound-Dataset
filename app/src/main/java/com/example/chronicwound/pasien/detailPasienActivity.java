@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.chronicwound.MainActivity.id_nurse;
+import static com.example.chronicwound.logging.LogHelper.InsertLog;
+
 public class detailPasienActivity extends AppCompatActivity {
 
     TextView nama_pasien, nomorRekamMedis, nomorHp, email, usiaPasien, tanggalLahir, jenisKelamin, Alamat;
@@ -54,6 +58,7 @@ public class detailPasienActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tampilan_detail_pasien);
+        InsertLog(id_nurse, "Memasuki halaman detail asien");
 
         fab = findViewById(R.id.tambahKajian);
 
@@ -110,6 +115,16 @@ public class detailPasienActivity extends AppCompatActivity {
 
         fab = findViewById(R.id.tambahKajian);
 
+        //back button
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InsertLog(id_nurse, "Menekan tombol kembali dari halaman detail pasien");
+                finish();
+            }
+        });
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
@@ -137,6 +152,7 @@ public class detailPasienActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // your handler code here
                 // TODO Auto-generated method stub
+                InsertLog(id_nurse, "Menekan tombol tambah kajian");
                 Intent i = new Intent(getApplicationContext(), tambahKajianActivity.class);
                 System.out.println("Id perawat tombol tambah: " + id_perawat);
                 startActivity(i);
@@ -173,6 +189,14 @@ public class detailPasienActivity extends AppCompatActivity {
           }
       });*/
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        // do something on back.
+        Intent i = new Intent(getApplicationContext(), listPasienActivity.class);
+        startActivity(i);
+        finish();
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -215,6 +239,7 @@ public class detailPasienActivity extends AppCompatActivity {
             public void onResponse(Call<PasienResponse> call, Response<PasienResponse> response) {
 
                 if (response.isSuccessful()) {
+                    InsertLog(id_nurse, "Sistem melakukan pemanggilan REST API cari pasien berdasarkan no reg");
                     //login start main activity
                     nama_pasien.setText(response.body().getNama());
                     nomorRekamMedis.setText("NRM: " + response.body().get_id());

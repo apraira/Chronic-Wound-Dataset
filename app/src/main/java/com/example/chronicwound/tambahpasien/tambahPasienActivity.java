@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -31,6 +32,9 @@ import android.widget.AutoCompleteTextView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.chronicwound.MainActivity.id_nurse;
+import static com.example.chronicwound.logging.LogHelper.InsertLog;
 
 
 public class tambahPasienActivity extends AppCompatActivity {
@@ -66,6 +70,19 @@ public class tambahPasienActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tampilan_tambahpasien);
         initViews();
+        InsertLog(id_nurse, "Memasuki halaman tambah pasien");
+
+        //back button
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InsertLog(id_nurse, "Menekan tombol kembali dari halaman tambah pasien");
+                Intent i = new Intent(getApplicationContext(), listPasienActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
 
         //retrieve ID Perawat
@@ -151,6 +168,7 @@ public class tambahPasienActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
             @Override
             public void onClick(View view) {
+                InsertLog(id_nurse, "Menekan tombol submit pada halaman tambah pasien");
 
 
 
@@ -196,6 +214,14 @@ public class tambahPasienActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        // do something on back.
+        Intent i = new Intent(getApplicationContext(), listPasienActivity.class);
+        startActivity(i);
+        finish();
     }
 
     //this method is used to connect XML views to its Objects

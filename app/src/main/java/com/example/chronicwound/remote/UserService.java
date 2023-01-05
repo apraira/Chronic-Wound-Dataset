@@ -3,6 +3,7 @@ import android.database.Observable;
 
 import com.example.chronicwound.gallery.GalleryRequest;
 import com.example.chronicwound.gallery.GalleryResponse;
+import com.example.chronicwound.logging.LoggingResponse;
 import com.example.chronicwound.tambahkajian.dataKajianResponse;
 
 import java.util.ArrayList;
@@ -64,8 +65,12 @@ public interface UserService {
     @POST("upload")
     Call<UploadRequest> uploadImage(@Part MultipartBody.Part image, @Part("id") RequestBody id,
                                     @Part("id_pasien") RequestBody id_pasien,
-                                           @Part("id_perawat") RequestBody id_perawat,
+                                           @Part("id_perawat") RequestBody id_perawat,@Part("type") RequestBody type,
                                            @Part("category") RequestBody category);
+
+    //get image by patient id
+    @GET("get_images")
+    Call<ArrayList<GalleryRequest>>  getAllImages();
 
     //get image by patient id
     @GET("image/find/{id_pasien}")
@@ -81,10 +86,36 @@ public interface UserService {
     Call<dataKajianResponse> tambahKajian(@Field("id_pasien") String id_pasien, @Field("id_perawat") String id_perawat,
                                           @Field("size") String size, @Field("edges") String edges, @Field("necrotic_type") String necrotic_type,
                                           @Field("necrotic_amount") String necrotic_amount, @Field("skincolor_surround") String skincolor_surround, @Field("granulation") String granulation,
-                                          @Field("epithelization") String epithelization, @Field("raw_photo_id") String raw_photo_id);
+                                          @Field("epithelization") String epithelization, @Field("raw_photo_id") String raw_photo_id, @Field("tepi_image_id") String tepi_image_id, @Field("diameter_image_id") String diameter_image_id);
 
 
     //delete image
     @DELETE("delete_image/{id}")
     Call<GalleryResponse> delete_image(@Path("id") String id);
+
+    // GET histori kajian by id
+    @GET("get_kajian/pasien/{id_pasien}")
+    Call<ArrayList<KajianResponse>> getHistoriPasien(@Path("id_pasien") String id);
+
+    //regist pasien versi baru
+    @FormUrlEncoded
+    @POST("upload_svg")
+    Call<UploadVectorRequest> uploadSVG(@Field("paths") String paths, @Field("id_pasien") String id_pasien,
+                                      @Field("id_perawat") String id_perawat, @Field("category") String category);
+
+    //regist pasien versi baru
+    @FormUrlEncoded
+    @POST("upload_svg_3")
+    Call<AnotasiDiameterRequest> uploadSVGDiameter(@Field("paths") String paths, @Field("paths2") String paths2, @Field("paths3") String paths3, @Field("id_pasien") String id_pasien,
+                                        @Field("id_perawat") String id_perawat, @Field("category") String category);
+
+
+    //data detail kajian pasien
+    @GET("get_kajian/{id}")
+    Call<KajianResponse> cariDetailKajian(@Path("id") String id);
+
+    //catat logging
+    @FormUrlEncoded
+    @POST("insert_log")
+    Call<LoggingResponse> insertLog(@Field("id_perawat") String id_perawat, @Field("activity") String activity);
 }

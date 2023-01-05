@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -42,6 +43,7 @@ import com.google.android.material.slider.RangeSlider;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -54,12 +56,12 @@ import petrov.kristiyan.colorpicker.ColorPicker;
 import static com.example.chronicwound.MainActivity.id_nurse;
 import static com.example.chronicwound.logging.LogHelper.InsertLog;
 
-public class anotasiTepi extends AppCompatActivity {
+public class anotasiDiameter extends AppCompatActivity {
     private static final int RESULT_LOAD_IMG = 1;
     // creating the object of type DrawView
     // in order to get the reference of the View
     private PathView paint;
-    TextView toolbarTitle;
+    TextView toolbarTitle, inputPanjang;
 
 
     // creating objects of type button
@@ -72,20 +74,22 @@ public class anotasiTepi extends AppCompatActivity {
     private RangeSlider rangeSlider;
     String id_perawat, id_gambar, id_pasien;
     private static int RESULT_LOAD_IMAGE = 1;
-    public static Activity tepiAct;
+    public static Activity dxAct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anotasi_tepi);
+        setContentView(R.layout.activity_anotasi_diameter);
+        InsertLog(id_nurse, "Memasuki halaman anotasi diameter X");
+
+
+        dxAct = this;
         toolbarTitle = (TextView) findViewById(R.id.teksToolBar);
+        inputPanjang = (TextView) findViewById(R.id.textViewInputPanjang);
 
-        InsertLog(id_nurse, "Memasuki halaman anotasi tepi");
-
-        tepiAct = this;
-
-        toolbarTitle.setText("Anotasi Tepi Luka");
+        toolbarTitle.setText("Anotasi Diameter Luka X");
+        inputPanjang.setText("Ukuran X (cm)");
 
         // getting the reference of the views from their ids
         paint = (PathView) findViewById(R.id.draw_view);
@@ -93,7 +97,7 @@ public class anotasiTepi extends AppCompatActivity {
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
         undo = (ImageButton) findViewById(R.id.btn_undo);
         stroke = (ImageButton) findViewById(R.id.btn_stroke);
-        //upload = (ImageButton) findViewById(R.id.btn_upload);
+        upload = (ImageButton) findViewById(R.id.btn_upload);
         foto = (ImageView) findViewById(R.id.img);
 
         /* Getting ImageBitmap from Camera from Main Activity */
@@ -105,17 +109,26 @@ public class anotasiTepi extends AppCompatActivity {
         id_pasien = extras.getString("id_pasien");
 
 
-        foto.setImageURI(rawImage);
+        // Get value of shared preferences
+        SharedPreferences settings = getSharedPreferences("preferences",
+                Context.MODE_PRIVATE);
+        String pngAnotasi = settings.getString("pngAnotasi", "");
+        String pngAnotasiFilename = settings.getString("pngAnotasiFilename", "");
+        String jpgAnotasi = settings.getString("jpgAnotasi", "");
+        String jpgAnotasiFilename = settings.getString("jpgAnotasiFilename", "");
+        System.out.println("Id perawat shared preferemces: " + id_perawat.toString());
 
-        //back button
-        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                anotasiTepi.super.onBackPressed();
-            }
-        });
-        //
+
+        try {
+            File f=new File(jpgAnotasi, jpgAnotasiFilename);
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            foto.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
 
 
 
@@ -137,10 +150,20 @@ public class anotasiTepi extends AppCompatActivity {
         undo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InsertLog(id_nurse, "Menekan tombol undo anotasi tepi");
+                InsertLog(id_nurse, "Menekan tombol undo pada halaman diameter X");
                 paint.undo();
             }
         });
+
+        //back button
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                anotasiDiameter.super.onBackPressed();
+            }
+        });
+        //
 
 
 
@@ -148,7 +171,7 @@ public class anotasiTepi extends AppCompatActivity {
         stroke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InsertLog(id_nurse, "Mengubah ukuran stroke anotasi tepi");
+                InsertLog(id_nurse, "Mengganti ukuran stroke anotasi diameter");
                 if (rangeSlider.getVisibility() == View.VISIBLE)
                     rangeSlider.setVisibility(View.GONE);
                 else
@@ -188,11 +211,10 @@ public class anotasiTepi extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InsertLog(id_nurse, "Menyimpan gambar anotasi diameter X");
 
-                Toast.makeText(anotasiTepi.this,"Saved.Check in your gallery.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Saved.Check in your gallery.",Toast.LENGTH_LONG).show();
                 // getting the bitmap from Drawiew class
-
-                InsertLog(id_nurse, "Menyimpan anotasi tepi");
 
                 Bitmap bmp1 = paint.save();
                 ArrayList path1 = paint.getPathList();
@@ -211,7 +233,7 @@ public class anotasiTepi extends AppCompatActivity {
 
 
                 /*Save png anotasi tepi luka ke galeri*/
-                String namapng = "IMG_PNG_ANOTASI" + System.currentTimeMillis() +".png";
+                String namapng = "IMG_PNG_DIAMETER_X_" + System.currentTimeMillis() +".png";
                 ContextWrapper cw = new ContextWrapper(getApplicationContext());
                 // path to /data/data/yourapp/app_data/ChronicWound
                 File directory = cw.getDir("ChronicWound", Context.MODE_PRIVATE);
@@ -236,7 +258,7 @@ public class anotasiTepi extends AppCompatActivity {
                 String filepath_png = directory.getAbsolutePath();
 
                 /*Save jpg raw image + anotasi tepi luka ke galeri*/
-                String namajpg = "IMG_JPG_ANOTASI" + System.currentTimeMillis() +".jpg";
+                String namajpg = "IMG_JPG_DIAMETER_X_" + System.currentTimeMillis() +".jpg";
                 ContextWrapper cv = new ContextWrapper(getApplicationContext());
                 // path to /data/data/yourapp/app_data/imageDir
                 File dire = cv.getDir("ChronicWound", Context.MODE_PRIVATE);
@@ -260,16 +282,19 @@ public class anotasiTepi extends AppCompatActivity {
 
                 String filepath_jpg = dire.getAbsolutePath();
 
+                EditText panjangX = (EditText) findViewById(R.id.editTextDiameter);
+
+                String ukuranX = panjangX.getText().toString();
+
                 SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("pngAnotasi", filepath_png);
-                editor.putString("pngAnotasiFilename", namapng);
-                editor.putString("jpgAnotasi", filepath_jpg);
-                editor.putString("jpgAnotasiFilename", namajpg);
-                editor.putString("tepiPathList", pathList);
+                editor.putString("pngDiameterX", filepath_png);
+                editor.putString("pngDiameterXFilename", namapng);
+                editor.putString("jpgDiameterX", filepath_jpg);
+                editor.putString("jpgDiameterXFilename", namajpg);
+                editor.putString("ukuranX", ukuranX);
+                editor.putString("XPathList", pathList);
                 editor.commit();
-
-
 
 
                 /* Getting ImageBitmap from Camera from Main Activity */
@@ -284,7 +309,7 @@ public class anotasiTepi extends AppCompatActivity {
 
 
 
-                Intent IntentCamera = new Intent(anotasiTepi.this, anotasiDiameter.class);
+                Intent IntentCamera = new Intent(getApplicationContext(), anotasiDiameterY.class);
                 IntentCamera.putExtra("rawPhoto", rawImage);
                 IntentCamera.putExtra("raw_path", raw_path);
                 IntentCamera.putExtra("id_gambar", id_gambar);

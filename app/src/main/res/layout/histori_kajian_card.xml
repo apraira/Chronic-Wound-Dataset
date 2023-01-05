@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="14dp"
+    android:layout_marginHorizontal="4sp"
+    card_view:cardElevation="4dp"
+    android:outlineSpotShadowColor="#9E9E9E"
+    android:outlineAmbientShadowColor="#9E9E9E"
+    card_view:cardBackgroundColor="#FFFFFF"
+    card_view:cardCornerRadius="15dp"
+    tools:targetApi="honeycomb">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="22sp"
+                android:layout_height="22sp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_kalender"/>
+            <TextView
+                android:id="@+id/txtTanggal"
+                android:layout_width="match_parent"
+                android:paddingLeft="10sp"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="#000000"
+                android:text="21 October 2022"
+                android:layout_gravity="center_vertical"
+                android:textSize="20sp"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <!-- TextView Nama Perawat -->
+            <TextView
+                android:id="@+id/NamaPerawat"
+                android:layout_width="match_parent"
+                android:text="Nama Perawat"
+                android:fontFamily="@font/nunito_regular"
+                android:textColor="#7C7C7C"
+                android:textSize="14sp"
+                android:layout_height="wrap_content" />
+
+            <!-- NIP -->
+            <TextView
+                android:id="@+id/NIPperawat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NIP: 1313617020"
+                android:fontFamily="@font/nunito_regular"
+                android:textColor="#7C7C7C"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.chronicwound.LoginActivity;
 import com.example.chronicwound.MainActivity;
 import com.example.chronicwound.R;
@@ -29,6 +31,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.chronicwound.MainActivity.id_nurse;
+import static com.example.chronicwound.logging.LogHelper.InsertLog;
+
 public class singleImageView extends AppCompatActivity {
 
     TextView nama_pasien, nama_perawat, filename, created_at, category;
@@ -38,6 +43,7 @@ public class singleImageView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        InsertLog(id_nurse, "Memasuki halaman single image view");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_image_view_layout);
 
@@ -92,7 +98,7 @@ public class singleImageView extends AppCompatActivity {
             }
         });}
 
-    // cari pasien
+    // image details
     public void imageDetails(final String id) {
         Call<GalleryResponse> imageResponseCall = RetrofitClient.getService().getImageDetail(id);
         imageResponseCall.enqueue(new Callback<GalleryResponse>() {
@@ -101,7 +107,13 @@ public class singleImageView extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
 
-                    Picasso.get().load("https://jft.web.id/woundapi/instance/uploads/" + response.body().getFilename()).rotate(90).into(imageHolder);
+                    Glide.with(getApplicationContext()).load("https://jft.web.id/woundapi/instance/uploads/" + response.body().getFilename())
+                            .centerCrop()
+                            .thumbnail(0.05f)
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(imageHolder);
+
+                    //Picasso.get().load("https://jft.web.id/woundapi/instance/uploads/" + response.body().getFilename()).rotate(90).into(imageHolder);
                     nama_pasien.setText(response.body().getId_pasien());
                     nama_perawat.setText(response.body().getId_perawat());
                     filename.setText(response.body().getFilename());
