@@ -11,4 +11,4 @@
 |     |                                                      | Membuat layout arsir warna luka pada XML                                   | Next Sprint |
 |     |                                                      | Implementasi fungsi arsir warna luka                                       | Next Sprint |
 |     |                                                      | Menyimpan gambar hasil arsir warna luka ke storage internal & server       | Next Sprint |
-|     |                                                      | Menghapus  arsir warna luka ke storage server                              | Next Sprint |
+|     |                                                      | Menghapus arsir warna luka ke storage server                               | Next Sprint |
