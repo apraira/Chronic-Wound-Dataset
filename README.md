@@ -2,29 +2,23 @@
 
 
 # Product Backlog
-| No. | User Story                                                                         | Priority | Sprint No. |
-|-----|------------------------------------------------------------------------------------|----------|------------|
-| 1   | Konfigurasi Server                                                                 | High     | 1          |
-| 2   | Konfigurasi Database                                                               | High     |            |
-| 3   | Membuat akun                                                                       | Medium   |            |
-| 4   | Masuk ke akun yang sudah dibuat                                                    | Medium   |            |
-| 5   | Menambah pasien dan memilih pasien                                                 | High     | 2          |
-| 6   | Menganotasi pusat luka dan ditarik diameter ke tepi luka, diameter major dan minor | High     | 3          |
-| 7   | Mengarsir wilayah goa luka                                                         | High     | 3          |
-| 8   | Mengarsir warna luka                                                               | High     | 4          |
-| 9   | Mengarsir wilayah keliling luka yang sedang berproses atau sudah sembuh            | High     | 4          |
-| 10  | Segmentasi warna luka secara otomatis                                              | High     | 5          |
-| 11  | Galeri tepi luka kronis                                                            | High     | 5          |
-| 12  | Unduh dataset luka milik user tersebut                                             | High     | 6          |
-| 13  | Mengunggah luka kronis yang akan dikaji                                            | Medium   | 7          |
-| 14  | Melakukan penambahan pengkajian luka                                               | Medium   | 8          |
-| 15  | Input nilai skoring tepi luka secara manual                                        | Medium   | 8          |
-| 16  | Input nilai skoring ukuran luka secara manual                                      | Medium   | 9          |
-| 17  | Input nilai skoring epitalisasi luka secara manual                                 | Medium   | 9          |
-| 18  | Melihat status luka pasien                                                         | Medium   | 10         |
-| 19  | Melihat data riwayat pengkajian luka pada tiap pasien                              | Medium   | 10         |
-| 20  | Mencatat log activity user                                                         | Low      | 11         |
-| 21  | Melihat detail profil akun perawat atau pengguna                                   | Low      | 11         |
-| 22  | Keluar dari akun                                                                   | Low      | 11         |
+| No. | User Story                                           | Priority | Sprint No. |
+|-----|------------------------------------------------------|----------|------------|
+| 1   | Konfigurasi Server                                   | High     | 1          |
+| 2   | Konfigurasi Database                                 | High     | 1          |
+| 3   | Membuat akun                                         | Medium   | 1          |
+| 4   | Masuk ke akun yang sudah dibuat                      | Medium   | 1          |
+| 5   | Menambah pasien dan memilih pasien                   | High     | 2          |
+| 6   | Manajemen fotografi luka                             | High     | 3-4        |
+| 7   | Melakukan penambahan pengkajian luka                 | High     | 4          |
+| 8   | Menganotasi tepi luka dan menganotasi orientasi luka | High     | 4-6        |
+| 9   | Mengunggah luka kronis yang akan dikaji              | Medium   | 5          |
+| 10  | Mengarsir warna luka                                 | High     | 7          |
+| 11  | Galeri luka kronis semua pasien                      | High     | 8          |
+| 12  | Unduh dataset luka milik user tersebut               | High     | 8          |
+| 13  | Melihat histori kajian pasien dan status luka pasien | Medium   | 8          |
+| 14  | Melihat detail profil akun perawat atau pengguna     | Low      | 8          |
+| 15  | Keluar dari akun                                     | Low      | 8          |
+| 16  | Mencatat log activity user                           | Low      | 9- 10      |
 
 
