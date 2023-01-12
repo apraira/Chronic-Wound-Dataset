@@ -75,17 +75,21 @@ public class singleImageView extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     // delete image
     public void deleteImage(final String id) {
         Call<GalleryResponse> galleryResponseCall = RetrofitClient.getService().delete_image(id);
         galleryResponseCall.enqueue(new Callback<GalleryResponse>() {
+            @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
             @Override
             public void onResponse(Call<GalleryResponse> call, Response<GalleryResponse> response) {
 
                 if (response.isSuccessful()) {
-                    Intent i = new Intent(getApplicationContext(), GaleriActivity.class);
-                    i.putExtra("NRM", IDPasien);
-                    startActivity(i);
+                    finish();
                 } else {
                     Toast.makeText(singleImageView.this, "gagal menghapus foto", Toast.LENGTH_LONG).show();
                 }

@@ -19,6 +19,7 @@ import com.example.chronicwound.R;
 import com.example.chronicwound.galeriLukaPasien;
 import com.example.chronicwound.pasien.detailPasienActivity;
 import com.example.chronicwound.remote.PasienResponse;
+import com.google.android.material.chip.Chip;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -34,11 +35,22 @@ public class AllGalleryAdapter extends RecyclerView.Adapter<com.example.chronicw
     private String id_image, filename;
     galeriLukaPasien myFragment;
 
+
     private ArrayList<GalleryRequest> dataList;
 
     public AllGalleryAdapter(ArrayList<GalleryRequest> dataList, GaleriActivity GaleriActivity) {
 
         this.dataList = dataList;
+    }
+
+    // method for filtering our recyclerview items.
+    public void filterList(ArrayList<GalleryRequest> filterlist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        dataList = filterlist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
     }
 
     @Override

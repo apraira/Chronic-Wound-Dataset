@@ -54,7 +54,7 @@ public class tambahPasienActivity extends AppCompatActivity {
     //Declaration TextInputLayout
     TextInputLayout textInputLayoutNama;
     TextInputLayout textInputLayoutNRM;
-    TextInputLayout textInputLayoutUsia;
+    TextInputLayout textInputLayoutUsia, textInputLayoutAgama;
     TextInputLayout textInputLayoutTanggalLahir, textInputLayoutKelamin, textInputLayoutAlamat, textInputLayoutNoHp, textInputLayoutEmail;
 
     //Dropdown
@@ -170,9 +170,6 @@ public class tambahPasienActivity extends AppCompatActivity {
             public void onClick(View view) {
                 InsertLog(id_nurse, "Menekan tombol submit pada halaman tambah pasien");
 
-
-
-
                     String nrm = editTextNRM.getText().toString();
                     String id_perawat = IDperawat.toString();
                     String nama = editTextNama.getText().toString();
@@ -184,8 +181,9 @@ public class tambahPasienActivity extends AppCompatActivity {
                     String no_hp = editTextNoHp.getText().toString();
                     String email = editTextEmail.getText().toString();
 
-
-
+                //Check user input is correct or not
+                if (validate(nrm, nama, agama, born_date, usia, kelamin, alamat, no_hp, email)) {
+                    //do login
                     //PasienRequest pasien = new PasienRequest(nrm, id_perawat, nama, agama, born_date, usia, kelamin, alamat, no_hp, email);
                     Call<PasienResponse> call = RetrofitClient.getService().createPasien(nrm, id_perawat, nama, agama, born_date, usia, kelamin, alamat, no_hp, email);
                     call.enqueue(new Callback<PasienResponse>() {
@@ -211,6 +209,9 @@ public class tambahPasienActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "input pasien gagal", Toast.LENGTH_SHORT).show();
                         }
                     });
+                }
+
+
 
             }
         });
@@ -238,6 +239,7 @@ public class tambahPasienActivity extends AppCompatActivity {
 
         textInputLayoutNama = (TextInputLayout) findViewById(R.id.textInputLayoutNama);
         textInputLayoutNRM = (TextInputLayout) findViewById(R.id.textInputLayoutNRM);
+        textInputLayoutAgama = (TextInputLayout) findViewById(R.id.textInputLayoutAgama);
         textInputLayoutUsia = (TextInputLayout) findViewById(R.id.textInputLayoutUsia);
         textInputLayoutTanggalLahir = (TextInputLayout) findViewById(R.id.textInputLayoutTanggalLahir);
         textInputLayoutKelamin = (TextInputLayout) findViewById(R.id.textInputLayoutKelamin);
@@ -246,6 +248,60 @@ public class tambahPasienActivity extends AppCompatActivity {
         textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
 
         buttonSubmit = (Button) findViewById(R.id.buttonSubmit);
+    }
+
+    //This method is used to validate input given by user
+    public boolean validate(String nrm, String nama, String agama, String born_date, String usia, String kelamin, String alamat, String no_hp, String email) {
+
+        InsertLog("Sistem", "Validasi isian form tambah pasien");
+
+        if(nrm == null || nrm.trim().length() == 0){
+            textInputLayoutNRM.setError("maaf, tidak boleh kosong.");
+            return false;
+        }
+
+        if(nama == null || nama.trim().length() == 0){
+            textInputLayoutNama.setError("maaf, tidak boleh kosong.");
+            return false;
+        }
+
+        if(agama == null || agama.trim().length() == 0){
+            textInputLayoutAgama.setError("maaf, tidak boleh kosong.");
+            return false;
+        }
+
+        if(born_date == null || born_date.trim().length() == 0){
+            textInputLayoutTanggalLahir.setError("maaf, tidak boleh kosong.");
+            return false;
+        }
+
+        if(usia == null || usia.trim().length() == 0){
+            textInputLayoutUsia.setError("maaf, tidak boleh kosong.");
+            return false;
+        }
+
+        if(kelamin == null || kelamin.trim().length() == 0){
+            textInputLayoutKelamin.setError("maaf, tidak boleh kosong.");
+            return false;
+        }
+
+        if(alamat == null || alamat.trim().length() == 0){
+            textInputLayoutAlamat.setError("maaf, tidak boleh kosong.");
+            return false;
+        }
+
+        if(no_hp == null || no_hp.trim().length() == 0){
+            textInputLayoutNoHp.setError("maaf, tidak boleh kosong.");
+            return false;
+        }
+
+        if(email == null || email.trim().length() == 0){
+            textInputLayoutEmail.setError("maaf, tidak boleh kosong.");
+            return false;
+        }
+
+
+        return true;
     }
 
     // add pasien

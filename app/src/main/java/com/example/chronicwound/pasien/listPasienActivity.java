@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import com.example.chronicwound.remote.RetrofitClient;
 import com.example.chronicwound.tambahpasien.PasienAdapter;
 import com.example.chronicwound.tambahpasien.tambahPasienActivity;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -48,6 +50,7 @@ public class listPasienActivity extends AppCompatActivity {
     private String KEY_USERNAME = "USERNAME";
     int id_perawat;
     private Integer dd;
+    private Chip laki, perempuan, semua;
 
 
     @Override
@@ -62,6 +65,36 @@ public class listPasienActivity extends AppCompatActivity {
         dd = Integer.parseInt(String.valueOf(id_perawat));
         System.out.println("Id perawat list pasien: " + id_perawat);
         InsertLog(idp, "Memasuki halaman list pasien");
+
+        this.laki = (Chip) this.findViewById(R.id.pasienLaki);
+        this.perempuan = (Chip) this.findViewById(R.id.pasienPerempuan);
+        this.semua = (Chip) this.findViewById(R.id.semuaPasien);
+
+        semua.setChecked(true);
+
+        laki.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterKelamin("Laki-laki");
+            }
+        });
+
+        perempuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterKelamin("Perempuan");
+            }
+        });
+
+        semua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filter("");
+            }
+        });
+
+
+
 
 
 
@@ -236,12 +269,19 @@ public class listPasienActivity extends AppCompatActivity {
         // running a for loop to compare elements.
         for (PasienResponse item : pasienArrayList) {
             // checking if the entered string matched with any item of our recycler view.
-            if (item.getKelamin().toLowerCase().contains(text.toLowerCase())) {
-                // if the item is matched we are
-                // adding it to our filtered list.
-                filteredlist.add(item);
+            if (item.getKelamin() == null){
+                System.out.println("Null");
+            } else{
+                if (item.getKelamin().toLowerCase().contains(text.toLowerCase())) {
+                    // if the item is matched we are
+                    // adding it to our filtered list.
+                    filteredlist.add(item);
+                }
+
             }
+
         }
+
         if (filteredlist.isEmpty()) {
             // if no item is added in filtered list we are
             // displaying a toast message as no data found.

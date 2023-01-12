@@ -38,6 +38,7 @@
                     android:textSize="22sp" />
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/galeriFilter"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
@@ -68,6 +69,47 @@
 
 
         </TableLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:outlineProvider="none"
+            android:elevation="2dp"
+            android:id="@+id/filterPasien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBar"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipRaw"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Raw" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTepi"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_regular"
+                android:textSize="14sp"
+                android:text="Anotasi Tepi" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipDiameter"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_regular"
+                android:textSize="14sp"
+                android:text="Anotasi Diameter" />
+        </com.google.android.material.chip.ChipGroup>
 
 
         <androidx.recyclerview.widget.RecyclerView

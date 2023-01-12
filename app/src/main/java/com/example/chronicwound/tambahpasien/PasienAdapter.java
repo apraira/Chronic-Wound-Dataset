@@ -54,6 +54,7 @@ public class PasienAdapter extends RecyclerView.Adapter<PasienAdapter.MahasiswaV
     public void onBindViewHolder(MahasiswaViewHolder holder, int position) {
         holder.txtNama.setText(dataList.get(position).getNama());
         holder.txtNRM.setText("NRM: " + dataList.get(position).get_id());
+        holder.txtKelamin.setText(dataList.get(position).getKelamin());
         holder.txtUsia.setText(dataList.get(position).getUsia() + " Tahun");
     }
 
@@ -63,13 +64,14 @@ public class PasienAdapter extends RecyclerView.Adapter<PasienAdapter.MahasiswaV
     }
 
     public class MahasiswaViewHolder extends RecyclerView.ViewHolder{
-        private TextView txtNama, txtNRM, txtUsia;
+        private TextView txtNama, txtNRM, txtKelamin, txtUsia;
 
         public MahasiswaViewHolder(View itemView) {
             super(itemView);
-            txtNama = (TextView) itemView.findViewById(R.id.txt_nama_Pasien);
-            txtNRM = (TextView) itemView.findViewById(R.id.txt_nrm_pasien);
-            txtUsia = (TextView) itemView.findViewById(R.id.txt_skor_terakhir);
+            txtNama = (TextView) itemView.findViewById(R.id.nama_pasien);
+            txtNRM = (TextView) itemView.findViewById(R.id.nomorRekamMedis);
+            txtKelamin = (TextView) itemView.findViewById(R.id.jenisKelamin);
+            txtUsia = (TextView) itemView.findViewById(R.id.usiaPasien);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

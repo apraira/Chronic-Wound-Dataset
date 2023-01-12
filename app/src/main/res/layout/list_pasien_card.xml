@@ -16,55 +16,80 @@
     card_view:cardCornerRadius="15dp"
     tools:targetApi="honeycomb">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:background="@drawable/circleshape"
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/fotoPasien"
-            android:layout_width="60dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_gravity="center"
-            android:layout_height="60dp"
             android:layout_marginRight="10sp"
-            android:src="@drawable/ic_profile_picture"/>
+            android:background="@drawable/circleshape"
+            android:src="@drawable/ic_profile_picture" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:orientation="vertical">
-        <!-- TextView Nama Pasien -->
-        <TextView
-            android:id="@+id/txt_nama_Pasien"
-            android:layout_width="match_parent"
-            android:fontFamily="@font/nunito_bold"
-            android:textColor="#000000"
-            android:text="Jane Doe"
-            android:textSize="20sp"
-            android:layout_height="wrap_content" />
+            <!-- TextView Nama Pasien -->
+            <TextView
+                android:id="@+id/nama_pasien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Jane Doe"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-        <!-- TextView Npm Mahasiswa -->
-        <TextView
-            android:id="@+id/txt_nrm_pasien"
-            android:layout_width="match_parent"
-            android:text="No. Registrasi: 1313617888"
-            android:fontFamily="@font/nunito_regular"
-            android:textColor="#7C7C7C"
-            android:textSize="14sp"
-            android:layout_height="wrap_content" />
+            <!-- TextView Npm Mahasiswa -->
+            <TextView
+                android:id="@+id/nomorRekamMedis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_regular"
+                android:text="No. Registrasi: 1313617888"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
-        <!-- TextView NoHp Mahasiswa -->
-        <TextView
-            android:id="@+id/txt_skor_terakhir"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Wanita | 13 Tahun"
-            android:fontFamily="@font/nunito_regular"
-            android:textColor="#7C7C7C"
-            android:textSize="14sp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!--Kelamin-->
+                <TextView
+                    android:id="@+id/jenisKelamin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_regular"
+                    android:text="Wanita"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_gravity="center"
+                    android:layout_width="0.8dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_height="14sp"
+                    android:background="#000" />
+
+                <TextView
+                    android:id="@+id/usiaPasien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_regular"
+                    android:text="13 Tahun"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
 
         </LinearLayout>
 

@@ -52,7 +52,7 @@ public interface UserService {
                                      @Field("usia") String usia, @Field("kelamin") String kelamin, @Field("alamat") String alamat,
                                      @Field("no_hp") String no_hp, @Field("email") String email);
 
-    //pasien berdasarkan id_perawat
+    //semua pasien
     @GET("pasien")
     Call<ArrayList<PasienResponse>> getAllCourses();
 

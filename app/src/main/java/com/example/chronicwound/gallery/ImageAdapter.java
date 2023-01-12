@@ -41,6 +41,16 @@ public class ImageAdapter extends RecyclerView.Adapter<com.example.chronicwound.
         this.dataList = dataList;
     }
 
+    // method for filtering our recyclerview items.
+    public void filterList(ArrayList<GalleryRequest> filterlist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        dataList = filterlist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
+    }
+
     @Override
     public com.example.chronicwound.gallery.ImageAdapter.ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -60,7 +70,8 @@ public class ImageAdapter extends RecyclerView.Adapter<com.example.chronicwound.
                     .with((Activity) holder.itemView.getContext())
                     .setPlaceHolder(R.mipmap.ic_launcher, R.mipmap.ic_launcher)
                     .load("https://jft.web.id/woundapi/instance/uploads/" + imageModel.getFilename(), holder.imgView);*/
-        } else {
+        }
+        else {
             System.out.println(type + " is loaded by Glide");
             Glide.with(holder.itemView.getContext()).load("https://jft.web.id/woundapi/instance/uploads/" + imageModel.getFilename())
                     .centerCrop()

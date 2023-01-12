@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import com.example.chronicwound.R;
 import com.example.chronicwound.remote.RetrofitClient;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +28,8 @@ public class GaleriActivity extends AppCompatActivity {
     private ArrayList<GalleryRequest> imageArrayList;
     private Integer IDperawat;
     private String KEY_NAME = "NRM";
+    private Chip chipRaw, chipTepi, chipDiameter, chipArsir;
+    private ChipGroup chipFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,39 @@ public class GaleriActivity extends AppCompatActivity {
         setContentView(R.layout.activity_galeri);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        chipRaw = (Chip) findViewById(R.id.chipRaw);
+        chipTepi = (Chip) findViewById(R.id.chipTepi);
+        chipDiameter = (Chip) findViewById(R.id.chipDiameter);
+        chipArsir = (Chip) findViewById(R.id.chipArsir);
+        chipFilter = (ChipGroup) findViewById(R.id.filterPasien);
+
+        chipTepi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filter("Anotasi Tepi");
+            }
+        });
+
+        chipArsir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filter("Arsir Warna");
+            }
+        });
+
+        chipDiameter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filter("Anotasi Diameter");
+            }
+        });
+
+        chipRaw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filter("Raw");
+            }
+        });
 
 
         getAllImages();
@@ -50,6 +87,43 @@ public class GaleriActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        chipFilter.clearCheck();
+        getAllImages();
+
+
+
+    }
+
+    private void filter(String text){
+        // creating a new array list to filter our data.
+        ArrayList<GalleryRequest> filteredlist = new ArrayList<GalleryRequest>();
+
+        // running a for loop to compare elements.
+        for (GalleryRequest item : imageArrayList) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.getCategory() == null){System.out.println("Null");}else{
+                if (item.getCategory().toLowerCase().contains(text.toLowerCase())) {
+                    // if the item is matched we are
+                    // adding it to our filtered list.
+                    filteredlist.add(item);
+                }
+            }
+
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(getApplicationContext(), "No Data Found..", Toast.LENGTH_SHORT).show();
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            adapter.filterList(filteredlist);
+        }
     }
 
     /**

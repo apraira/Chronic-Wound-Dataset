@@ -109,6 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
         InsertLog("Sistem", "Memvalidasi isian form");
 
         //Get values from EditText fields
+        String Nama = editTextNama.getText().toString();
         String UserName = editTextUserName.getText().toString();
         String Email = editTextEmail.getText().toString();
         String Password = editTextPassword.getText().toString();
@@ -136,6 +137,18 @@ public class RegisterActivity extends AppCompatActivity {
             valid = true;
             textInputLayoutEmail.setError(null);
         }
+
+
+        //Nama
+        if(Nama.isEmpty()){
+            textInputLayoutNama.setError("Nama tidak boleh kosong");
+            valid = false;
+        }else {
+            valid = true;
+            textInputLayoutEmail.setError(null);
+        }
+
+
 
         //Handling validation for Password field
         if (Password.isEmpty()) {

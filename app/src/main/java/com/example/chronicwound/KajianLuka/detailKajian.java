@@ -1,10 +1,12 @@
 package com.example.chronicwound.KajianLuka;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -131,12 +133,14 @@ public class detailKajian extends AppCompatActivity {
     public void getDetail(final String id) {
         Call<KajianResponse> pasienResponseCall = RetrofitClient.getService().cariDetailKajian(id);
         pasienResponseCall.enqueue(new Callback<KajianResponse>() {
+            @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
             @Override
             public void onResponse(Call<KajianResponse> call, Response<KajianResponse> response) {
 
                 if (response.isSuccessful()) {
                     //login start main activity
-
+                    Integer jml = 0;
+                    Integer hasil = 0;
 
                     //umum
                     tanggalKajian.setText(response.body().getCreated_at());
@@ -151,39 +155,77 @@ public class detailKajian extends AppCompatActivity {
 
 
                     //Luas
-                    textKeteranganLuas.setText(response.body().getSize().substring(3).trim());
-                    textSkorLuas.setText(response.body().getSize().substring(0,1).toString());
+                    if( response.body().getSize().isEmpty()){
+                        System.out.println("empty");
+                    } else{
+                        textKeteranganLuas.setText(response.body().getSize().substring(3).trim());
+                        textSkorLuas.setText(response.body().getSize().substring(0,1).toString());
+                        jml += Integer.valueOf(response.body().getSize().substring(0, 1));
+                    }
+
 
                     //Tepi
-                    textKeteranganTepi.setText(response.body().getEdges().substring(3).trim());
-                    textSkorTepi.setText(response.body().getEdges().substring(0,1).toString());
+
+                    if( response.body().getEdges().isEmpty()){
+                        System.out.println("empty");
+                    } else{
+                        textKeteranganTepi.setText(response.body().getEdges().substring(3).trim());
+                        textSkorTepi.setText(response.body().getEdges().substring(0,1).toString());
+                        jml +=  Integer.valueOf(response.body().getEdges().substring(0,1));
+                    }
+
 
                     //Tipe Nekrotik
-                    textKeteranganTipeNekrotik.setText(response.body().getNecrotic_type().substring(3).trim());
-                    textSkorTipeNekrotik.setText(response.body().getNecrotic_type().substring(0,1).toString());
+                    if( response.body().getNecrotic_type().isEmpty()){
+                        System.out.println("empty");
+                    } else{
+                        textKeteranganTipeNekrotik.setText(response.body().getNecrotic_type().substring(3).trim());
+                        textSkorTipeNekrotik.setText(response.body().getNecrotic_type().substring(0,1).toString());
+                        jml+= Integer.valueOf(response.body().getNecrotic_type().substring(0,1));
+                    }
+
 
                     //Jumlah Nekrotik
-                    textKeteranganJumlahNekrotik.setText(response.body().getNecrotic_amount().substring(3).trim());
-                    textSkorJumlahNekrotik.setText(response.body().getNecrotic_amount().substring(0,1).toString());
+                    if( response.body().getNecrotic_amount().isEmpty()){
+                        System.out.println("empty");
+                    } else{
+                        textKeteranganJumlahNekrotik.setText(response.body().getNecrotic_amount().substring(3).trim());
+                        textSkorJumlahNekrotik.setText(response.body().getNecrotic_amount().substring(0,1).toString());
+                        jml+= Integer.valueOf(response.body().getNecrotic_amount().substring(0,1));
+                    }
+
 
                     //Warna Kulit Keliling Luka
-                    textKeteranganWarnaKulit.setText(response.body().getSkincolor_surround().substring(3).trim());
-                    textSkorWarnaKulit.setText(response.body().getSkincolor_surround().substring(0,1).toString());
+                    if( response.body().getSkincolor_surround().isEmpty()){
+                        System.out.println("empty");
+                    } else{
+                        textKeteranganWarnaKulit.setText(response.body().getSkincolor_surround().substring(3).trim());
+                        textSkorWarnaKulit.setText(response.body().getSkincolor_surround().substring(0,1).toString());
+                        jml+= Integer.valueOf(response.body().getSkincolor_surround().substring(0,1));
+                    }
+
 
                     //Granulasi
-                    textKeteranganGranulasi.setText(response.body().getGranulation().substring(3).trim());
-                    textSkorGranulasi.setText(response.body().getGranulation().substring(0,1).toString());
+                    if( response.body().getGranulation().isEmpty()){
+                        System.out.println("empty");
+                    } else{
+                        textKeteranganGranulasi.setText(response.body().getGranulation().substring(3).trim());
+                        textSkorGranulasi.setText(response.body().getGranulation().substring(0,1).toString());
+                        jml+= Integer.valueOf(response.body().getGranulation().substring(0,1));
+                    }
+
 
                     //Epitelisasi
-                    textKeteranganEpitelisasi.setText(response.body().getEpithelization().substring(3).trim());
-                    textSkorEpitelisasi.setText(response.body().getEpithelization().substring(0,1).toString());
+                    if( response.body().getEpithelization().isEmpty()){
+                        System.out.println("empty");
+                    } else{
+                        textKeteranganEpitelisasi.setText(response.body().getEpithelization().substring(3).trim());
+                        textSkorEpitelisasi.setText(response.body().getEpithelization().substring(0,1).toString());
+                        jml+= Integer.valueOf(response.body().getEpithelization().substring(0,1));
+                    }
+
 
                     //jumlah skor
-
-                    Integer jml = Integer.valueOf(response.body().getSize().substring(0,1))+ Integer.valueOf(response.body().getEdges().substring(0,1))
-                            + Integer.valueOf(response.body().getNecrotic_type().substring(0,1)) + Integer.valueOf(response.body().getNecrotic_amount().substring(0,1))
-                            + Integer.valueOf(response.body().getSkincolor_surround().substring(0,1)) + Integer.valueOf(response.body().getGranulation().substring(0,1))
-                            + Integer.valueOf(response.body().getEpithelization().substring(0,1));
 
                     textSkorJumlah.setText(jml.toString());
 
