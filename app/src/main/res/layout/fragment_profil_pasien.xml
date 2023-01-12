@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="13/01/2022"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="1313617888"
+                    android:text=1313617888"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Nama Pasien"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="29-12-1999"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
@@ -190,7 +190,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="23 Tahun"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
@@ -223,7 +223,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Perempuan"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
@@ -256,7 +256,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Islam"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
@@ -289,7 +289,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="example@mail.com"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
@@ -322,7 +322,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="087786667878"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
@@ -357,7 +357,7 @@
                     android:padding="8sp"
                     android:layout_weight="1"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Jl. Pintu Satu Senayan No.RT.1, RT.1/RW.3, Gelora, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10270"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
