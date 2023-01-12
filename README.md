@@ -19,6 +19,6 @@
 | 13  | Melihat histori kajian pasien dan status luka pasien | Medium   | 8          |
 | 14  | Melihat detail profil akun perawat atau pengguna     | Low      | 8          |
 | 15  | Keluar dari akun                                     | Low      | 8          |
-| 16  | Mencatat log activity user                           | Low      | 9- 10      |
+| 16  | Mencatat log activity user                           | Low      | 9      |
 
 
