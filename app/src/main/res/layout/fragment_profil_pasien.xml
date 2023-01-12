@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text=1313617888"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#000000"
                     android:textSize="14sp"/>
