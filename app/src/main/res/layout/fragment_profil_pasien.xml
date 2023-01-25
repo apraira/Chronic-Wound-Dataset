@@ -12,26 +12,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".gallery.singleImageView"
-
+        android:paddingBottom="400dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_marginVertical="8sp"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_bold"
-            android:text="Informasi Umum Pasien"
-            android:layout_marginHorizontal="16sp"
-            android:textColor="#9E9E9E"
-            android:textSize="22sp"
-            />
+            android:paddingTop="8dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_marginVertical="8sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Informasi Umum Pasien"
+                android:layout_marginHorizontal="16sp"
+                android:textColor="#9E9E9E"
+                android:textSize="22sp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="right"
+                android:layout_gravity="center_vertical"
+                android:layout_height="match_parent">
+                <ImageButton
+                    android:layout_marginRight="20sp"
+                    android:id="@+id/editButton"
+                    android:paddingRight="16sp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_baseline_edit_24"
+                    android:backgroundTint="#9E9E9E"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
 
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/tableLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="1"> <!-- stretch the second column of the layout-->
-
+            android:stretchColumns="1">
+            <!-- stretch the second column of the layout-->
             <!-- tanggal pendaftaran-->
             <TableRow
                 android:layout_width="fill_parent"

@@ -85,6 +85,14 @@
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chipAll"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="All" />
+
+            <com.google.android.material.chip.Chip
                 android:id="@+id/chipRaw"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
@@ -117,6 +125,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="350sp"/>
+
+        <TextView
+            android:id="@+id/teksKosong"
+            android:layout_gravity="center
+"           android:textAlignment="center"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16sp"
+            android:layout_marginVertical="8sp"
+            android:fontFamily="@font/nunito_regular"
+            android:text="Belum terdapat foto pasien, silakan tambah kajian terlebih dahulu"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
 
     </LinearLayout>
 

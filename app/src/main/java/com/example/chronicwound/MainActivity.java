@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -48,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
         UserName = settings.getString("username", "");
 
-        final TextView editUsername = (TextView) findViewById(R.id.view_username);
-        editUsername.setText(UserName);
+
         setNamaPerawat(UserName);
 
         InsertLog(id_nurse, "Memasuki halaman utama");
@@ -77,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
                 // your handler code here
                 Intent intent = new Intent(getApplicationContext(), ProfilPerawat.class);
                 startActivity(intent);
+
                 InsertLog(id_nurse, "Menekan tombol menuju detail profil perawat");
+                finish();
 
             }
         });
@@ -117,8 +120,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), com.example.chronicwound.anotasi.anotasiWarna.class);
+                intent.putExtra("dari", "utama");
                 startActivity(intent);
-                InsertLog(id_nurse, "Menekan tombol menuju halaman arsir warna");
+
+                InsertLog(id_nurse, "Menekan tombol menuju halaman arsir warna"); 
             }
         });
 
@@ -128,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 InsertLog(id_nurse, "Menekan tombol untuk memasuki halaman galeri luka");
                 Intent intent = new Intent(getApplicationContext(), GaleriActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -138,6 +144,38 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        // Get value of shared preferences
+        SharedPreferences settings = getSharedPreferences("preferences",
+                Context.MODE_PRIVATE);
+        UserName = settings.getString("username", "");
+        setNamaPerawat(UserName);
+
+    }
+
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
     // cari pasien
@@ -162,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     startActivity(i);
+                    finish();
 
 
 
@@ -192,6 +231,9 @@ public class MainActivity extends AppCompatActivity {
                     //login start main activity
                     namaPerawat = (TextView) findViewById(R.id.namaPerawat);
                     namaPerawat.setText(response.body().getName());
+                    TextView editUsername = (TextView) findViewById(R.id.view_username);
+                    editUsername.setText(response.body().getUsername());
+
                     id_nurse = response.body().get_id().toString();
                     InsertLog(id_nurse, "Mencari id berdasarkan NIP");
                     SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);

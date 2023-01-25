@@ -11,9 +11,13 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +54,7 @@ public class detailPasienActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     ExtendedFloatingActionButton fab;
+    ImageView fotoPasien;
     private profilPasienFragment profilPasienFragment;
     private historiKajianFragment historiKajianFragment;
     private galeriLukaPasien galeriLukaPasien;
@@ -68,6 +73,7 @@ public class detailPasienActivity extends AppCompatActivity {
         jenisKelamin = (TextView) findViewById(R.id.jenisKelamin);
         viewPager = findViewById(R.id.view_pager_pasien);
         tabLayout = findViewById(R.id.tabLayoutPasien);
+        fotoPasien = (ImageView) findViewById(R.id.fotoPasien);
 
         profilPasienFragment = new profilPasienFragment();
         historiKajianFragment = new historiKajianFragment();
@@ -88,6 +94,8 @@ public class detailPasienActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("NRM", NRM);
         editor.commit();
+
+
 
         // send NRM ke fragment
         Bundle bundle = new Bundle();
@@ -120,10 +128,13 @@ public class detailPasienActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InsertLog(id_nurse, "Menekan tombol kembali dari halaman detail pasien");
+                Intent i = new Intent(getApplicationContext(), listPasienActivity.class);
+                startActivity(i);
                 finish();
             }
         });
+
+
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -154,8 +165,10 @@ public class detailPasienActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 InsertLog(id_nurse, "Menekan tombol tambah kajian");
                 Intent i = new Intent(getApplicationContext(), tambahKajianActivity.class);
+                i.putExtra("NRM", NRM);
                 System.out.println("Id perawat tombol tambah: " + id_perawat);
                 startActivity(i);
+                finish();
             }
         });
 

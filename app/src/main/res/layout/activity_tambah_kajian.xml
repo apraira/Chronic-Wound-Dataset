@@ -29,12 +29,14 @@
             android:background="@color/white"
             android:outlineProvider="none">
 
-            <ImageButton
-                android:layout_marginLeft="16sp"
-                android:id="@+id/backButton"
-                android:layout_width="16sp"
-                android:layout_height="16sp"
-                android:background="@drawable/ic_back_arrow"/>
+                <ImageButton
+                    android:layout_marginLeft="16sp"
+                    android:id="@+id/backButton"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="@drawable/ic_back_arrow"/>
+
+
 
             <TextView
                 android:id="@+id/teksToolBar"
@@ -43,13 +45,15 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
                 android:fontFamily="@font/nunito_bold"
-                android:text="Tambah Kajian Luka Pasien"
+                android:text="Tambah Kajian Luka Baru"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <LinearLayout
+        android:layout_marginHorizontal="16sp"
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,6 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appBar">
 
         <com.google.android.material.card.MaterialCardView
+            android:layout_marginHorizontal="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -76,6 +81,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/appBar" />
 
             <LinearLayout
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -102,7 +108,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Jane Doe"
+
                         android:textColor="@color/white"
                         android:textSize="20sp" />
 
@@ -112,7 +118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_regular"
-                        android:text="No. Registrasi: 1313617888"
+
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
@@ -126,7 +132,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_regular"
-                            android:text="Wanita"
+
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -141,7 +147,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_regular"
-                            android:text="13 Tahun"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -158,6 +163,7 @@
 
         <!-- Tombol Kamera -->
         <androidx.cardview.widget.CardView
+            android:layout_marginHorizontal="16dp"
 
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
@@ -220,17 +226,18 @@
 
         <ScrollView
             android:visibility="gone"
+            android:layout_marginHorizontal="16sp"
             android:id="@+id/formKajian"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8sp"
-            android:orientation="vertical"
-            android:layout_marginBottom="100dp">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="120sp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -277,7 +284,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:layout_height="wrap_content"
 
-                android:hint="Size">
+                android:hint="Luas Luka">
 
                 <AutoCompleteTextView
                     android:id="@+id/editTextSize"
@@ -297,7 +304,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:layout_height="wrap_content"
 
-                android:hint="Edges">
+                android:hint="Kondisi Tepi Luka">
 
                 <AutoCompleteTextView
                     android:fontFamily="@font/nunito_bold"
@@ -317,7 +324,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:layout_height="wrap_content"
 
-                android:hint="Necrotic Type">
+                android:hint="Tipe Jaringan Nekrotik">
 
                 <AutoCompleteTextView
                     android:fontFamily="@font/nunito_bold"
@@ -337,7 +344,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:hint="Necrotic Amount">
+
+                android:hint="Jumlah Jaringan Nekrotik">
 
                 <AutoCompleteTextView
                     android:id="@+id/editTextNAmount"
@@ -357,7 +365,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:layout_height="wrap_content"
 
-                android:hint="Skin Color Surrounding Wound">
+                android:hint="Warna Kulit Sekeliling Luka">
 
                 <AutoCompleteTextView
                     android:id="@+id/editTextSkinColor"
@@ -377,7 +385,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:hint="Granulation Tissue">
+                android:hint="Kondisi Jaringan Granulasi">
 
                 <AutoCompleteTextView
                     android:id="@+id/editTextGranulation"
@@ -397,7 +405,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_bold"
-                android:hint="Epithelization Tissue">
+                android:hint="Kondisi Jaringan Epitelisasi">
 
                 <AutoCompleteTextView
                     android:id="@+id/editTextEpithelization"

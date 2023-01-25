@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.ahmadrosid.svgloader.SvgLoader;
@@ -65,21 +66,13 @@ public class AllGalleryAdapter extends RecyclerView.Adapter<com.example.chronicw
         final GalleryRequest imageModel = (com.example.chronicwound.gallery.GalleryRequest) dataList.get(position);
         String type = imageModel.getType();
 
-        if ("Vector".equals(type)) {
-            System.out.println(type + "Vector Image Detected is not loaded by glide");
-            /*
-            SvgLoader.pluck()
-                    .with((Activity) holder.itemView.getContext())
-                    .setPlaceHolder(R.mipmap.ic_launcher, R.mipmap.ic_launcher)
-                    .load("https://jft.web.id/woundapi/instance/uploads/" + imageModel.getFilename(), holder.imgView);*/
-        } else {
-            System.out.println(type + " is loaded by Glide");
-            Glide.with(holder.itemView.getContext()).load("https://jft.web.id/woundapi/instance/uploads/" + imageModel.getFilename())
-                    .centerCrop()
-                    .thumbnail(0.05f)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(holder.imgView);
-        }
+
+        System.out.println(type + " is loaded by Glide");
+        Glide.with(holder.itemView.getContext()).load("https://jft.web.id/woundapi/instance/uploads/" + imageModel.getFilename())
+                .centerCrop()
+                .thumbnail(0.05f)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(holder.imgView);
 
         //Picasso.get().load("https://jft.web.id/woundapi/instance/uploads/" + imageModel.getFilename()).resize(200,200).centerCrop().into(holder.imgView);
     }
@@ -91,11 +84,15 @@ public class AllGalleryAdapter extends RecyclerView.Adapter<com.example.chronicw
 
     public class ImageViewHolder extends RecyclerView.ViewHolder{
         public ImageView imgView;
+        public LinearLayout.LayoutParams params;
+        public LinearLayout rootView; //the outermost view from your layout. Note that it doesn't necessarily have to be a LinearLayout.
+
 
         public ImageViewHolder(View itemView) {
             super(itemView);
             imgView  = (ImageView) itemView.findViewById(R.id.iv_photo);
-
+            rootView = itemView.findViewById(R.id.galeriCard);
+            params = new LinearLayout.LayoutParams(0, 0);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -105,12 +102,20 @@ public class AllGalleryAdapter extends RecyclerView.Adapter<com.example.chronicw
                     String IDPasien = dataList.get(position).getId_pasien();
                     Context context = v.getContext();
                     Intent i = new Intent(context, singleImageView.class);
+
+                    if (dataList.get(position).getType().toLowerCase().contains("jpg")){
+                        i.putExtra("type", "jpg");
+                    } else{
+                        i.putExtra("type", "none");
+                    }
                     i.putExtra("IDPasien", IDPasien);
                     i.putExtra(KEY_NAME, IDImage);
                     context.startActivity(i);
                 }
             });
         }
+
+
     }
 
 

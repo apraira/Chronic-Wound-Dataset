@@ -11,6 +11,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
@@ -25,6 +27,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.chronicwound.MainActivity;
 import com.example.chronicwound.R;
 import com.example.chronicwound.anotasi.DrawView;
 import com.example.chronicwound.anotasi.PathView;
@@ -50,6 +56,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -67,17 +74,22 @@ public class anotasiWarna extends AppCompatActivity {
     // in order to get the reference of the View
     private DrawView paint;
     TextView toolbarTitle;
+    boolean hasImage;
 
 
     // creating objects of type button
-    private ImageButton eraser, stroke,  undo;
+    private ImageButton eraser, stroke;
+    LinearLayout undo, lamanKosong;
+    FrameLayout leot;
     private Button save;
     private ImageView foto;
+    CircleImageView buttonUpload2, upload;
     Uri rawImage;
     // creating a RangeSlider object, which will
     // help in selecting the width of the Stroke
     private RangeSlider rangeSlider;
     String id_perawat, id_gambar, id_pasien;
+    Integer finalHeight, finalWidth;
     private static int RESULT_LOAD_IMAGE = 1;
 
     @Override
@@ -92,16 +104,44 @@ public class anotasiWarna extends AppCompatActivity {
         // getting the reference of the views from their ids
         paint = (DrawView) findViewById(R.id.draw_view);
         save = (Button) findViewById(R.id.submitAnotasi);
+        buttonUpload2 = (CircleImageView) findViewById(R.id.buttonUpload2);
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
-        undo = (ImageButton) findViewById(R.id.btn_undo);
-        ImageButton black = (ImageButton) findViewById(R.id.btn_black);
-        ImageButton red = (ImageButton) findViewById(R.id.btn_red);
-        ImageButton yellow = (ImageButton) findViewById(R.id.btn_yellow);
-        stroke = (ImageButton) findViewById(R.id.btn_stroke);
-        de.hdodenhof.circleimageview.CircleImageView upload = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.btn_upload);
+        undo = (LinearLayout) findViewById(R.id.btn_undo);
+        lamanKosong = (LinearLayout) findViewById(R.id.lamanKosong);
+        leot = (FrameLayout) findViewById(R.id.leot);
+        LinearLayout black = (LinearLayout) findViewById(R.id.btn_black);
+        LinearLayout red = (LinearLayout) findViewById(R.id.btn_red);
+        LinearLayout yellow = (LinearLayout) findViewById(R.id.btn_yellow);
+
+        upload = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.btn_upload);
         foto = (ImageView) findViewById(R.id.img);
 
         InsertLog(id_nurse, "Memasuki halaman arsir warna luka");
+
+        Bundle extras = getIntent().getExtras();
+        String dari = extras.getString("dari");
+
+
+        if (dari.contains("single")){
+            String url_image = extras.getString("picture");
+
+            Glide.with(getApplicationContext()).load(url_image)
+                    .centerCrop()
+                    .thumbnail(0.05f)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(foto);
+
+            lamanKosong.setVisibility(View.GONE);
+            paint.setVisibility(View.VISIBLE);
+        }
+
+
+
+
+
+
+
+
 
 
 
@@ -118,12 +158,35 @@ public class anotasiWarna extends AppCompatActivity {
         });
         //
 
+        // pass the height and width of the custom view
+        // to the init method of the DrawView object
+        ViewTreeObserver vto = paint.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onGlobalLayout() {
+                paint.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                int width = foto.getMeasuredWidth();
+                int height = foto.getMeasuredHeight();
+                paint.init(height, width);
+            }
+        });
+
         // upload button
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InsertLog(id_nurse, "Melakukan saving gambar arsir warna luka ke server");
+                InsertLog(id_nurse, "Mencari gambar");
+                getImageFromAlbum();
+
+            }
+        });
+
+        buttonUpload2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InsertLog(id_nurse, "Mencari gambar");
                 getImageFromAlbum();
 
             }
@@ -189,19 +252,7 @@ public class anotasiWarna extends AppCompatActivity {
             }
         });
 
-        // pass the height and width of the custom view
-        // to the init method of the DrawView object
-        ViewTreeObserver vto = paint.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onGlobalLayout() {
-                paint.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int width = paint.getMeasuredWidth();
-                int height = paint.getMeasuredHeight();
-                paint.init(height, width);
-            }
-        });
+
 
         // the button will toggle the visibility of the RangeBar/RangeSlider
         save.setOnClickListener(new View.OnClickListener() {
@@ -343,6 +394,12 @@ public class anotasiWarna extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
@@ -355,7 +412,16 @@ public class anotasiWarna extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
             Bitmap image = BitmapFactory.decodeFile(picturePath);
-            foto.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            Drawable d = new BitmapDrawable(getResources(), image);
+            foto.setImageDrawable(d);
+            hasImage = true;
+            System.out.println("foto ada imagenya");
+            lamanKosong.setVisibility(View.GONE);
+            paint.setVisibility(View.VISIBLE);
+            upload.setVisibility(View.VISIBLE);
+
+
+
         }
 
 
@@ -373,6 +439,8 @@ public class anotasiWarna extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Toast.makeText(getApplicationContext(), "Image uploaded to server", Toast.LENGTH_LONG).show();
                     InsertLog(id_nurse, "Berhasil upload gambar ke server");
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                     finish();
 
                 }else {

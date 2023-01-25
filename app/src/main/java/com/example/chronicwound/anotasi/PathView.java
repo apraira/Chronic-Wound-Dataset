@@ -72,7 +72,7 @@ public class PathView extends View {
         mCanvas = new Canvas(mBitmap);
 
         // set an initial color of the brush
-        currentColor = Color.BLACK;
+        currentColor = Color.RED;
 
         // set an initial brush size
         strokeWidth = 10;

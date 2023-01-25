@@ -31,8 +31,8 @@
             <ImageButton
                 android:layout_marginLeft="16sp"
                 android:id="@+id/backButton"
-                android:layout_width="16sp"
-                android:layout_height="16sp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:background="@drawable/ic_back_arrow"/>
 
             <TextView
@@ -45,6 +45,7 @@
                 android:text="Detail Kajian"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
+
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -62,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:orientation="vertical"
+            android:layout_marginTop="20sp"
             android:paddingBottom="100sp"
             android:paddingHorizontal="16sp">
 
@@ -108,7 +110,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="21/10/22"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -126,7 +127,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="Ns. Ratna Aryani"
+
                             android:textColor="@color/white"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -151,7 +152,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="Ervan Foster"
+
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -169,7 +170,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="1234567891011"
+
                             android:textColor="@color/white"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -192,38 +193,166 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/rawImageView"
+                <LinearLayout
                     android:layout_width="200dp"
-                    android:layout_height="180dp"
-                    android:layout_marginVertical="16sp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/anotasiTepiView"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_regular"
+                        android:text="Foto Luka Asli"
+                        android:textColor="#9E9E9E"
+                        android:textSize="12sp" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/rawImageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_marginVertical="4sp"
+
+                            android:scaleType="centerCrop"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="4dp"
+                            android:insetLeft="0dp"
+                            android:insetTop="0dp"
+                            android:insetRight="0dp"
+                            android:insetBottom="0dp"
+                            app:cornerRadius="50dp"
+                            app:icon="@drawable/ic_baseline_edit_24"
+                            app:iconGravity="textStart"
+                            app:iconPadding="0dp"
+                            app:iconSize="18dp" />
+
+                    </FrameLayout>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="200dp"
-                    android:layout_height="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_marginHorizontal="8sp"
-                    android:layout_marginVertical="16sp"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/anotasiDiameterView"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_regular"
+                        android:text="Anotasi Tepi"
+                        android:textColor="#9E9E9E"
+                        android:textSize="12sp" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/anotasiTepiView"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_marginVertical="4sp"
+
+                            android:scaleType="centerCrop"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="4dp"
+                            android:insetLeft="0dp"
+                            android:insetTop="0dp"
+                            android:insetRight="0dp"
+                            android:insetBottom="0dp"
+                            app:cornerRadius="50dp"
+                            app:icon="@drawable/ic_baseline_edit_24"
+                            app:iconGravity="textStart"
+                            app:iconPadding="0dp"
+                            app:iconSize="18dp" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="200dp"
-                    android:layout_height="180dp"
-                    android:layout_marginVertical="16sp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_regular"
+                        android:text="Anotasi Diameter"
+                        android:textColor="#9E9E9E"
+                        android:textSize="12sp" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/anotasiDiameterView"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_marginVertical="4sp"
+
+                            android:scaleType="centerCrop"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:srcCompat="@tools:sample/avatars" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="4dp"
+                            android:insetLeft="0dp"
+                            android:insetTop="0dp"
+                            android:insetRight="0dp"
+                            android:insetBottom="0dp"
+                            app:cornerRadius="50dp"
+                            app:icon="@drawable/ic_baseline_edit_24"
+                            app:iconGravity="textStart"
+                            app:iconPadding="0dp"
+                            app:iconSize="18dp" />
+
+                    </FrameLayout>
+
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
+            <TextView
+                android:paddingTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_regular"
+                android:text="Klik ikon pensil untuk foto atau anotasi ulang"
+                android:textColor="#9E9E9E"
+                android:textSize="12sp" />
+
 
 
             <LinearLayout
@@ -314,25 +443,53 @@
 
             </LinearLayout>
 
-            <TextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16sp"
-                android:fontFamily="@font/nunito_bold"
-                android:text="Skoring Kajian Luka"
-                android:textColor="#9E9E9E"
-                android:textSize="22sp" />
+                android:paddingTop="8dp"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Skoring Kajian Luka"
+                    android:textColor="#9E9E9E"
+                    android:textSize="22sp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="right"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="match_parent">
+                    <ImageButton
+                        android:id="@+id/editButton"
+                        android:paddingRight="16sp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/ic_baseline_edit_24"
+                        android:backgroundTint="#9E9E9E"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_regular"
-                android:text="Instrumen Bates Jensen Wound Assesment Tool"
+                android:text="Berdasarkan instrumen Bates Jensen Wound Assesment Tool"
                 android:textColor="#9E9E9E"
                 android:textSize="11sp" />
 
 
-            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <TableLayout
                 android:id="@+id/tableLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -356,10 +513,9 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:layout_width="200sp"
+                        android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8sp"
-                        android:layout_weight="1"
                         android:fontFamily="@font/nunito_bold"
                         android:text="Keterangan"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -369,8 +525,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8sp"
                         android:layout_weight="1"
+                        android:layout_marginLeft="-10dp"
                         android:fontFamily="@font/nunito_bold"
                         android:text="Skor"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"

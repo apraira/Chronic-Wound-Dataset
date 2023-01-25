@@ -23,8 +23,18 @@
         android:theme="@style/Theme.ChronicWound"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustResize">
-        <activity android:name=".ProfilPerawat"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".pasien.editPasien"></activity>
+        <activity android:name=".editProfilPerawat" />
+        <activity android:name=".Start">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ProfilPerawat"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".KajianLuka.detailKajian" />
         <activity android:name=".anotasi.anotasiDiameterY" />
         <activity android:name=".anotasi.anotasiWarna" />
@@ -34,13 +44,7 @@
         <activity android:name=".konfirmasiFotoActivity" />
         <activity android:name=".gallery.GaleriActivity" />
         <activity android:name=".pasien.detailPasienActivity" />
-        <activity android:name=".FirstActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".FirstActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".RegisterActivity" />

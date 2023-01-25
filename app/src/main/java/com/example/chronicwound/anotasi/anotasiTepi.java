@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ import com.example.chronicwound.anotasi.DrawView;
 import com.example.chronicwound.anotasi.PathView;
 import com.example.chronicwound.tambahkajian.tambahKajianActivity;
 import com.google.android.material.slider.RangeSlider;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -63,7 +65,8 @@ public class anotasiTepi extends AppCompatActivity {
 
 
     // creating objects of type button
-    private ImageButton eraser, stroke,  undo, upload;
+    private ImageButton eraser, upload;
+    LinearLayout stroke, undo;
     private Button save;
     private ImageView foto;
     Uri rawImage;
@@ -91,8 +94,8 @@ public class anotasiTepi extends AppCompatActivity {
         paint = (PathView) findViewById(R.id.draw_view);
         save = (Button) findViewById(R.id.submitAnotasi);
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
-        undo = (ImageButton) findViewById(R.id.btn_undo);
-        stroke = (ImageButton) findViewById(R.id.btn_stroke);
+        undo = (LinearLayout) findViewById(R.id.btn_undo);
+        stroke = (LinearLayout) findViewById(R.id.btn_red);
         //upload = (ImageButton) findViewById(R.id.btn_upload);
         foto = (ImageView) findViewById(R.id.img);
 
@@ -100,19 +103,24 @@ public class anotasiTepi extends AppCompatActivity {
         Intent intent_camera = getIntent();
         rawImage = intent_camera.getParcelableExtra("PHOTO");
         Bundle extras = getIntent().getExtras();
-        id_perawat = extras.getString("id_perawat");
-        id_gambar = extras.getString("id_gambar");
-        id_pasien = extras.getString("id_pasien");
 
+        // Get value of shared preferences
+        SharedPreferences settings = getSharedPreferences("preferences",
+                Context.MODE_PRIVATE);
+        id_perawat = settings.getString("id_perawat", "").toString();
+        id_pasien  = settings.getString("NRM", "").toString();
 
-        foto.setImageURI(rawImage);
+        Picasso.get().load(new File(rawImage.getPath())).fit().centerCrop().into(foto);
 
         //back button
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                anotasiTepi.super.onBackPressed();
+
+                Intent IntentCamera = new Intent(getApplicationContext(), tambahKajianActivity.class);
+                startActivity(IntentCamera);
+                finish();
             }
         });
         //
@@ -329,5 +337,13 @@ public class anotasiTepi extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent IntentCamera = new Intent(getApplicationContext(), tambahKajianActivity.class);
+        startActivity(IntentCamera);
+        finish();
     }
 }

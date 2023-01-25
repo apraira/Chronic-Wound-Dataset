@@ -20,6 +20,7 @@ import com.example.chronicwound.remote.RetrofitClient;
 import com.example.chronicwound.tambahkajian.kajianAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -120,6 +121,7 @@ public class historiKajianFragment extends Fragment {
 
                     // below line is to add our data from api to our array list.
                     kajianArrayList = response.body();
+                    Collections.reverse(kajianArrayList);
 
                     // below line we are running a loop to add data to our adapter class.
                     for (int i = 0; i < kajianArrayList.size(); i++) {

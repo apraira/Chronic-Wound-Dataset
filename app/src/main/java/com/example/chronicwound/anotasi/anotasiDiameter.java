@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +66,8 @@ public class anotasiDiameter extends AppCompatActivity {
 
 
     // creating objects of type button
-    private ImageButton eraser, stroke,  undo, upload;
+    private ImageButton eraser;
+    LinearLayout stroke,  undo;
     private Button save;
     private ImageView foto;
     Uri rawImage;
@@ -86,37 +88,36 @@ public class anotasiDiameter extends AppCompatActivity {
 
         dxAct = this;
         toolbarTitle = (TextView) findViewById(R.id.teksToolBar);
-        inputPanjang = (TextView) findViewById(R.id.textViewInputPanjang);
+        //inputPanjang = (TextView) findViewById(R.id.textViewInputPanjang);
 
         toolbarTitle.setText("Anotasi Diameter Luka X");
-        inputPanjang.setText("Ukuran X (cm)");
+        //inputPanjang.setText("Ukuran X (cm)");
 
         // getting the reference of the views from their ids
         paint = (PathView) findViewById(R.id.draw_view);
         save = (Button) findViewById(R.id.submitAnotasi);
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
-        undo = (ImageButton) findViewById(R.id.btn_undo);
-        stroke = (ImageButton) findViewById(R.id.btn_stroke);
-        upload = (ImageButton) findViewById(R.id.btn_upload);
+        undo = (LinearLayout) findViewById(R.id.btn_undo);
+        stroke = (LinearLayout) findViewById(R.id.btn_red);
+        //upload = (ImageButton) findViewById(R.id.btn_upload);
         foto = (ImageView) findViewById(R.id.img);
 
         /* Getting ImageBitmap from Camera from Main Activity */
         Intent intent_camera = getIntent();
         rawImage = intent_camera.getParcelableExtra("PHOTO");
         Bundle extras = getIntent().getExtras();
-        id_perawat = extras.getString("id_perawat");
         id_gambar = extras.getString("id_gambar");
-        id_pasien = extras.getString("id_pasien");
 
 
         // Get value of shared preferences
         SharedPreferences settings = getSharedPreferences("preferences",
                 Context.MODE_PRIVATE);
+        id_perawat = settings.getString("id_perawat", "");
+        id_pasien = settings.getString("NRM", "");
         String pngAnotasi = settings.getString("pngAnotasi", "");
         String pngAnotasiFilename = settings.getString("pngAnotasiFilename", "");
         String jpgAnotasi = settings.getString("jpgAnotasi", "");
         String jpgAnotasiFilename = settings.getString("jpgAnotasiFilename", "");
-        System.out.println("Id perawat shared preferemces: " + id_perawat.toString());
 
 
         try {
@@ -204,6 +205,7 @@ public class anotasiDiameter extends AppCompatActivity {
                 int width = paint.getMeasuredWidth();
                 int height = paint.getMeasuredHeight();
                 paint.init(height, width);
+                paint.setColor(Color.BLUE);
             }
         });
 
@@ -282,9 +284,9 @@ public class anotasiDiameter extends AppCompatActivity {
 
                 String filepath_jpg = dire.getAbsolutePath();
 
-                EditText panjangX = (EditText) findViewById(R.id.editTextDiameter);
+                //EditText panjangX = (EditText) findViewById(R.id.editTextDiameter);
 
-                String ukuranX = panjangX.getText().toString();
+                //String ukuranX = panjangX.getText().toString();
 
                 SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
@@ -292,7 +294,7 @@ public class anotasiDiameter extends AppCompatActivity {
                 editor.putString("pngDiameterXFilename", namapng);
                 editor.putString("jpgDiameterX", filepath_jpg);
                 editor.putString("jpgDiameterXFilename", namajpg);
-                editor.putString("ukuranX", ukuranX);
+                //editor.putString("ukuranX", ukuranX);
                 editor.putString("XPathList", pathList);
                 editor.commit();
 
@@ -303,9 +305,7 @@ public class anotasiDiameter extends AppCompatActivity {
                 rawImage = intent_camera.getParcelableExtra("PHOTO");
                 Bundle extras = getIntent().getExtras();
                 String raw_path = extras.getString("raw_path");
-                id_perawat = extras.getString("id_perawat");
                 id_gambar = extras.getString("id_gambar");
-                id_pasien = extras.getString("id_pasien");
 
 
 

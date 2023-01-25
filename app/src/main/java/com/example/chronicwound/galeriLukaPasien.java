@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chronicwound.gallery.GaleriActivity;
@@ -39,12 +40,13 @@ public class galeriLukaPasien extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private Chip chipRaw, chipTepi, chipDiameter;
+    private Chip chipRaw, chipTepi, chipDiameter, chipAll;
     private String mParam2;
     private String NRM, id_perawat;
     private RecyclerView recyclerView;
     private com.example.chronicwound.gallery.ImageAdapter adapter;
     private ArrayList<GalleryRequest> imageArrayList;
+    TextView teksKosong;
 
 
     public galeriLukaPasien() {
@@ -95,11 +97,12 @@ public class galeriLukaPasien extends Fragment {
         chipRaw = (Chip) inf.findViewById(R.id.chipRaw);
         chipTepi = (Chip) inf.findViewById(R.id.chipTepi);
         chipDiameter = (Chip) inf.findViewById(R.id.chipDiameter);
-
+        chipAll = (Chip) inf.findViewById(R.id.chipAll);
+        teksKosong = (TextView) inf.findViewById(R.id.teksKosong);
 
         getImageURL(NRM);
 
-
+        chipAll.setChecked(true);
         chipTepi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +114,13 @@ public class galeriLukaPasien extends Fragment {
             @Override
             public void onClick(View v) {
                 filter("Anotasi Diameter", "Jpg");
+            }
+        });
+
+        chipAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterType("Jpg");
             }
         });
 
@@ -155,6 +165,42 @@ public class galeriLukaPasien extends Fragment {
         }
     }
 
+    private void filterType(String type){
+        // creating a new array list to filter our data.
+        ArrayList<GalleryRequest> filteredlist = new ArrayList<GalleryRequest>();
+
+        if(imageArrayList.isEmpty()){
+            teksKosong.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+
+        } else {
+
+            // running a for loop to compare elements.
+            for (GalleryRequest item : imageArrayList) {
+                // checking if the entered string matched with any item of our recycler view.
+                if (item.getCategory() == null || item.getType() == null) {
+                    System.out.println("Null");
+                } else {
+                    if (item.getType().toLowerCase().contains(type.toLowerCase())) {
+                        // if the item is matched we are
+                        // adding it to our filtered list.
+                        filteredlist.add(item);
+                    }
+                }
+
+            }
+            if (filteredlist.isEmpty()) {
+                // if no item is added in filtered list we are
+                // displaying a toast message as no data found.
+                Toast.makeText(getContext(), "No Data Found..", Toast.LENGTH_SHORT).show();
+            } else {
+                // at last we are passing that filtered
+                // list to our adapter class.
+                adapter.filterList(filteredlist);
+            }
+        }
+    }
+
     private void getImageURL(String id_pasien) {
         Call<ArrayList<GalleryRequest>> pasienResponseCall = RetrofitClient.getService().getImageByID(id_pasien);
 
@@ -174,7 +220,7 @@ public class galeriLukaPasien extends Fragment {
                     for (int i = 0; i < imageArrayList.size(); i++) {
                         adapter = new ImageAdapter(imageArrayList, com.example.chronicwound.galeriLukaPasien.this);
 
-                        int numberOfColumns = 2;
+                        int numberOfColumns = 3;
 
                         adapter = new com.example.chronicwound.gallery.ImageAdapter(imageArrayList, com.example.chronicwound.galeriLukaPasien.this);
 
@@ -184,6 +230,8 @@ public class galeriLukaPasien extends Fragment {
 
                         recyclerView.setAdapter(adapter);
                     }
+
+                    filterType("Jpg");
                 }
             }
 

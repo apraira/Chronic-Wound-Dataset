@@ -32,25 +32,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20sp"
+                android:layout_marginLeft="20sp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="Beranda"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
 
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_marginRight="16sp"
                 android:id="@+id/circle_imageView"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_gravity="right"
                 android:src="@drawable/ic_profil" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:layout_marginTop="20sp"
+        android:paddingHorizontal="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -92,7 +96,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/nunito_extrabold"
-                android:text="Ns. Nama Perawat"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 />
@@ -102,7 +105,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/nunito_extrabold"
-                    android:text="NIP: 13136177888899  "
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     />
@@ -137,7 +139,7 @@
             android:outlineSpotShadowColor="#9E9E9E"
             android:outlineAmbientShadowColor="#9E9E9E"
             card_view:cardBackgroundColor="#FFFFFF"
-            card_view:cardCornerRadius="15dp"
+            card_view:cardCornerRadius="15sp"
             tools:targetApi="honeycomb">
 
             <LinearLayout
@@ -163,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="Data Pasien"
+                    android:text="Daftar Pasien"
                     android:textColor="@color/black"
                     android:textSize="22sp"
                     />
@@ -174,7 +176,7 @@
                     android:fontFamily="@font/nunito_regular"
                     android:text="Lihat daftar pasien"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     />
                 </LinearLayout>
             </LinearLayout>
@@ -185,6 +187,7 @@
 
         <!-- Galeri Foto Luka-->
         <androidx.cardview.widget.CardView
+            android:visibility="gone"
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:layout_marginTop="8sp"
@@ -193,15 +196,15 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardElevation="4dp"
+            card_view:cardElevation="4sp"
             android:outlineSpotShadowColor="#9E9E9E"
             android:outlineAmbientShadowColor="#9E9E9E"
             card_view:cardBackgroundColor="#FFFFFF"
-            card_view:cardCornerRadius="15dp"
+            card_view:cardCornerRadius="15sp"
             tools:targetApi="honeycomb">
 
             <LinearLayout
-                android:layout_margin="10dp"
+                android:layout_margin="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -234,7 +237,7 @@
                         android:fontFamily="@font/nunito_regular"
                         android:text="Lihat semua foto luka kronis"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         />
                 </LinearLayout>
             </LinearLayout>
@@ -254,15 +257,15 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardElevation="4dp"
+            card_view:cardElevation="4sp"
             android:outlineSpotShadowColor="#9E9E9E"
             android:outlineAmbientShadowColor="#9E9E9E"
             card_view:cardBackgroundColor="#FFFFFF"
-            card_view:cardCornerRadius="15dp"
+            card_view:cardCornerRadius="15sp"
             tools:targetApi="honeycomb">
 
             <LinearLayout
-                android:layout_margin="10dp"
+                android:layout_margin="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -295,7 +298,7 @@
                         android:fontFamily="@font/nunito_regular"
                         android:text="Mengarsir warna luka dengan RYB"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         />
                 </LinearLayout>
             </LinearLayout>

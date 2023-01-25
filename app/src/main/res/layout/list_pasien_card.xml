@@ -3,6 +3,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:layout_width="match_parent"
@@ -14,6 +15,9 @@
     android:outlineAmbientShadowColor="#9E9E9E"
     card_view:cardBackgroundColor="#FFFFFF"
     card_view:cardCornerRadius="15dp"
+
+    android:clipChildren="false"
+    android:clipToPadding="false"
     tools:targetApi="honeycomb">
 
     <LinearLayout
@@ -21,16 +25,30 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
+
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:padding="16dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/fotoPasien"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10sp"
-            android:background="@drawable/circleshape"
-            android:src="@drawable/ic_profile_picture" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shape="ring"
+            card_view:cardElevation="0dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:layout_marginRight="8sp"
+            app:cardCornerRadius="37dp">
+
+            <ImageView
+                android:id="@+id/fotoPasien"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_profile_picture"
+                android:background="@drawable/mbuled"
+                tools:ignore="VectorDrawableCompat" />
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_bold"
-                android:text="Jane Doe"
+
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -53,7 +71,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_regular"
-                android:text="No. Registrasi: 1313617888"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -67,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_regular"
-                    android:text="Wanita"
+
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -83,7 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_regular"
-                    android:text="13 Tahun"
+
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 

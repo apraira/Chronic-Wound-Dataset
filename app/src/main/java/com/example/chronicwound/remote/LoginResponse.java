@@ -3,7 +3,7 @@ package com.example.chronicwound.remote;
 public class LoginResponse {
 
     private Integer _id;
-    private String name, username, email, password;
+    private String name, username, email, password, profile_image_url;
 
     public Integer get_id() {
         return _id;
@@ -25,4 +25,11 @@ public class LoginResponse {
     public String getPassword(){return password;}
     public void setPassword(String password){this.password=password;}
 
+    public String getProfile_image_url() {
+        return profile_image_url;
+    }
+
+    public void setProfile_image_url(String profile_image_url) {
+        this.profile_image_url = profile_image_url;
+    }
 }

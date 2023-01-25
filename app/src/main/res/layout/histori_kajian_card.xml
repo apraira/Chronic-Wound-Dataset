@@ -16,7 +16,7 @@
     card_view:cardCornerRadius="15dp"
     tools:targetApi="honeycomb">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -25,7 +25,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
             <ImageView
                 android:layout_width="22sp"
@@ -34,17 +33,44 @@
                 android:src="@drawable/ic_kalender"/>
             <TextView
                 android:id="@+id/txtTanggal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:paddingLeft="10sp"
                 android:fontFamily="@font/nunito_bold"
                 android:textColor="#000000"
-                android:text="21 October 2022"
                 android:layout_gravity="center_vertical"
                 android:textSize="20sp"
                 android:layout_height="wrap_content" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <ImageView
+                android:layout_width="18sp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_access_time_24" />
+
+            <TextView
+                android:id="@+id/txtWaktu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/nunito_bold"
+                android:paddingLeft="4sp"
+                android:textAlignment="viewEnd"
+                android:textColor="#7C7C7C"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,7 +82,6 @@
             <TextView
                 android:id="@+id/NamaPerawat"
                 android:layout_width="match_parent"
-                android:text="Nama Perawat"
                 android:fontFamily="@font/nunito_regular"
                 android:textColor="#7C7C7C"
                 android:textSize="14sp"
@@ -67,7 +92,6 @@
                 android:id="@+id/NIPperawat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="NIP: 1313617020"
                 android:fontFamily="@font/nunito_regular"
                 android:textColor="#7C7C7C"
                 android:textSize="14sp"/>

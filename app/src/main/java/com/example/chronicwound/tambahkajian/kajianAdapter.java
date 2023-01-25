@@ -64,13 +64,16 @@ public class kajianAdapter extends RecyclerView.Adapter<kajianAdapter.HistoriVie
 
         String tanggal = dataList.get(position).getCreated_at().replaceAll(" .*", "");
 
+
+        String waktu = dataList.get(position).getCreated_at().split(" ")[1];
+
         String startDateString = "08-12-2017";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MMMM/yyyy");
         System.out.println(LocalDate.parse(tanggal, formatter).format(formatter2));
 
         holder.txtTanggal.setText(LocalDate.parse(tanggal, formatter).format(formatter2).replaceAll("/", " "));
-
+        holder.txtWaktu.setText(waktu);
 
         Call<LoginResponse> loginResponseCall = RetrofitClient.getService().cariIDPerawat(dataList.get(position).getId_perawat());
         loginResponseCall.enqueue(new Callback<LoginResponse>() {
@@ -81,7 +84,7 @@ public class kajianAdapter extends RecyclerView.Adapter<kajianAdapter.HistoriVie
                     //login start main activity
                     String nama = response.body().getName();
                     String nip = response.body().getUsername();
-                    holder.txtPerawat.setText( response.body().getName());
+                    holder.txtPerawat.setText("Perawat: " + response.body().getName());
                     holder.txtNIP.setText("NIP: " + response.body().getUsername());
 
 
@@ -103,13 +106,14 @@ public class kajianAdapter extends RecyclerView.Adapter<kajianAdapter.HistoriVie
     }
 
     public class HistoriViewHolder extends RecyclerView.ViewHolder{
-        private TextView txtTanggal, txtPerawat, txtNIP;
+        private TextView txtTanggal, txtPerawat, txtNIP, txtWaktu;
 
         public HistoriViewHolder(View itemView) {
             super(itemView);
             txtTanggal = (TextView) itemView.findViewById(R.id.txtTanggal);
             txtPerawat = (TextView) itemView.findViewById(R.id.NamaPerawat);
             txtNIP = (TextView) itemView.findViewById(R.id.NIPperawat);
+            txtWaktu = (TextView) itemView.findViewById(R.id.txtWaktu);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

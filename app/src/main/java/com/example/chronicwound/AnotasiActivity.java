@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,7 +46,8 @@ public class AnotasiActivity extends AppCompatActivity {
     private DrawView paint;
 
     // creating objects of type button
-    private ImageButton eraser, stroke,  undo, upload;
+    private ImageButton eraser;
+    LinearLayout stroke,  undo;
     private Button save;
     private ImageView foto;
     // creating a RangeSlider object, which will
@@ -63,21 +65,21 @@ public class AnotasiActivity extends AppCompatActivity {
         paint = (DrawView) findViewById(R.id.draw_view);
         save = (Button) findViewById(R.id.submitAnotasi);
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
-        undo = (ImageButton) findViewById(R.id.btn_undo);
-        stroke = (ImageButton) findViewById(R.id.btn_stroke);
-        upload = (ImageButton) findViewById(R.id.btn_upload);
+        undo = (LinearLayout) findViewById(R.id.btn_undo);
+        stroke = (LinearLayout) findViewById(R.id.btn_red);
+        //upload = (ImageButton) findViewById(R.id.btn_upload);
         foto = (ImageView) findViewById(R.id.img);
 
 
 
         // upload button
-        upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getImageFromAlbum();
+        //upload.setOnClickListener(new View.OnClickListener() {
+           // @Override
+           // public void onClick(View view) {
+            //    getImageFromAlbum();
 
-            }
-        });
+           // }
+        //});
 
         // creating a OnClickListener for each button,
         // to perform certain actions

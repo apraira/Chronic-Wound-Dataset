@@ -2,14 +2,18 @@ package com.example.chronicwound.gallery;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,12 +24,16 @@ import com.example.chronicwound.LoginActivity;
 import com.example.chronicwound.MainActivity;
 import com.example.chronicwound.R;
 import com.example.chronicwound.SaveSharedPreference;
+import com.example.chronicwound.anotasi.anotasiTepi;
+import com.example.chronicwound.anotasi.anotasiWarna;
 import com.example.chronicwound.pasien.detailPasienActivity;
 import com.example.chronicwound.remote.LoginResponse;
 import com.example.chronicwound.remote.PasienResponse;
 import com.example.chronicwound.remote.RetrofitClient;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,6 +48,8 @@ public class singleImageView extends AppCompatActivity {
     ImageView imageHolder;
     private String KEY_NAME = "NRM"; //nomor registrasi pasien
     String IDPasien;
+    CardView arsirWarnaLuka;
+    String url_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +63,24 @@ public class singleImageView extends AppCompatActivity {
         created_at = (TextView) findViewById(R.id.textCreatedAt);
         category = (TextView) findViewById(R.id.textCategory);
         imageHolder = (ImageView) findViewById(R.id.imageHolder);
+        arsirWarnaLuka = (CardView) findViewById(R.id.arsirWarnaLuka);
 
         Bundle extras = getIntent().getExtras();
         String IDImage = extras.getString(KEY_NAME);
+        String tipe = extras.getString("type");
         IDPasien = extras.getString("IDPasien");
+
+
 
         imageDetails(IDImage);
 
+
+
         Button delete = findViewById(R.id.deleteImage);
+
+        if(tipe.equals("jpg")){
+            delete.setVisibility(View.GONE);
+        } else { delete.setVisibility(View.VISIBLE);}
 
         delete.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -69,6 +89,28 @@ public class singleImageView extends AppCompatActivity {
                deleteImage(IDImage);
             }
         });
+
+        //back button
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                singleImageView.super.onBackPressed();
+            }
+        });
+
+        arsirWarnaLuka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), anotasiWarna.class);
+                intent.putExtra("picture", url_image);
+                intent.putExtra("dari", "single");
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
@@ -123,6 +165,8 @@ public class singleImageView extends AppCompatActivity {
                     filename.setText(response.body().getFilename());
                     created_at.setText(response.body().getCreated_at());
                     category.setText(response.body().getCategory());
+
+                    url_image = "https://jft.web.id/woundapi/instance/uploads/" + response.body().getFilename();
 
 
 

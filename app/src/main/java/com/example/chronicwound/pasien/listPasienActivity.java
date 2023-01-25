@@ -50,7 +50,7 @@ public class listPasienActivity extends AppCompatActivity {
     private String KEY_USERNAME = "USERNAME";
     int id_perawat;
     private Integer dd;
-    private Chip laki, perempuan, semua;
+    private Chip laki, perempuan, semua, olehAnda;
 
 
     @Override
@@ -69,8 +69,10 @@ public class listPasienActivity extends AppCompatActivity {
         this.laki = (Chip) this.findViewById(R.id.pasienLaki);
         this.perempuan = (Chip) this.findViewById(R.id.pasienPerempuan);
         this.semua = (Chip) this.findViewById(R.id.semuaPasien);
+        this.olehAnda = (Chip) this.findViewById(R.id.olehAnda);
 
-        semua.setChecked(true);
+
+        olehAnda.setChecked(true);
 
         laki.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +92,13 @@ public class listPasienActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 filter("");
+            }
+        });
+
+        olehAnda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterPerawat(idp);
             }
         });
 
@@ -122,6 +131,8 @@ public class listPasienActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 InsertLog(idp, "Menekan back button");
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -130,7 +141,7 @@ public class listPasienActivity extends AppCompatActivity {
         TextView teksToolbar = (TextView) findViewById(R.id.teksToolBar);
 
         SearchView searchView=(SearchView) findViewById(R.id.searchView);
-        searchView.setQueryHint("Cari Pasien");
+        searchView.setQueryHint("Masukkan Nama / NRM");
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
         // Detect SearchView icon clicks
@@ -262,6 +273,30 @@ public class listPasienActivity extends AppCompatActivity {
         }
     }
 
+    private void filterPerawat(String text) {
+        // creating a new array list to filter our data.
+        ArrayList<PasienResponse> filteredlist = new ArrayList<PasienResponse>();
+
+        // running a for loop to compare elements.
+        for (PasienResponse item : pasienArrayList) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.getId_perawat().toString().contains(text)) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                filteredlist.add(item);
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            adapter.filterList(filteredlist);
+        }
+    }
+
     private void filterKelamin(String text) {
         // creating a new array list to filter our data.
         ArrayList<PasienResponse> filteredlist = new ArrayList<PasienResponse>();
@@ -322,6 +357,11 @@ public class listPasienActivity extends AppCompatActivity {
                         // below line is to set adapter to our recycler view.
                         recyclerView.setAdapter(adapter);
                     }
+
+                    SharedPreferences settings = getSharedPreferences("preferences",
+                            Context.MODE_PRIVATE);
+                    String idp = settings.getString("id_perawat", "");
+                    filterPerawat(idp);
                 }
             }
 

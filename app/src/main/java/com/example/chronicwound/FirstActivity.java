@@ -1,32 +1,48 @@
 package com.example.chronicwound;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import static android.Manifest.permission_group.CAMERA;
+import static android.Manifest.permission_group.STORAGE;
 import static com.example.chronicwound.logging.LogHelper.InsertLog;
 
 public class FirstActivity extends AppCompatActivity {
 
     RelativeLayout FirstTime;
+    private static final int PERMISSION_REQUEST_CODE = 200;
+    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tampilan_awal);
 
+
         FirstTime = findViewById(R.id.FirstTime);
 
         if(SaveSharedPreference.getLoggedStatus(getApplicationContext())) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
+            finish();
         } else {
             FirstTime.setVisibility(View.VISIBLE);
         }
+
+
 
         InsertLog("Guest", "Memasuki Halaman Pertama");
 
@@ -57,6 +73,9 @@ public class FirstActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    
 
 
 }

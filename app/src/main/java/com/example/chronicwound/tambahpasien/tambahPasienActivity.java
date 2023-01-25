@@ -18,6 +18,7 @@ import java.util.Calendar;
 
 import com.example.chronicwound.R;
 import com.example.chronicwound.model;
+import com.example.chronicwound.pasien.detailPasienActivity;
 import com.example.chronicwound.pasien.listPasienActivity;
 import com.example.chronicwound.remote.PasienRequest;
 import com.example.chronicwound.remote.PasienResponse;
@@ -192,8 +193,8 @@ public class tambahPasienActivity extends AppCompatActivity {
                             if(response.isSuccessful()){
                                 //login start main activity
                                 Snackbar.make(buttonSubmit, "Patient created successfully!", Snackbar.LENGTH_LONG).show();
-                                Intent i = new Intent(tambahPasienActivity.this, listPasienActivity.class);
-                                i.putExtra(KEY_USERNAME, IDperawat);
+                                Intent i = new Intent(tambahPasienActivity.this, detailPasienActivity.class);
+                                i.putExtra("NRM", nrm);
                                 startActivity(i);
                                 finish();
 

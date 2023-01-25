@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -118,15 +119,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (UserName.isEmpty()) {
             valid = false;
-            textInputLayoutUserName.setError("Username tidak boleh kosong");
+            textInputLayoutUserName.setError("NIP tidak boleh kosong");
         } else {
-            if (UserName.matches("^(?=.{0,10}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$")) {
-                valid = true;
-                textInputLayoutUserName.setError(null);
-            } else {
-                valid = false;
-                textInputLayoutUserName.setError("Tidak boleh selain abjad dan angka");
-            }
+            valid = true;
+            textInputLayoutUserName.setError(null);
         }
 
         //Handling validation for Email field
@@ -182,7 +178,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if(response.isSuccessful()){
                     //login start main activity
-                    Snackbar.make(buttonRegister, "User created successfully!", Snackbar.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(getApplicationContext(), "Akun berhasil dibuat", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
 
                     SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
 

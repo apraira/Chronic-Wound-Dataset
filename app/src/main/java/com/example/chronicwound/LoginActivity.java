@@ -2,6 +2,7 @@ package com.example.chronicwound;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -99,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
         InsertLog("Sistem", "Validasi isian form login");
         if(username == null || username.trim().length() == 0){
-            textInputLayoutUserName.setError("Username tidak boleh kosong");
+            textInputLayoutUserName.setError("NIP tidak boleh kosong");
             return false;
         }
         if(password == null || password.trim().length() == 0){
@@ -120,7 +121,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(response.isSuccessful()){
                     //login start main activity
-                    Snackbar.make(buttonLogin, "Login success", Snackbar.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(getApplicationContext(), "Login Sukses", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
 
                     SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
 
@@ -135,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
 
                 }else {
-                    Snackbar.make(buttonLogin, "Unable to register user, maybe you are already registered", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(buttonLogin, "Silakan buat akun terlebih dahulu.", Snackbar.LENGTH_LONG).show();
                 }
 
             }

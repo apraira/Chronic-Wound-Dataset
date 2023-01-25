@@ -52,6 +52,12 @@ public interface UserService {
                                      @Field("usia") String usia, @Field("kelamin") String kelamin, @Field("alamat") String alamat,
                                      @Field("no_hp") String no_hp, @Field("email") String email);
 
+    //regist pasien versi baru
+    @FormUrlEncoded
+    @POST("user/update")
+    Call<updatePerawatRequest> updatePerawat(@Field("id_perawat") String id_perawat, @Field("jenis") String jenis,
+                                      @Field("isian") String isian);
+
     //semua pasien
     @GET("pasien")
     Call<ArrayList<PasienResponse>> getAllCourses();
@@ -118,4 +124,8 @@ public interface UserService {
     @FormUrlEncoded
     @POST("insert_log")
     Call<LoggingResponse> insertLog(@Field("id_perawat") String id_perawat, @Field("activity") String activity);
+
+    @Multipart
+    @POST("user/profile_img")
+    Call<uploadImageUser> uploadImageUser(@Part MultipartBody.Part image, @Part("id_perawat") RequestBody id_perawat);
 }

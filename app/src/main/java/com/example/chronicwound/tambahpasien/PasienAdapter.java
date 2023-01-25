@@ -1,6 +1,7 @@
 package com.example.chronicwound.tambahpasien;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -87,6 +88,7 @@ public class PasienAdapter extends RecyclerView.Adapter<PasienAdapter.MahasiswaV
                     i.putExtra(KEY_NAME, NRM);
                     System.out.println("list pasien:" +   id_perawat + "," + NRM);
                     context.startActivity(i);
+                    ((Activity)context).finish();
                 }
             });
         }

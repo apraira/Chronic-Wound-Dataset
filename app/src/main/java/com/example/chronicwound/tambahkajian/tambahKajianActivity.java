@@ -7,10 +7,12 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
 import com.example.chronicwound.anotasi.PathView;
 import com.example.chronicwound.anotasi.anotasiDiameter;
 import com.example.chronicwound.anotasi.anotasiDiameterY;
@@ -35,6 +37,7 @@ import androidx.cardview.widget.CardView;
 
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -48,6 +51,7 @@ import android.widget.Toast;
 
 import com.example.chronicwound.R;
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -104,6 +108,7 @@ public class tambahKajianActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
         id_perawat = settings.getString("id_perawat", "").toString();
         NRM  = settings.getString("NRM", "").toString();
+
         jpgRawImage = settings.getString("rawImage", "");
 
         //back button
@@ -112,6 +117,11 @@ public class tambahKajianActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 InsertLog(id_nurse, "Menekan tombol kembali pada halaman tambah kajian");
+                Intent i = new Intent(getApplicationContext(), detailPasienActivity.class);
+                Bundle extras = getIntent().getExtras();
+                String NRM = extras.getString("NRM");
+                i.putExtra("NRM", NRM);
+                startActivity(i);
                 finish();
             }
         });
@@ -156,19 +166,23 @@ public class tambahKajianActivity extends AppCompatActivity {
 
 
         Button submit = findViewById(R.id.buttonSubmit);
-
         Intent intent_camera = getIntent();
         String id = intent_camera.getStringExtra("KEY");
+
         Uri uriRaw = Uri.fromFile(new File(jpgRawImage));
+        File a =  new File(jpgRawImage);
         Uri uriDiameter = Uri.fromFile(new File(jpgDiameter, jpgDiameterFilename));
         Uri uriTepi = Uri.fromFile(new File(jpgTepi, jpgTepiFilename));
 
         if (id != null) {
             fab.setVisibility(View.GONE);
             formKajian.setVisibility(View.VISIBLE);
-            RawImageView.setImageURI(uriRaw);
+
+
+            Glide.with(this).load(uriRaw).fitCenter().into(RawImageView);
             DiameterImageView.setImageURI(uriDiameter);
             TepiImageView.setImageURI(uriTepi);
+
         }else {
             fab.setVisibility(View.VISIBLE);
         }
@@ -186,43 +200,43 @@ public class tambahKajianActivity extends AppCompatActivity {
 
         //list opsi-opsi form size
         opsiSize = (AutoCompleteTextView) findViewById(R.id.editTextSize);
-        String[] listSize = new String[]{"1= pxl < 4sq cm", "2= pxl  4=<16sq cm", "3= pxl 16.1=<36 sq cm ", "4= pxl 36.1--<80 sq cm", "5 = pxl >80 sq cm"};
+        String[] listSize = new String[]{ "1= kurang dari 4cm²", "2= antara 4cm² dan 16cm²", "3= antara 16cm² dan 36cm²", "4= antara 36cm² dan 80cm²", "5 = lebih dari 80cm²"};
         ArrayAdapter<String> adapterSize = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listSize);
         opsiSize.setAdapter(adapterSize);
 
         //list opsi-opsi form edges
         opsiEdges = (AutoCompleteTextView) findViewById(R.id.editTextEdges);
-        String[] listEdges = new String[]{"1 = Indistinct, diffuse, none clearly visible", "2 = Distinct, outline clearly visible, attached, even with wound base", "3 = Well-defined, not attached to wound base", "4 = Well-defined, not attached to base, rolled under, thickened", "5 = Well-defined, fibrotic, scarred or hyperkeratotic"};
+        String[] listEdges = new String[]{"1 = Tidak terlihat jelas", "2 = garis besar jelas,\nlekat dengan dasar luka", "3 = terdefinisikan baik,\ntidak lekat dasar luka", "4 = terdefinisikan baik, tidak melekat pada\nalas, digulung ke bawah, menebal", "5 = Terdefinisi dengan baik, fibrotik, \nbekas luka atau hiperkeratotik"};
         ArrayAdapter<String> adapterEdges = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listEdges);
         opsiEdges.setAdapter(adapterEdges);
 
         //list opsi-opsi form necrotic type
         opsiNType = (AutoCompleteTextView) findViewById(R.id.editTextNType);
-        String[] listNType = new String[]{"1 =  None visible", "2 = White/grey non-viable tissue &/or non-adherent yellow slough", "3 =  Loosely adherent yellow slough", "4 = Adherent, soft, black eschar", "5 =  Firmly adherent, hard, black eschar"};
+        String[] listNType = new String[]{"1 =  Tidak ada", "2 = Jaringan berwarna putih/abu-abu \ntidak dapat hidup, dan atau \nberupa slough yang tidak melekat", "3 =  Slough kuning longgar", "4 = Adherent/menempel, soft, \nterdapat black eschar", "5 =  Firmly adherent/sangat menempel, \nhard, terdapat black eschar"};
         ArrayAdapter<String> adapterNType = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listNType);
         opsiNType.setAdapter(adapterNType);
 
         //list opsi-opsi form necrotic amount
         opsiNAmount = (AutoCompleteTextView) findViewById(R.id.editTextNAmount);
-        String[] listNAmount = new String[]{"1 = None visible", "2 = <25% of wound bed covered", "3 = 25% to 50% of wound covered", "4 =  > 50% and < 75% of wound covered", "5 =   75% to 100% of wound covered"};
+        String[] listNAmount = new String[]{"1 = Tidak ada", "2 = kurang dari 25%\nof wound bed covered", "3 = 25% sampai 50%\nof wound covered", "4 =  50% sampai 75%\nof wound covered", "5 =   75% sampai 100%\nof wound covered"};
         ArrayAdapter<String> adapterNAmount = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listNAmount);
         opsiNAmount.setAdapter(adapterNAmount);
 
         //list opsi-opsi form skin color surrounding wound
         opsiSkinColor = (AutoCompleteTextView) findViewById(R.id.editTextSkinColor);
-        String[] listSkinColor = new String[]{"1 = Pink or normal for ethnic group", "2 =  Bright red &/or blanches to touch", "3 = White or grey pallor or hypopigmented", "4 =  Dark red or purple &/or non-blanchable", "5 = Black or hyperpigmented"};
+        String[] listSkinColor = new String[]{"1 = Pink atau normal", "2 =  Merah terang,\n pucat jika disentuh", "3 = Putih atau abu-abu pucat\natau hipopigmentasi", "4 =  Merah gelap atau ungu,\ntidak pucat jika disentuh", "5 = Hitam atau hyperpigmented"};
         ArrayAdapter<String> adapterSkinColor = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listSkinColor);
         opsiSkinColor.setAdapter(adapterSkinColor);
 
         //list opsi-opsi form granulation tissue
         opsiGranulation = (AutoCompleteTextView) findViewById(R.id.editTextGranulation);
-        String[] listGranulation = new String[]{"1 =  Skin intact or partial thickness wound", "2 =  Bright, beefy red; 75% to 100% of wound filled &/or tissue overgrowth", "3 =  Bright, beefy red; < 75% & > 25% of wound filled", "4 =   Pink, &/or dull, dusky red &/or fills < 25% of wound", "5 = No granulation tissue present"};
+        String[] listGranulation = new String[]{"1 =  Skin intact/utuh atau\nberjenis partial thickness wound", "2 =  Cerah, merah daging;\n75% sampai 100% luka terisi\n&/atau jaringan tumbuh berlebih", "3 =  Cerah, merah daging;\n25% sampai 75% wound filled", "4 =   Pink, &/atau kusam, merah kehitaman\n&/or kurang dari 25% wound filled", "5 = Tidak ada jaringan granulasi"};
         ArrayAdapter<String> adapterGranulation = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listGranulation);
         opsiGranulation.setAdapter(adapterGranulation);
 
         //list opsi-opsi form ephitelization tissue
         opsiEpithelization = (AutoCompleteTextView) findViewById(R.id.editTextEpithelization);
-        String[] listEpithelization = new String[]{"1 = 100% wound covered, surface intac", "2 = 75% to <100% wound covered &/or epithelial tissue extends >0.5cm  into wound bed", "3 =  50% to <75% wound covered &/or epithelial tissue extends to <0.5cm  into wound bed", "4 = 25% to < 50% wound covered ", "5 = < 25%  wound covered"};
+        String[] listEpithelization = new String[]{"1 = 100% wound covered,\npermukaan utuh", "2 = 75% sampai 100% wound covered\n&/atau jaringan epithelial meluas\nlebih dari 0.5cm into wound bed", "3 =  50% sampai 75% wound covered\n&/atau jaringan epitel meluas kurang dari\n0.5cm pada permukaan luka", "4 = 25% sampai 50% wound covered", "5 = kurang dari 25%  wound covered"};
         ArrayAdapter<String> adapterEpithelization = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listEpithelization);
         opsiEpithelization.setAdapter(adapterEpithelization);
 
@@ -373,6 +387,16 @@ public class tambahKajianActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(getApplicationContext(), detailPasienActivity.class);
+        Bundle extras = getIntent().getExtras();
+        String NRM = extras.getString("NRM");
+        i.putExtra("NRM", NRM);
+        startActivity(i);
+        finish();
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
@@ -424,7 +448,6 @@ public class tambahKajianActivity extends AppCompatActivity {
 
                     Intent IntentCamera = new Intent(tambahKajianActivity.this, konfirmasiFotoActivity.class);
                     IntentCamera.putExtra(KEY_PHOTO, image);
-                    IntentCamera.putExtra("id_perawat", id_perawat);
                     startActivity(IntentCamera);
                 }
                 if (image == null && mCameraFileName != null) {
@@ -464,10 +487,9 @@ public class tambahKajianActivity extends AppCompatActivity {
                     IntentCamera.putExtra(KEY_PHOTO, image);
                     IntentCamera.putExtra("raw_path", rawPath);
                     IntentCamera.putExtra("id_gambar", id_gambar);
-                    IntentCamera.putExtra("id_perawat", id_perawat);
-                    IntentCamera.putExtra("id_pasien", id_pasien);
                     System.out.println("sent from tambah kajian activity 1:" + id_gambar+ "," + id_perawat + "," + id_pasien);
                     startActivity(IntentCamera);
+                    finish();
                 }
                 
             }

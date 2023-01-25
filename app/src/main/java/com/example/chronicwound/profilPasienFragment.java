@@ -1,5 +1,6 @@
 package com.example.chronicwound;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,10 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chronicwound.pasien.detailPasienActivity;
+import com.example.chronicwound.pasien.editPasien;
 import com.example.chronicwound.remote.PasienResponse;
 import com.example.chronicwound.remote.RetrofitClient;
 
@@ -27,6 +31,7 @@ public class profilPasienFragment extends Fragment {
 
     TextView tanggalPendaftaran, nomorRegistrasi, namaPasien, tanggalLahir, usiaPasien, jenisKelamin, agamaPasien, emailPasien, nomorHp, alamatPasien;
     private String NRM, id_perawat;
+    ImageButton editButton;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,10 +90,27 @@ public class profilPasienFragment extends Fragment {
         emailPasien = (TextView) inf.findViewById(R.id.textEmail);
         nomorHp = (TextView) inf.findViewById(R.id.textNoHp);
         alamatPasien = (TextView) inf.findViewById(R.id.textAlamat);
+        editButton = (ImageButton) inf.findViewById(R.id.editButton);
 
         System.out.println("fragment pasien");
 
         cariPasien(NRM);
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), editPasien.class);
+
+                //formality
+                i.putExtra("NRM", NRM);
+
+
+                //send data
+                i.putExtra("textNoReg", String.valueOf(nomorRegistrasi.getText()));
+                startActivity(i);
+                getActivity().finish();
+            }
+        });
 
 
 

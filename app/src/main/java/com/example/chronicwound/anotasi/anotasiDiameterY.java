@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,9 +66,10 @@ public class anotasiDiameterY extends AppCompatActivity {
 
 
     // creating objects of type button
-    private ImageButton eraser, stroke,  undo, upload;
+    private ImageButton eraser;
+    LinearLayout stroke,  undo;
     private Button save;
-    private ImageView foto;
+    private ImageView foto, warna;
     Uri rawImage;
     Bitmap Tepi, DiameterX;
     // creating a RangeSlider object, which will
@@ -88,32 +90,34 @@ public class anotasiDiameterY extends AppCompatActivity {
 
         dyAct = this;
         toolbarTitle = (TextView) findViewById(R.id.teksToolBar);
-        inputPanjang = (TextView) findViewById(R.id.textViewInputPanjang);
+        //inputPanjang = (TextView) findViewById(R.id.textViewInputPanjang);
 
         toolbarTitle.setText("Anotasi Diameter Luka Y");
-        inputPanjang.setText("Ukuran Y (cm)");
+        //inputPanjang.setText("Ukuran Y (cm)");
 
         // getting the reference of the views from their ids
         paint = (PathView) findViewById(R.id.draw_view);
         save = (Button) findViewById(R.id.submitAnotasi);
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
-        undo = (ImageButton) findViewById(R.id.btn_undo);
-        stroke = (ImageButton) findViewById(R.id.btn_stroke);
-        upload = (ImageButton) findViewById(R.id.btn_upload);
+        undo = (LinearLayout) findViewById(R.id.btn_undo);
+        stroke = (LinearLayout) findViewById(R.id.btn_red);
+        //upload = (ImageButton) findViewById(R.id.btn_upload);
+        warna = (ImageView) findViewById(R.id.warna);
         foto = (ImageView) findViewById(R.id.img);
 
+        warna.setColorFilter(Color.YELLOW);
         /* Getting ImageBitmap from Camera from Main Activity */
         Intent intent_camera = getIntent();
         rawImage = intent_camera.getParcelableExtra("PHOTO");
         Bundle extras = getIntent().getExtras();
-        id_perawat = extras.getString("id_perawat");
         id_gambar = extras.getString("id_gambar");
-        id_pasien = extras.getString("id_pasien");
 
 
         // Get value of shared preferences
         SharedPreferences settings = getSharedPreferences("preferences",
                 Context.MODE_PRIVATE);
+        id_perawat = settings.getString("id_perawat", "");
+        id_pasien = settings.getString("NRM", "");
         String pngAnotasi = settings.getString("pngAnotasi", "");
         String pngAnotasiFilename = settings.getString("pngAnotasiFilename", "");
         String jpgAnotasi = settings.getString("jpgDiameterX", "");
@@ -196,6 +200,7 @@ public class anotasiDiameterY extends AppCompatActivity {
                 int width = paint.getMeasuredWidth();
                 int height = paint.getMeasuredHeight();
                 paint.init(height, width);
+                paint.setColor(Color.YELLOW);
             }
         });
 
@@ -283,9 +288,9 @@ public class anotasiDiameterY extends AppCompatActivity {
 
                 String filepath_jpg = dire.getAbsolutePath();
 
-                EditText panjangY = (EditText) findViewById(R.id.editTextDiameter);
+                //EditText panjangY = (EditText) findViewById(R.id.editTextDiameter);
 
-                String ukuranY = panjangY.getText().toString();
+                //String ukuranY = panjangY.getText().toString();
 
                 /* combine png photo*/
 
@@ -349,7 +354,7 @@ public class anotasiDiameterY extends AppCompatActivity {
                 editor.putString("pngDiameterYFilename", AnotasiDiametr);
                 editor.putString("jpgDiameterY", filepath_jpg);
                 editor.putString("jpgDiameterYFilename", namajpg);
-                editor.putString("ukuranY", ukuranY);
+                //editor.putString("ukuranY", ukuranY);
                 editor.putString("YPathList", pathList);
                 editor.commit();
 

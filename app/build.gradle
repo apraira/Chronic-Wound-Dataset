@@ -6,12 +6,20 @@ android {
     compileSdkVersion 29
     buildToolsVersion "30.0.2"
 
+
+    packagingOptions {
+        pickFirst  '**'
+        exclude 'project.properties'
+        exclude 'META-INF/INDEX.LIST'
+    }
+
     defaultConfig {
         applicationId "com.example.chronicwound"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,10 +33,16 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
     }
 }
 
 dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'
+    implementation 'com.android.support:multidex:2.0.1'
+
+    //zoom
+    implementation"com.otaliastudios:zoomlayout:1.9.0"
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
@@ -72,5 +86,8 @@ dependencies {
 
     //svgLoader untuk load svg ke imageview
     implementation 'com.github.ar-android:AndroidSvgLoader:1.0.2'
+
+    //request permission
+    implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
 
 }

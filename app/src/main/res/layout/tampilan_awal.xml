@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/FirstTime"
-    android:visibility="invisible"
+    android:visibility="gone"
     tools:context="com.example.chronicwound.LoginActivity"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -37,6 +37,7 @@
             android:layout_marginBottom="8dp"
             android:lineHeight="46sp"
             android:text="Chronic Wound Assesment Tool"
+            android:fontFamily="@font/nunito_bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#000000"
             android:textSize="34sp" />
@@ -47,7 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="34dp"
             android:lineHeight="26sp"
-            android:text="Anda dapat membantu kami untuk mengumpukan dataset citra warna luka dan tepi luka kronik serta mengunduhnya lewat aplikasi ini"
+            android:fontFamily="@font/nunito_regular"
+            android:text="Anda dapat melakukan pengkajian luka, melihat histori pasien secara digital"
             android:textSize="18sp" />
 
         <Button
