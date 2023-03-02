@@ -206,37 +206,37 @@ public class tambahKajianActivity extends AppCompatActivity {
 
         //list opsi-opsi form edges
         opsiEdges = (AutoCompleteTextView) findViewById(R.id.editTextEdges);
-        String[] listEdges = new String[]{"1 = Tidak terlihat jelas", "2 = garis besar jelas,\nlekat dengan dasar luka", "3 = terdefinisikan baik,\ntidak lekat dasar luka", "4 = terdefinisikan baik, tidak melekat pada\nalas, digulung ke bawah, menebal", "5 = Terdefinisi dengan baik, fibrotik, \nbekas luka atau hiperkeratotik"};
+        String[] listEdges = new String[]{"1 = Samar, tidak terlihat dengan jelas", "2 = Batas tepi terlihat \nmenyatu dengan dasar luka", "3 = Jelas, tidak menyatu\ndasar luka", "4 = Jelas, tidak menyatu dengan dasar luka, tebal", "5 = Jelas, fibrotik, parut tebal/hiperkeratonik"};
         ArrayAdapter<String> adapterEdges = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listEdges);
         opsiEdges.setAdapter(adapterEdges);
 
         //list opsi-opsi form necrotic type
         opsiNType = (AutoCompleteTextView) findViewById(R.id.editTextNType);
-        String[] listNType = new String[]{"1 =  Tidak ada", "2 = Jaringan berwarna putih/abu-abu \ntidak dapat hidup, dan atau \nberupa slough yang tidak melekat", "3 =  Slough kuning longgar", "4 = Adherent/menempel, soft, \nterdapat black eschar", "5 =  Firmly adherent/sangat menempel, \nhard, terdapat black eschar"};
+        String[] listNType = new String[]{"1 =  Tidak ada", "2 = Putih/abu-abu, tidak dapat teramati,\ndan atau jaringan kekuningan yang mudah dilepas", "3 =  Jaringan nekrotik kekuningan\nyang melekat tapi mudah dilepas", "4 = Melekat, lembut, eskar hitam", "5 =  Melekat kuat, keras, eskar hitam"};
         ArrayAdapter<String> adapterNType = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listNType);
         opsiNType.setAdapter(adapterNType);
 
         //list opsi-opsi form necrotic amount
         opsiNAmount = (AutoCompleteTextView) findViewById(R.id.editTextNAmount);
-        String[] listNAmount = new String[]{"1 = Tidak ada", "2 = kurang dari 25%\nof wound bed covered", "3 = 25% sampai 50%\nof wound covered", "4 =  50% sampai 75%\nof wound covered", "5 =   75% sampai 100%\nof wound covered"};
+        String[] listNAmount = new String[]{"1 = Tidak ada", "2 = <25% permukaan luka tertutup\njaringan nekrotik", "3 = 25% sampai 50%\npermukaan luka tertutup", "4 =  50% sampai 75%\npermukaan luka tertutup", "5 =   75% sampai 100%\npermukaan luka tertutup"};
         ArrayAdapter<String> adapterNAmount = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listNAmount);
         opsiNAmount.setAdapter(adapterNAmount);
 
         //list opsi-opsi form skin color surrounding wound
         opsiSkinColor = (AutoCompleteTextView) findViewById(R.id.editTextSkinColor);
-        String[] listSkinColor = new String[]{"1 = Pink atau normal", "2 =  Merah terang,\n pucat jika disentuh", "3 = Putih atau abu-abu pucat\natau hipopigmentasi", "4 =  Merah gelap atau ungu,\ntidak pucat jika disentuh", "5 = Hitam atau hyperpigmented"};
+        String[] listSkinColor = new String[]{"1 = Pink atau normal", "2 =  Merah terang jika disentuh", "3 = Putih atau abu-abu,\npucat atau hipopigmentasi", "4 =  Merah gelap atau ungu,\ntidak pucat jika disentuh", "5 = Hitam atau hiperpigmentasi"};
         ArrayAdapter<String> adapterSkinColor = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listSkinColor);
         opsiSkinColor.setAdapter(adapterSkinColor);
 
         //list opsi-opsi form granulation tissue
         opsiGranulation = (AutoCompleteTextView) findViewById(R.id.editTextGranulation);
-        String[] listGranulation = new String[]{"1 =  Skin intact/utuh atau\nberjenis partial thickness wound", "2 =  Cerah, merah daging;\n75% sampai 100% luka terisi\n&/atau jaringan tumbuh berlebih", "3 =  Cerah, merah daging;\n25% sampai 75% wound filled", "4 =   Pink, &/atau kusam, merah kehitaman\n&/or kurang dari 25% wound filled", "5 = Tidak ada jaringan granulasi"};
+        String[] listGranulation = new String[]{"1 =  Kulit utuh atau\nluka pada sebagian kulit", "2 =  Terang, merah seperti daging;\n75% s/d 100% luka terisi granulasi,\natau jaringan tumbuh.", "3 =  Terang, merah seperti daging;\n<75% dan > 25% luka terisi granulasi", "4 = Pink, dan atau pucat, merah kehitaman\ndan atau luka < 25% terisi granulasi.", "5 = Tidak ada"};
         ArrayAdapter<String> adapterGranulation = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listGranulation);
         opsiGranulation.setAdapter(adapterGranulation);
 
         //list opsi-opsi form ephitelization tissue
         opsiEpithelization = (AutoCompleteTextView) findViewById(R.id.editTextEpithelization);
-        String[] listEpithelization = new String[]{"1 = 100% wound covered,\npermukaan utuh", "2 = 75% sampai 100% wound covered\n&/atau jaringan epithelial meluas\nlebih dari 0.5cm into wound bed", "3 =  50% sampai 75% wound covered\n&/atau jaringan epitel meluas kurang dari\n0.5cm pada permukaan luka", "4 = 25% sampai 50% wound covered", "5 = kurang dari 25%  wound covered"};
+        String[] listEpithelization = new String[]{"1 = 100% luka tertutup,\npermukaan utuh", "2 = 75% s/d 100% epitelisasi", "3 =  50% s/d 75% epitelisasi", "4 = 25% s/d 50% epitelisasi", "5 = < 25%  epitelisasi"};
         ArrayAdapter<String> adapterEpithelization = new ArrayAdapter<>(this, R.layout.list_opsi_agama, listEpithelization);
         opsiEpithelization.setAdapter(adapterEpithelization);
 

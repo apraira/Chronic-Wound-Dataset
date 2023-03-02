@@ -84,7 +84,6 @@ public class historiKajianFragment extends Fragment {
         // Inflate the layout for this fragment
 
         //mahasiswaArrayList.clear();
-
         View inf = inflater.inflate(R.layout.fragment_histori_kajian, container, false);
         recyclerView = (RecyclerView) inf.findViewById(R.id.recycler_view);
 
@@ -92,7 +91,6 @@ public class historiKajianFragment extends Fragment {
         // Inflate the layout for this fragment
         String NRM = getArguments().getString("NRM");
         System.out.println("Id perawat shared preferemces: " + NRM.toString());
-
 
         getHistoriKajian(NRM);
 
@@ -115,8 +113,7 @@ public class historiKajianFragment extends Fragment {
         KajianResponseCall.enqueue(new Callback<ArrayList<KajianResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<KajianResponse>> call, Response<ArrayList<KajianResponse>> response) {
-                // inside on response method we are checking
-                // if the response is success or not.
+
                 if (response.isSuccessful()) {
 
                     // below line is to add our data from api to our array list.

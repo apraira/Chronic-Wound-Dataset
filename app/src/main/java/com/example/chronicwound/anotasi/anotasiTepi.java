@@ -73,6 +73,7 @@ public class anotasiTepi extends AppCompatActivity {
     // creating a RangeSlider object, which will
     // help in selecting the width of the Stroke
     private RangeSlider rangeSlider;
+    public String dari;
     String id_perawat, id_gambar, id_pasien;
     private static int RESULT_LOAD_IMAGE = 1;
     public static Activity tepiAct;
@@ -111,6 +112,8 @@ public class anotasiTepi extends AppCompatActivity {
         id_pasien  = settings.getString("NRM", "").toString();
 
         Picasso.get().load(new File(rawImage.getPath())).fit().centerCrop().into(foto);
+
+
 
         //back button
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
@@ -197,7 +200,7 @@ public class anotasiTepi extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(anotasiTepi.this,"Saved.Check in your gallery.",Toast.LENGTH_LONG).show();
+
                 // getting the bitmap from Drawiew class
 
                 InsertLog(id_nurse, "Menyimpan anotasi tepi");

@@ -289,7 +289,8 @@ public class listPasienActivity extends AppCompatActivity {
         if (filteredlist.isEmpty()) {
             // if no item is added in filtered list we are
             // displaying a toast message as no data found.
-            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+            olehAnda.setChecked(false);
+            semua.setChecked(true);
         } else {
             // at last we are passing that filtered
             // list to our adapter class.

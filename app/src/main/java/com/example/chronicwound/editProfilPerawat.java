@@ -196,7 +196,35 @@ public class editProfilPerawat extends AppCompatActivity {
                         editor.commit();
                     } else if (edit_type.contains("e-mail") && siapa.contains("perawat")){
                         editPerawat(id, "email", isian);
-                    } else {
+                    }  else if (edit_type.contains("no. reg") && siapa.contains("pasien")){
+                        SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("NRM", isian);
+                        editor.putString("id_pasien", isian);
+                        editor.commit();
+
+                        editPasien(NRM, "_id", isian);
+                    }else if (edit_type.contains("nama") && siapa.contains("pasien")){
+                        editPasien(NRM, "nama", isian);
+                    }else if (edit_type.contains("tanggal lahir") && siapa.contains("pasien")){
+                        if (validateTgl(String.valueOf(editTextTanggalLahir.getText()))){
+                            editPasien(NRM, "born_date", String.valueOf(editTextTanggalLahir.getText()));
+                        }
+                    }else if (edit_type.contains("usia") && siapa.contains("pasien")){
+                        editPasien(NRM, "usia", isian);
+                    }else if (edit_type.contains("jenis kelamin") && siapa.contains("pasien")){
+                        if (validateOpt(String.valueOf(editTextOption.getText()))){
+                            editPasien(NRM, "kelamin", String.valueOf(editTextOption.getText()));
+                        }
+                    }else if (edit_type.contains("agama") && siapa.contains("pasien")){
+                        if (validateOpt(String.valueOf(editTextOption.getText()))){
+                            editPasien(NRM, "agama", String.valueOf(editTextOption.getText()));
+                        }
+                    }else if (edit_type.contains("email") && siapa.contains("pasien")){
+                        editPasien(NRM, "email", isian);
+                    }else if (edit_type.contains("nomor hp") && siapa.contains("pasien")){
+                        editPasien(NRM, "no_hp", isian);
+                    }else {
                         Toast toast = Toast.makeText(getApplicationContext(), "Belum diaplikasikan", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
@@ -218,6 +246,29 @@ public class editProfilPerawat extends AppCompatActivity {
         return true;
     }
 
+    public boolean validateOpt(String username) {
+
+        InsertLog("Sistem", "Validasi isian form edit perawat");
+        if(username == null || username.trim().length() == 0){
+            textInputLayoutOption.setError("Maaf, tidak boleh kosong.");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateTgl(String username) {
+
+        InsertLog("Sistem", "Validasi isian form edit perawat");
+        if(username == null || username.trim().length() == 0){
+            textInputLayoutTanggalLahir.setError("Maaf, tidak boleh kosong.");
+            return false;
+        }
+        return true;
+    }
+
+
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -236,7 +287,7 @@ public class editProfilPerawat extends AppCompatActivity {
 
     }
 
-    // add pasien
+    // edit Perawat
     public void editPerawat(final String id_perawat, final String jenis, final String isian) {
         Call<updatePerawatRequest> pasienResponseCall = RetrofitClient.getService().updatePerawat(id_perawat, jenis, isian);
         pasienResponseCall.enqueue(new Callback<updatePerawatRequest>() {
@@ -247,6 +298,37 @@ public class editProfilPerawat extends AppCompatActivity {
                     //login start main activity
                     Snackbar.make(buttonSubmit, "Data " + edit_type + " telah di-update.", Snackbar.LENGTH_LONG).show();
                     Intent i = new Intent(getApplicationContext(), ProfilPerawat.class);
+                    startActivity(i);
+                    finish();
+
+                } else {
+                    Snackbar.make(buttonSubmit, "Data belum berhasil di-update.", Snackbar.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<updatePerawatRequest> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    // edit Perawat
+    public void editPasien(final String id_pasien, final String jenis, final String isian) {
+        Call<updatePerawatRequest> pasienResponseCall = RetrofitClient.getService().updatePasien(id_pasien, jenis, isian);
+        pasienResponseCall.enqueue(new Callback<updatePerawatRequest>() {
+            @Override
+            public void onResponse(Call<updatePerawatRequest> call, Response<updatePerawatRequest> response) {
+
+                if (response.isSuccessful()) {
+                    //login start main activity
+                    Snackbar.make(buttonSubmit, "Data " + edit_type + " telah di-update.", Snackbar.LENGTH_LONG).show();
+                    Intent i = new Intent(getApplicationContext(), editPasien.class);
+                    SharedPreferences settings = getSharedPreferences("preferences",
+                            Context.MODE_PRIVATE);
+                    NRM = settings.getString("id_pasien", "");
+                    i.putExtra("NRM", NRM);
                     startActivity(i);
                     finish();
 

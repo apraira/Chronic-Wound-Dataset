@@ -23,7 +23,12 @@
         android:theme="@style/Theme.ChronicWound"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustResize">
-        <activity android:name=".pasien.editPasien"></activity>
+        <activity android:name=".KajianLuka.editSkoringLuka"></activity>
+        <activity android:name=".KajianLuka.editDiameterY" />
+        <activity android:name=".KajianLuka.editDiameterX" />
+        <activity android:name=".KajianLuka.editKajianLuka" />
+        <activity android:name=".KajianLuka.editAnotasiTepi" />
+        <activity android:name=".pasien.editPasien" />
         <activity android:name=".editProfilPerawat" />
         <activity android:name=".Start">
             <intent-filter>

@@ -172,8 +172,6 @@ public class GaleriActivity extends AppCompatActivity {
                 Toast.makeText(GaleriActivity.this, "Fail to get data", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.chronicwound.anotasi;
+package com.example.chronicwound.KajianLuka;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -38,6 +38,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.chronicwound.R;
 import com.example.chronicwound.anotasi.DrawView;
 import com.example.chronicwound.anotasi.PathView;
+import com.example.chronicwound.remote.RetrofitClient;
+import com.example.chronicwound.remote.UploadRequest;
+import com.example.chronicwound.remote.uploadImageUser;
 import com.example.chronicwound.tambahkajian.tambahKajianActivity;
 import com.google.android.material.slider.RangeSlider;
 
@@ -51,13 +54,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import petrov.kristiyan.colorpicker.ColorPicker;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.chronicwound.MainActivity.id_nurse;
 import static com.example.chronicwound.logging.LogHelper.InsertLog;
 
-public class anotasiDiameterY extends AppCompatActivity {
+public class editDiameterY extends AppCompatActivity {
     private static final int RESULT_LOAD_IMG = 1;
     // creating the object of type DrawView
     // in order to get the reference of the View
@@ -209,7 +219,7 @@ public class anotasiDiameterY extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                anotasiDiameterY.super.onBackPressed();
+                editDiameterY.super.onBackPressed();
             }
         });
         //
@@ -292,7 +302,7 @@ public class anotasiDiameterY extends AppCompatActivity {
                 //String ukuranY = panjangY.getText().toString();
 
                 /* combine png photo*/
-
+                /*
                 // Get value of shared preferences
                 SharedPreferences settings = getSharedPreferences("preferences",
                         Context.MODE_PRIVATE);
@@ -314,7 +324,7 @@ public class anotasiDiameterY extends AppCompatActivity {
                 // As described by Steve Pomeroy in a previous comment,
                 // use the canvas to combine them.
                 // Start with the first in the constructor..
-                Bitmap mutableBitmap = Tepi.copy(Bitmap.Config.ARGB_8888, true);
+                Bitmap mutableBitmap = DiameterX.copy(Bitmap.Config.ARGB_8888, true);
                 comboImage = new Canvas(mutableBitmap);
                 // Then draw the second on top of that
                 comboImage.drawBitmap(DiameterX, 0f, 0f, null);
@@ -346,11 +356,13 @@ public class anotasiDiameterY extends AppCompatActivity {
                 }
                 String filepath_diameter = direD.getAbsolutePath();
 
+                */
+
 
                 SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("pngDiameterY", filepath_diameter);
-                editor.putString("pngDiameterYFilename", AnotasiDiametr);
+                /*editor.putString("pngDiameterY", filepath_diameter);
+                editor.putString("pngDiameterYFilename", AnotasiDiametr);*/
                 editor.putString("jpgDiameterY", filepath_jpg);
                 editor.putString("jpgDiameterYFilename", namajpg);
                 //editor.putString("ukuranY", ukuranY);
@@ -370,16 +382,27 @@ public class anotasiDiameterY extends AppCompatActivity {
 
 
 
-                Intent IntentCamera = new Intent(getApplicationContext(), tambahKajianActivity.class);
-                IntentCamera.putExtra("rawPhoto", rawImage);
-                IntentCamera.putExtra("raw_path", raw_path);
-                IntentCamera.putExtra("id_gambar", id_gambar);
-                IntentCamera.putExtra("id_perawat", id_perawat);
-                IntentCamera.putExtra("id_pasien", id_pasien);
-                IntentCamera.putExtra("KEY", "dari diameter Y");
+                //UpDATE image
+                String TepiID = extras.getString("DiameterID");
+                File file_jpg_tepi = new File(filepath_jpg, namajpg);
+                RequestBody nurseids = RequestBody.create(MediaType.parse("multipart/form-data"), TepiID);
+                RequestBody requestFileWarnaPng = RequestBody.create(MediaType.parse("multipart/form-data"), file_jpg_tepi);
+                MultipartBody.Part bodyWarnaPng = MultipartBody.Part.createFormData("image", file_jpg_tepi.getName(), requestFileWarnaPng);
+                updateImage(bodyWarnaPng, nurseids);
 
-                System.out.println("sent from tambah kajian activity 1:" + id_gambar+ "," + id_perawat + "," + id_pasien);
-                startActivity(IntentCamera);
+
+                /*//upload Image tepi png
+                String diameterPNGID = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+                File file_png_diameter = new File(filepath_diameter, AnotasiDiametr);
+                RequestBody regpas = RequestBody.create(MediaType.parse("multipart/form-data"),id_pasien);
+                RequestBody id_nurse = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(id_perawat));
+                RequestBody requestFileDiameterPng = RequestBody.create(MediaType.parse("multipart/form-data"), file_png_diameter);
+                MultipartBody.Part bodyDiameterPng = MultipartBody.Part.createFormData("image", file_png_diameter.getName(), requestFileDiameterPng);
+                RequestBody id_diameter_png = RequestBody.create(MediaType.parse("multipart/form-data"), diameterPNGID);
+                RequestBody tipe_diameter_png = RequestBody.create(MediaType.parse("multipart/form-data"), "Png");
+                RequestBody kategoriDP = RequestBody.create(MediaType.parse("multipart/form-data"), "Anotasi Diameter");
+                uploadImage(bodyDiameterPng, id_diameter_png, regpas, id_nurse, tipe_diameter_png, kategoriDP);
+                System.out.println("Anotasi Tepi PNG Image Uploaded");*/
             }
 
 
@@ -418,4 +441,68 @@ public class anotasiDiameterY extends AppCompatActivity {
 
 
     }
+
+
+    // upload image
+    public void updateImage(final MultipartBody.Part image, final RequestBody id_perawat){
+        Call<uploadImageUser> uploadRequestCall = RetrofitClient.getService().updateImageAnotasi(image, id_perawat);
+        uploadRequestCall.enqueue(new Callback<uploadImageUser>() {
+
+            @Override
+            public void onResponse(Call<uploadImageUser> call, Response<uploadImageUser> response) {
+
+
+                if(response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Berhasil memperbaharui foto anotasi", Toast.LENGTH_LONG).show();
+                    InsertLog(id_nurse, "Berhasil memperbaharui foto anotasi");
+                    Intent IntentCamera = new Intent(getApplicationContext(), detailKajian.class);
+                    Bundle extras = getIntent().getExtras();
+                    String id_kajian = extras.getString("id_kajian");
+                    IntentCamera.putExtra("id_kajian", id_kajian);
+                    startActivity(IntentCamera);
+                    finish();
+
+                }else {
+                    Toast.makeText(getApplicationContext(), "gagal upload image", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<uploadImageUser> call, Throwable t) {
+                System.out.println(t.getLocalizedMessage());
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
+
+
+    // upload image
+    public void uploadImage( final MultipartBody.Part image, final RequestBody id, final RequestBody id_pasien, final RequestBody id_perawat, final RequestBody type, final RequestBody category){
+        Call<UploadRequest> uploadRequestCall = RetrofitClient.getService().uploadImage(image, id, id_pasien, id_perawat, type, category);
+        uploadRequestCall.enqueue(new Callback<UploadRequest>() {
+            @Override
+            public void onResponse(Call<UploadRequest> call, Response<UploadRequest> response) {
+
+                if(response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Image uploaded to server", Toast.LENGTH_LONG).show();
+
+                }else {
+                    Toast.makeText(getApplicationContext(), "gagal upload image" + category + type, Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UploadRequest> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
+
+
 }

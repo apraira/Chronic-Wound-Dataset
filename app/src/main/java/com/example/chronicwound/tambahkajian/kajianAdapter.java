@@ -124,8 +124,12 @@ public class kajianAdapter extends RecyclerView.Adapter<kajianAdapter.HistoriVie
                     Context context = v.getContext();
                     //Snackbar.make(itemView, dataList.get(position).getNrm(), Snackbar.LENGTH_LONG).show();
                     Intent i = new Intent(context, detailKajian.class);
+
+                    String NRM = dataList.get(position).getId_pasien();
+                    i.putExtra("NRM", NRM);
                     i.putExtra("id_kajian", id_kajian);
                     context.startActivity(i);
+                    ((Activity)context).finish();
                 }
             });
 

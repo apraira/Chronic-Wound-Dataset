@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AnotasiActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            android:gravity="center"
+            android:outlineAmbientShadowColor="#7C7C7C00"
+            android:outlineSpotShadowColor="#7C7C7C00"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:outlineProvider="none"
+                android:paddingVertical="10sp">
+
+                <ImageButton
+                    android:id="@+id/backButton"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginLeft="16sp"
+                    android:background="@drawable/ic_back_arrow" />
+
+                <TextView
+                    android:id="@+id/teksToolBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Edit Skoring Kajian"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:paddingBottom="200dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="68dp"
+                android:paddingHorizontal="16sp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appBar">
+
+
+
+
+
+                <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/tableLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1"> <!-- stretch the second column of the layout-->
+
+                    <!-- Nomor Registrasi-->
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16sp"
+                        >
+
+                        <!-- first element of the row-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10sp"
+
+                            android:text="Luas Luka"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#8F8F8F"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/textLuas"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/editLuas"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginLeft="8sp"
+                            android:backgroundTint="@color/black"
+                            android:background="@drawable/ic_baseline_edit_24" />
+
+                    </TableRow>
+
+                    <!-- Nama Lengkap-->
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16sp"
+                        >
+
+                        <!-- first element of the row-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10sp"
+                            android:text="Tepi Luka"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#8F8F8F"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/textTepi"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/editTepi"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginLeft="8sp"
+                            android:backgroundTint="@color/black"
+                            android:background="@drawable/ic_baseline_edit_24" />
+
+                    </TableRow>
+
+                    <!-- Tanggal Lahir-->
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16sp"
+                        >
+
+                        <!-- first element of the row-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10sp"
+                            android:text="Tipe Nekrotik"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#8F8F8F"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/textTipeNekrotik"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/editTipeNekrotik"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginLeft="8sp"
+                            android:backgroundTint="@color/black"
+                            android:background="@drawable/ic_baseline_edit_24" />
+
+                    </TableRow>
+
+                    <!-- Usia-->
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16sp"
+                        >
+
+                        <!-- first element of the row-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10sp"
+                            android:text="Jumlah Nekrotik"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#8F8F8F"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/textJumlahNekrotik"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/editJumlahNekrotik"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginLeft="8sp"
+                            android:backgroundTint="@color/black"
+                            android:background="@drawable/ic_baseline_edit_24" />
+
+                    </TableRow>
+
+                    <!-- Jenis Kelamin-->
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16sp"
+                        >
+
+                        <!-- first element of the row-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10sp"
+                            android:text="Warna Kulit\nKeliling Luka"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#8F8F8F"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/textWarnaLuka"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/editWarnaLuka"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginLeft="8sp"
+                            android:backgroundTint="@color/black"
+                            android:background="@drawable/ic_baseline_edit_24" />
+
+                    </TableRow>
+
+                    <!-- Agama-->
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16sp"
+                        >
+
+                        <!-- first element of the row-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10sp"
+                            android:text="Jaringan Granulasi"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#8F8F8F"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/textGranulasi"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/editGranulasi"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginLeft="8sp"
+                            android:backgroundTint="@color/black"
+                            android:background="@drawable/ic_baseline_edit_24" />
+
+                    </TableRow>
+
+                    <!-- Email-->
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16sp"
+                        >
+
+                        <!-- first element of the row-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10sp"
+                            android:text="Jaringan Epitelisasi"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#8F8F8F"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/textEpitelisasi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/editEpitelisasi"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginLeft="8sp"
+                            android:backgroundTint="@color/black"
+                            android:background="@drawable/ic_baseline_edit_24" />
+
+                    </TableRow>
+
+
+
+                </TableLayout>
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

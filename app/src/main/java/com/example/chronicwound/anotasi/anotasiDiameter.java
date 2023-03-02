@@ -215,7 +215,6 @@ public class anotasiDiameter extends AppCompatActivity {
             public void onClick(View view) {
                 InsertLog(id_nurse, "Menyimpan gambar anotasi diameter X");
 
-                Toast.makeText(getApplicationContext(),"Saved.Check in your gallery.",Toast.LENGTH_LONG).show();
                 // getting the bitmap from Drawiew class
 
                 Bitmap bmp1 = paint.save();

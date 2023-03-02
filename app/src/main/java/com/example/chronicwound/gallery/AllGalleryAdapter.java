@@ -73,8 +73,6 @@ public class AllGalleryAdapter extends RecyclerView.Adapter<com.example.chronicw
                 .thumbnail(0.05f)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(holder.imgView);
-
-        //Picasso.get().load("https://jft.web.id/woundapi/instance/uploads/" + imageModel.getFilename()).resize(200,200).centerCrop().into(holder.imgView);
     }
 
     @Override
@@ -114,12 +112,7 @@ public class AllGalleryAdapter extends RecyclerView.Adapter<com.example.chronicw
                 }
             });
         }
-
-
     }
-
-
-
 }
 
 

@@ -73,6 +73,7 @@ public class editPasien extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("NRM", NRM);
+        editor.putString("id_pasien", NRM);
         editor.commit();
 
 
@@ -123,7 +124,7 @@ public class editPasien extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), editProfilPerawat.class);
                 intent.putExtra("siapa", "pasien");
                 intent.putExtra("edit", "usia");
-                intent.putExtra("text", textUsia.getText());
+                intent.putExtra("text", textUsia.getText().toString().substring(0,3).trim());
                 startActivity(intent);
                 finish();
             }
