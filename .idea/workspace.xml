@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <device id="pixel" />
+        <device id="Nexus 7" />
+        <device id="Nexus 10" />
+        <device id="pixel_3_xl" />
+        <device id="pixel_3" />
+        <device id="pixel_2" />
+        <device id="Nexus 6" />
+        <device id="Nexus 5X" />
+        <pickBest>false</pickBest>
+      </config>
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b2792a25-5bf4-4349-9518-0acbfeeff115" name="Default Changelist" comment="edit kajian fix">
+      <change afterPath="$PROJECT_DIR$/docs/Manual Book Aplikasi.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Manual Book WebService.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/article/draft jurnal.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/article/draft jurnal.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/06.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/223-Article Text-638-1-10-20201130.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/6799-14588-1-PB.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/70-138-1-SM.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/Addison Wesley - UML Distilled, 2nd Edition.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/BAB 1 - Kartika Definisi Kronis.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/BAB 1 - SIREGAR 2019.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/BAB 1 - arif et al.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/BAB 1 - dienillah dan dewi.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/BAB 1 HUANG N DOM.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/BAB I - AMINUDDIN.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/BAB I - GREATREX.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/BAB II kocakoyun 2017.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/Developing_of_Android_Mobile_Application_Using_Jav.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/Enhancing an End User Development.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/Guia-do-Scrum-2020-PT-BR-EN-US-1.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/Harwati_2017_IOP_Conf._Ser.__Mater._Sci._Eng._215_012031.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/Implementasi scrum pada manajemen proyek pengembangan perangkat lunak pemesanan undangan.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/Kenneth S. Rubin - Scrum. Praktyczny przewodnik po najpopularniejszej metodyce Agile-Helion (2013).pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/Modul Perawatan Luka aminuddijn.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/Modul_UML-with-cover-page-v2.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/More_Than_Two_Decades_of_Research_on_Verification_of_UML_Class_Models_A_Systematic_Literature_Review.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/OAJIS_24_1464.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/Pengujian Black Box Testing Pada Aplikasi.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/SM Kids v. Google.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/Siska Mery Fiatmi BAB I.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/TestCaseGenerationbasedonActivityDiagramforMobileApplication.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/The Elements of UML 2.0 Style (Scott W. Ambler) (z-lib.org).pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/nihms-1017882.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/refs/scrum vs kanban.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CounterApp/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CounterApp/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CounterApp/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CounterApp/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CounterApp/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CounterApp/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CounterApp/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CounterApp/app/src/main/res/drawable/ic_add.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CounterApp/app/src/main/res/drawable/ic_pencil.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CounterApp/app/src/main/res/drawable/ic_refresh.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GetWebPageSourceCode/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GetWebPageSourceCode/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GetWebPageSourceCode/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GetWebPageSourceCode/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GetWebPageSourceCode/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GetWebPageSourceCode/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GetWebPageSourceCode/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GetWebPageSourceCode/app/src/main/res/drawable/border.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GetWebPageSourceCode/app/src/main/res/drawable/rectangle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MyApplication/.idea/modules/My_Application.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MyApplication/.idea/modules/app/app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MyApplication4/app/src/main/res/drawable/ic_minus.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MyApplication4/app/src/main/res/navigation/mobile_navigation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MyApplication4/app/src/main/res/values/drawables.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../infused-paint-sprint-4/app/src/main/res/drawable/buttonabout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../infused-paint-sprint-4/app/src/main/res/drawable/editprofile.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../infused-paint-sprint-4/app/src/main/res/layout/activity_profile.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+        <option value="layoutResourceFile" />
+        <option value="valueResourceFile" />
+        <option value="resourceFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Salsa Rahmadati" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="ProjectId" id="1z25uwrnSS4RMBuFDDqsiQX2U0S" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_4_API_23" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2023-01-30T14:48:25.985Z" />
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="ResourceManagerPrefKey.ResourceType" value="MIPMAP" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SelectDeploymentTargetsDialog.selectedDevices" value="c283cc6d&#10;f3ebd0f37d63" />
+    <property name="android-custom-viewC:/Users/Salsa/AppData/Local/Android/Sdk/sources/android-29/android/app/MediaRouteButton.java_SELECTED" value="MediaRouteButton" />
+    <property name="android-custom-viewC:/Users/Salsa/AppData/Local/Android/Sdk/sources/android-29/android/view/View.java_SELECTED" value="View" />
+    <property name="android-custom-viewC:/Users/Salsa/StudioProjects/ChronicWound/app/src/main/java/com/example/chronicwound/Canvas.java_SELECTED" value="Canvas" />
+    <property name="android-custom-viewC:/Users/Salsa/StudioProjects/ChronicWound/app/src/main/java/com/example/chronicwound/anotasi/DrawView.java_SELECTED" value="DrawView" />
+    <property name="android-custom-viewC:/Users/Salsa/StudioProjects/ChronicWound/app/src/main/java/com/example/chronicwound/anotasi/PathView.java_SELECTED" value="PathView" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Counter-App-master" />
+    <property name="multi-representation-previewC:/Users/Salsa/AppData/Local/Android/Sdk/sources/android-29/android/app/MediaRouteButton.java_selected" value="Custom views" />
+    <property name="multi-representation-previewC:/Users/Salsa/AppData/Local/Android/Sdk/sources/android-29/android/view/View.java_selected" value="Custom views" />
+    <property name="multi-representation-previewC:/Users/Salsa/StudioProjects/ChronicWound/app/src/main/java/com/example/chronicwound/Canvas.java_selected" value="Custom views" />
+    <property name="multi-representation-previewC:/Users/Salsa/StudioProjects/ChronicWound/app/src/main/java/com/example/chronicwound/anotasi/DrawView.java_selected" value="Custom views" />
+    <property name="multi-representation-previewC:/Users/Salsa/StudioProjects/ChronicWound/app/src/main/java/com/example/chronicwound/anotasi/PathView.java_selected" value="Custom views" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.232106696">
+      <recent name="com.example.chronicwound" />
+      <recent name="com.example.chronicwound.remote" />
+    </key>
+    <key name="android.template.-2080333648">
+      <recent name="com.example.chronicwound.anotasi" />
+    </key>
+    <key name="android.template.-144227308">
+      <recent name="com.example.chronicwound.pasien" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Salsa\StudioProjects\ChronicWound\app\src\main\res\drawable" />
+    </key>
+    <key name="android.template.-1974563087">
+      <recent name="com.example.chronicwound.tambahkajian" />
+    </key>
+    <key name="android.template.751962852">
+      <recent name="com.example.chronicwound.KajianLuka" />
+    </key>
+    <key name="android.template.433133558">
+      <recent name="com.example.chronicwound" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.chronicwound" />
+    </key>
+    <key name="android.template.1162673824">
+      <recent name="com.example.chronicwound" />
+    </key>
+    <key name="android.template.220799202">
+      <recent name="com.example.chronicwound.KajianLuka" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Salsa\StudioProjects\ChronicWound\app\src\main\res\layout" />
+      <recent name="C:\Users\Salsa\StudioProjects\ChronicWound\app\src\main\res\drawable" />
+      <recent name="C:\Users\Salsa\StudioProjects\ChronicWound\app\src\main\res\font" />
+      <recent name="C:\Users\Salsa\StudioProjects\ChronicWound\app\src\main\res\layouts\tambahkajian" />
+      <recent name="C:\Users\Salsa\StudioProjects\ChronicWound\app\src\main\res\anotasi" />
+    </key>
+    <key name="android.template.1631097615">
+      <recent name="com.example.chronicwound.anotasi" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.chronicwound" />
+    </key>
+    <key name="android.template.-1369088424">
+      <recent name="com.example.chronicwound.gallery" />
+    </key>
+    <key name="android.template.1527925977">
+      <recent name="com.example.chronicwound" />
+      <recent name="com.example.chronicwound.KajianLuka" />
+    </key>
+    <key name="android.template.535381504">
+      <recent name="com.example.chronicwound.anotasi" />
+    </key>
+    <key name="android.template.1807548912">
+      <recent name="com.example.chronicwound" />
+      <recent name="com.example.chronicwound.tambahkajian" />
+    </key>
+    <key name="android.template.-2029630847">
+      <recent name="com.example.chronicwound" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="ChronicWound.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b2792a25-5bf4-4349-9518-0acbfeeff115" name="Default Changelist" comment="" />
+      <created>1633333568166</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1633333568166</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="edit kajian fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit kajian fix" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="309" y="47" key="#Inspections" timestamp="1669360633365">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="309" y="47" key="#Inspections/0.0.1366.738@0.0.1366.738" timestamp="1669360633365" />
+    <state x="530" y="189" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1670254742989">
+      <screen x="0" y="0" width="1600" height="870" />
+    </state>
+    <state x="530" y="189" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1600.870/-1366.259.1366.738@0.0.1600.870" timestamp="1670254742989" />
+    <state x="414" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1674665579634">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="414" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1674665579634" />
+    <state x="580" y="164" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1674800066769">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="580" y="164" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1674800066769" />
+    <state x="92" y="92" width="1182" height="554" key="AVDManager" timestamp="1674006347451">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="92" y="92" width="1182" height="554" key="AVDManager/0.0.1366.738@0.0.1366.738" timestamp="1674006347451" />
+    <state x="263" y="123" key="AndroidCreateResourceDirectoryDialog" timestamp="1669359723573">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="263" y="123" key="AndroidCreateResourceDirectoryDialog/0.0.1366.738@0.0.1366.738" timestamp="1669359723573" />
+    <state x="412" y="178" key="AndroidCreateResourceFileDialog" timestamp="1674799251498">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="412" y="178" key="AndroidCreateResourceFileDialog/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1674799251498" />
+    <state x="293" y="125" key="AndroidCreateResourceFileDialog/0.0.1366.738@0.0.1366.738" timestamp="1672196340405" />
+    <state x="680" y="164" key="AndroidProcessChooserDialog" timestamp="1674299155912">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="680" y="164" key="AndroidProcessChooserDialog/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1674299155912" />
+    <state x="680" y="164" key="AndroidProcessChooserDialog/-1366.490.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1672114550198" />
+    <state x="578" y="93" key="CommitChangelistDialog2" timestamp="1674658602491">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="578" y="93" key="CommitChangelistDialog2/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1674658602491" />
+    <state x="650" y="175" key="FileChooserDialogImpl" timestamp="1674799170111">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="650" y="175" key="FileChooserDialogImpl/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1674799170111" />
+    <state x="463" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1670113886994" />
+    <state x="542" y="145" key="FileChooserDialogImpl/0.0.1600.870/-1366.259.1366.738@0.0.1600.870" timestamp="1670229861577" />
+    <state x="650" y="175" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1670894476371" />
+    <state width="1877" height="311" key="GridCell.Tab.0.bottom" timestamp="1677771330203">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="311" key="GridCell.Tab.0.bottom/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1677771330203" />
+    <state width="1877" height="303" key="GridCell.Tab.0.bottom/-1366.490.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1672887174954" />
+    <state width="1323" height="485" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1674071532581" />
+    <state width="1557" height="177" key="GridCell.Tab.0.bottom/0.0.1600.870/-1366.259.1366.738@0.0.1600.870" timestamp="1670296697379" />
+    <state width="1877" height="802" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1671449434031" />
+    <state width="1877" height="311" key="GridCell.Tab.0.center" timestamp="1677771330202">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="311" key="GridCell.Tab.0.center/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1677771330202" />
+    <state width="1877" height="303" key="GridCell.Tab.0.center/-1366.490.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1672887174954" />
+    <state width="1323" height="485" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1674071532581" />
+    <state width="1557" height="177" key="GridCell.Tab.0.center/0.0.1600.870/-1366.259.1366.738@0.0.1600.870" timestamp="1670296697378" />
+    <state width="1877" height="802" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1671449434031" />
+    <state width="1877" height="311" key="GridCell.Tab.0.left" timestamp="1677771330202">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="311" key="GridCell.Tab.0.left/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1677771330202" />
+    <state width="1877" height="303" key="GridCell.Tab.0.left/-1366.490.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1672887174953" />
+    <state width="1323" height="485" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1674071532581" />
+    <state width="1557" height="177" key="GridCell.Tab.0.left/0.0.1600.870/-1366.259.1366.738@0.0.1600.870" timestamp="1670296697378" />
+    <state width="1877" height="802" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1671449434031" />
+    <state width="1877" height="311" key="GridCell.Tab.0.right" timestamp="1677771330203">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="311" key="GridCell.Tab.0.right/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1677771330203" />
+    <state width="1877" height="303" key="GridCell.Tab.0.right/-1366.490.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1672887174954" />
+    <state width="1323" height="485" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1674071532581" />
+    <state width="1557" height="177" key="GridCell.Tab.0.right/0.0.1600.870/-1366.259.1366.738@0.0.1600.870" timestamp="1670296697378" />
+    <state width="1877" height="802" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1671449434031" />
+    <state x="541" y="252" key="com.android.tools.idea.run.deployment.ModifyDeviceSetDialog" timestamp="1674711018860">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="541" y="252" key="com.android.tools.idea.run.deployment.ModifyDeviceSetDialog/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1674711018860" />
+    <state x="385" y="177" key="com.android.tools.idea.run.deployment.ModifyDeviceSetDialog/0.0.1366.738@0.0.1366.738" timestamp="1674004095076" />
+    <state x="702" y="237" key="git4idea.branch.GitSmartOperationDialog" timestamp="1677771326839">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="702" y="237" key="git4idea.branch.GitSmartOperationDialog/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1677771326839" />
+    <state x="803" y="282" key="refactoring.ChangeSignatureDialog" timestamp="1670899343335">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="803" y="282" key="refactoring.ChangeSignatureDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1670899343335" />
+    <state x="486" y="84" width="945" height="965" key="search.everywhere.popup" timestamp="1674488764417">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="486" y="84" width="945" height="965" key="search.everywhere.popup/-1366.207.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1674488764417" />
+    <state x="486" y="84" width="946" height="966" key="search.everywhere.popup/-1366.490.1366.738/0.0.1920.1050@0.0.1920.1050" timestamp="1673453982177" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1674065068574" />
+    <state x="405" y="70" width="788" height="800" key="search.everywhere.popup/0.0.1600.870/-1366.259.1366.738@0.0.1600.870" timestamp="1670231244666" />
+  </component>
+</project>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.chronicwound"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="19"
+        android:targetSdkVersion="29" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <queries>
+
+        <!-- Query Camera Packages -->
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+        <!-- Query Open Document -->
+        <intent>
+            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
+        </intent>
+    </queries>
+
+    <application
+        android:name="androidx.multidex.MultiDexApplication"
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ChronicWound"
+        android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="adjustResize" >
+        <activity android:name="com.example.chronicwound.KajianLuka.editSkoringLuka" />
+        <activity android:name="com.example.chronicwound.KajianLuka.editDiameterY" />
+        <activity android:name="com.example.chronicwound.KajianLuka.editDiameterX" />
+        <activity android:name="com.example.chronicwound.KajianLuka.editKajianLuka" />
+        <activity android:name="com.example.chronicwound.KajianLuka.editAnotasiTepi" />
+        <activity android:name="com.example.chronicwound.pasien.editPasien" />
+        <activity android:name="com.example.chronicwound.editProfilPerawat" />
+        <activity android:name="com.example.chronicwound.Start" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.chronicwound.ProfilPerawat"
+            android:parentActivityName="com.example.chronicwound.MainActivity" />
+        <activity android:name="com.example.chronicwound.KajianLuka.detailKajian" />
+        <activity android:name="com.example.chronicwound.anotasi.anotasiDiameterY" />
+        <activity android:name="com.example.chronicwound.anotasi.anotasiWarna" />
+        <activity android:name="com.example.chronicwound.anotasi.anotasiDiameter" />
+        <activity android:name="com.example.chronicwound.anotasi.anotasiTepi" />
+        <activity android:name="com.example.chronicwound.gallery.singleImageView" />
+        <activity android:name="com.example.chronicwound.konfirmasiFotoActivity" />
+        <activity android:name="com.example.chronicwound.gallery.GaleriActivity" />
+        <activity android:name="com.example.chronicwound.pasien.detailPasienActivity" />
+        <activity android:name="com.example.chronicwound.FirstActivity" />
+        <activity android:name="com.example.chronicwound.LoginActivity" />
+        <activity android:name="com.example.chronicwound.MainActivity" />
+        <activity android:name="com.example.chronicwound.RegisterActivity" />
+        <activity android:name="com.example.chronicwound.AnotasiActivity" />
+        <activity android:name="com.example.chronicwound.pasien.listPasienActivity" />
+        <activity android:name="com.example.chronicwound.tambahpasien.tambahPasienActivity" />
+        <activity android:name="com.example.chronicwound.tambahkajian.tambahKajianActivity" />
+        <activity
+            android:name="com.github.dhaval2404.imagepicker.ImagePickerActivity"
+            android:screenOrientation="unspecified"
+            android:theme="@style/Theme.Transparent.ImagePicker" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <provider
+            android:name="com.github.dhaval2404.imagepicker.ImagePickerFileProvider"
+            android:authorities="com.example.chronicwound.imagepicker.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/image_picker_provider_paths" />
+        </provider>
+
+        <activity
+            android:name="com.gun0912.tedpermission.TedPermissionActivity"
+            android:configChanges="mcc|mnc|locale|keyboard|keyboardHidden|screenLayout|fontScale|uiMode|orientation|screenSize|layoutDirection"
+            android:screenOrientation="unspecified"
+            android:theme="@style/Theme.Transparent.Permission" />
+
+        <provider
+            android:name="com.gun0912.tedpermission.provider.TedPermissionProvider"
+            android:authorities="com.example.chronicwound.tedpermissionprovider"
+            android:exported="false" />
+        <provider
+            android:name="com.squareup.picasso.PicassoProvider"
+            android:authorities="com.example.chronicwound.com.squareup.picasso"
+            android:exported="false" />
+    </application>
+
+</manifest>
